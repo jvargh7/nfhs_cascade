@@ -59,7 +59,7 @@ cascade_plot <- function(df,limits_y = c(0,65),exclude = "Screened"){
     ggplot(data=.,aes(x = group,y=est*100,ymax = uci*100,ymin = lci*100,fill=cascade)) +
     geom_col(position = position_dodge(width=0.9)) +
     geom_text(aes(y=uci*100 + 2,label=round(est*100,1)),
-              position = position_dodge(width = 0.9),size=2) +
+              position = position_dodge(width = 0.9),size=3) +
     geom_errorbar(width = 0.1, position = position_dodge(width = 0.9)) +
     theme_bw() +
     xlab("") +
@@ -89,8 +89,11 @@ figD <- age %>%
   cascade_plot(.)
 
 require(ggpubr)
-ggarrange(figA,figB,figC,figD,
-          labels = LETTERS[1:4],ncol = 2,nrow=2,common.legend = TRUE,legend="bottom") %>% 
+ggarrange(figA,
+          # figB,
+          figC,
+          # figD,
+          labels = LETTERS[1:2],ncol = 1,nrow=2,common.legend = TRUE,legend="bottom") %>% 
   ggsave(.,filename = paste0(path_cascade_folder,"/figures/cascade summary diabetes.png"),width=10,height=6)
 
 
