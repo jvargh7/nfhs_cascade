@@ -156,7 +156,15 @@ mutate(dm_sample = case_when(is.na(shb74) | shb74 > 498 ~ 0, # | is.na(s728a) re
                                       selfdiabetes == 1 & selfcurrdiabmed == 1 & diagdm == 0 ~ 0,
                                       TRUE ~ NA_real_),
        # Dignosis: Yes, Treated: Yes, Blood sugar: in range
-       dm_treat_contr = 1 - dm_treat_uncontr
+       dm_treat_contr = 1 - dm_treat_uncontr,
+       
+       # Dignosis: Yes, Treated: No, Blood sugar: out of range
+       dm_diag_uncontr = case_when(selfdiabetes == 0 | is.na(selfdiabetes)  ~ NA_real_,
+                                   selfdiabetes == 1 & diagdm == 1 ~ 1,
+                                   selfdiabetes == 1 & diagdm == 0 ~ 0,
+                                   TRUE ~ NA_real_),
+       # Dignosis: Yes, Treated: No, Blood sugar: in range
+       dm_diag_contr = 1 - dm_diag_uncontr
        
 ) %>% 
   
@@ -197,7 +205,16 @@ mutate(htn_sample = case_when(!is.na(sbp)|!is.na(dbp) ~ 1,
                                        selfhypertension == 1 & selfcurrhtnmed == 1 & diaghtn == 0 ~ 0,
                                        TRUE ~ NA_real_),
        # Dignosis: Yes, Treated: Yes, Blood pressure: in range
-       htn_treat_contr = 1 - htn_treat_uncontr
+       htn_treat_contr = 1 - htn_treat_uncontr,
+       
+       
+       # Dignosis: Yes, Treated: Yes, Blood pressure: out of range
+       htn_diag_uncontr = case_when(selfhypertension == 0 | is.na(selfhypertension)  ~ NA_real_,
+                                    selfhypertension == 1 &  diaghtn == 1 ~ 1,
+                                    selfhypertension == 1 &  diaghtn == 0 ~ 0,
+                                    TRUE ~ NA_real_),
+       # Dignosis: Yes, Treated: Yes, Blood pressure: in range
+       htn_diag_contr = 1 - htn_diag_uncontr
        
 ) %>% 
   # Prediabetes and Prehypertension ------
