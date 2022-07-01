@@ -1,6 +1,8 @@
 
-summary_to_long <- function(summary_table,prefix = "_dm$",id_cols = character()){
+summary_to_long <- function(summary_table,prefix = character(),id_cols = character()){
   print(prefix)
+  # prefix is the part of the svymean output that corresponds to the variable to be summarized
+  # Examples used include _dm$,_dm_diagnosed$, S81 etc.
   
   prefix_set = paste0("(",prefix,"|",
                       str_replace(prefix,"\\$","_low$"),"|",
