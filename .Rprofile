@@ -38,12 +38,16 @@ male_whr_cutoff = 0.95
 # male_wc_cutoff = 90 
 # male_whr_cutoff = 0.9
 
-fpg_cutoff <- 126/1.11
-rpg_cutoff <- 200/1.11
+fpg_cutoff <- 126
+rpg_cutoff <- 200
 sbp_cutoff <- 140
 dbp_cutoff <- 90
 
-fpgpre_cutoff <- 100/1.11
-rpgpre_cutoff <- 140/1.11
+fpgpre_cutoff <- 100
+rpgpre_cutoff <- 140
 sbppre_cutoff <- 130
 dbppre_cutoff <- 85
+
+gc()
+
+sdist <- readr::read_csv("C:/code/external/nfhs5_on_map2016/data/psu_on_map2018.csv")

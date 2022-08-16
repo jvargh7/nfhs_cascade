@@ -73,7 +73,9 @@ ncp_preprocessing <- function(df, sex = "Female"){
              is.na(fasting) & glucose < rpg_cutoff ~ 0,
              TRUE  ~ NA_real_),
            
+           # Among those diagnosed, indicator of diabetes status
            diagdm = case_when(
+             diagnosed_dm == 0 ~ NA_real_,
              is.na(glucose) | glucose > 498 ~ NA_real_,
              diagnosed_dm == 1 & fasting == 1 & glucose >= fpg_cutoff ~ 1,
              diagnosed_dm == 1 & fasting == 0 & glucose >= rpg_cutoff ~ 1,
@@ -105,6 +107,7 @@ ncp_preprocessing <- function(df, sex = "Female"){
              dbp < dbp_cutoff ~ 0,
              TRUE ~ NA_real_),
            diaghtn = case_when(
+             diagnosed_bp == 0 ~ NA_real_,
              is.na(sbp) | is.na(dbp) ~ NA_real_,
              diagnosed_bp == 1 & sbp >= sbp_cutoff ~ 1,
              diagnosed_bp == 1 & dbp >= dbp_cutoff ~ 1,
@@ -115,8 +118,7 @@ ncp_preprocessing <- function(df, sex = "Female"){
     
     # Diabetes cascade -----
   # From cp01_creating couples data.R --------
-  mutate(dm_sample = case_when(is.na(glucose) | glucose > 498 ~ 0, # | is.na(s728a) removed
-                               TRUE ~ 1),
+  mutate(
          # Diagnosis: No/DK, Blood sugar: in range
          dm_free = case_when(
            is.na(dm) ~ NA_real_,
@@ -130,11 +132,13 @@ ncp_preprocessing <- function(df, sex = "Female"){
          
          # Diagnosis: No/DK + Blood sugar: diabetes
          dm_screened_undiag = case_when(screened_dm == 0 | is.na(screened_dm) ~ NA_real_,
+                                        # or equivalently screened_dm == 0
                                         diagnosed_dm == 1 ~ 0,
                                         diagnosed_dm == 0 ~ 1,
                                         TRUE ~ NA_real_),
          
          dm_undiag_uncontr = case_when(diagnosed_dm == 1 | is.na(diagnosed_dm) ~ NA_real_,
+                                       # or equivalently diagnosed_dm == 0
                                        dm == 1 ~ 1,
                                        dm == 0 ~ 0,
                                        TRUE ~ NA_real_),
@@ -145,8 +149,8 @@ ncp_preprocessing <- function(df, sex = "Female"){
          
          # Dignosis: Yes, Treated: Yes, Blood sugar: out of range
          dm_treat_uncontr = case_when(medication_dm == 0 | is.na(medication_dm)  ~ NA_real_,
-                                      diagnosed_dm == 1 & medication_dm == 1 & diagdm == 1 ~ 1,
-                                      diagnosed_dm == 1 & medication_dm == 1 & diagdm == 0 ~ 0,
+                                      medication_dm == 1 & diagdm == 1 ~ 1,
+                                      medication_dm == 1 & diagdm == 0 ~ 0,
                                       TRUE ~ NA_real_),
          # Dignosis: Yes, Treated: Yes, Blood sugar: in range
          dm_treat_contr = 1 - dm_treat_uncontr,
@@ -195,8 +199,8 @@ ncp_preprocessing <- function(df, sex = "Female"){
          
          # Dignosis: Yes, Treated: Yes, Blood pressure: out of range
          htn_treat_uncontr = case_when(medication_bp == 0 | is.na(medication_bp)  ~ NA_real_,
-                                       diagnosed_bp == 1 & medication_bp == 1 & diaghtn == 1 ~ 1,
-                                       diagnosed_bp == 1 & medication_bp == 1 & diaghtn == 0 ~ 0,
+                                       medication_bp == 1 & diaghtn == 1 ~ 1,
+                                       medication_bp == 1 & diaghtn == 0 ~ 0,
                                        TRUE ~ NA_real_),
          # Dignosis: Yes, Treated: Yes, Blood pressure: in range
          htn_treat_contr = 1 - htn_treat_uncontr,
@@ -244,18 +248,18 @@ ncp_preprocessing <- function(df, sex = "Female"){
                                                    TRUE ~ as.numeric(x))) %>% 
     # Caste
     mutate_at(vars(caste),function(x) case_when(x == 1 ~ "Schedule Caste",
-                                                   x == 2 ~ "Schedule Tribe",
-                                                   x == 3 ~ "OBC",
-                                                   x == 4 ~ "General",
-                                                   x == 8 ~ "General",
-                                                   TRUE ~ NA_character_)) %>% 
+                                                x == 2 ~ "Schedule Tribe",
+                                                x == 3 ~ "OBC",
+                                                x == 4 ~ "General",
+                                                x == 8 ~ "General",
+                                                TRUE ~ "General")) %>% 
     # Education
     mutate_at(vars(education),function(x) case_when(x == 0 ~ "No education",
                                                     x == 1 ~ "Primary",
                                                     x == 2 ~ "Secondary",
                                                     x == 3 ~ "Higher",
-                                                    x == 9 ~ NA_character_,
-                                                    TRUE ~ NA_character_)) %>% 
+                                                    x == 9 ~ "No education",
+                                                    TRUE ~ "No education")) %>% 
     # Religion
     mutate_at(vars(religion),function(x) case_when(x == 1 ~ "Hindu",
                                                       x == 2 ~ "Muslim",
@@ -438,15 +442,31 @@ ncp_preprocessing <- function(df, sex = "Female"){
                               ),
            waist_hip = case_when(!is.na(hipcircumference) ~ waistcircumference/hipcircumference,
                                  TRUE ~ NA_real_)
-           ) %>% 
+    ) %>% 
     
     mutate(bmi_category = factor(bmi_category,levels=c(1:4),labels=c("Underweight","Normal","Overweight","Obese")),
            highwhr = case_when(sex == "Female" & waist_hip >= female_whr_cutoff ~ 1,
-                              sex == "Female" & waist_hip < female_whr_cutoff ~ 0,
-                              sex == "Male" & waist_hip >= male_whr_cutoff ~ 1,
-                              sex == "Male" & waist_hip < male_whr_cutoff ~ 0,
-                              TRUE ~ NA_real_
-    )) %>% 
+                               sex == "Female" & waist_hip < female_whr_cutoff ~ 0,
+                               sex == "Male" & waist_hip >= male_whr_cutoff ~ 1,
+                               sex == "Male" & waist_hip < male_whr_cutoff ~ 0,
+                               TRUE ~ NA_real_),
+           age_category = case_when(age %in% c(18:39) ~ 1,
+                                    age %in% c(40:64) ~ 2,
+                                    age >= 65 ~ 3,
+                                    TRUE ~ NA_real_),
+           dm_at_risk = case_when(age_category %in% c(2,3) & 
+                                    # bmi_category %in% c("Overweight","Obese") &
+                                    htn_disease == 1 ~ 1,
+                                  TRUE ~ 0)) %>% 
+    mutate(age_category = factor(age_category,levels=c(1:3),labels=c("18-39","40-64","65 plus")),
+           
+           # State wealth quintile - urban/rural
+           swealthq_ur = case_when(!is.na(suwealthq) ~ suwealthq,
+                                   TRUE ~ srwealthq),
+           # State wealth factor score - urban/rural
+           swealths_ur = case_when(!is.na(suwealths) ~ suwealths,
+                                   TRUE ~ srwealths)
+           ) %>% 
     
     return(.)
 }
