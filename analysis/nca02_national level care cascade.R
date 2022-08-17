@@ -28,7 +28,7 @@ with_progress({
                                                            # c_vars = continuous_vars,
                                                            p_vars = proportion_vars,
                                                            # g_vars = grouped_vars,
-                                                           id_vars = c("residence",g_v)
+                                                           id_vars = id_vars
                                        ) %>% 
                                          mutate_at(vars(estimate,lci,uci),~round(.,1)) %>% 
                                          mutate(est_ci = paste0(estimate," (",
