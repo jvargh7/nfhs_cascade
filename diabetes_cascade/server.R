@@ -69,7 +69,7 @@ shinyServer(function(input, output,session) {
       seq(0,100,by=20)
       
     }
-    else{c(0,2.5,5,7.5,10,15,20)}
+    else{c(0,2.5,5,7.5,10,20,30)}
     
   })
   
@@ -80,7 +80,7 @@ shinyServer(function(input, output,session) {
     
     
     nm <- tmap_mode("view") +
-      tm_shape(shp = nm_merge()) +
+      tm_shape(shp = nm_merge(),id = "n5_state") +
       tm_fill(title= "",
               col="estimate",
               palette = palette_chr(),
@@ -91,7 +91,7 @@ shinyServer(function(input, output,session) {
               colorNA = "white")+ 
       tm_borders(col="black") + 
       tm_text(text="n5_state",col="black",size=0.5,remove.overlap = TRUE)+
-      tm_view(legend.position = c("right","top")) +
+      tm_view(view.legend.position = c("right","top")) +
       tm_legend(
                 legend.outside=FALSE,
                 legend.just=c("left","top"))
@@ -109,6 +109,9 @@ shinyServer(function(input, output,session) {
                   dplyr::select(D_CODE,n5_state,estimate),
                 by.x="D_CODE",by.y="D_CODE",all.x=TRUE) 
     
+    ds@data <- ds@data %>% 
+      dplyr::select(D_NAME,D_CODE,everything())
+    
     # https://stackoverflow.com/questions/52384937/subsetting-spatial-polygon-dataframe
     subset(ds,n5_state == input$stateinput)
   })
@@ -119,7 +122,7 @@ shinyServer(function(input, output,session) {
   output$statemap <- tmap::renderTmap({
     
     sm <- tmap_mode("view") +
-      tm_shape(sm_merge(),ext=1.2) + 
+      tm_shape(sm_merge(),ext=1.2,id="D_NAME") + 
       tm_fill(title= "",
               col="estimate",
               palette = palette_chr(),
@@ -130,7 +133,7 @@ shinyServer(function(input, output,session) {
               colorNA = "white")+ 
       tm_borders(col="black") + 
       tm_text(text="D_NAME",col="black",size=0.5,remove.overlap = TRUE)+
-      tm_view(legend.position = c("right","top"))
+      tm_view(view.legend.position = c("right","top"))
       tm_legend(
                 legend.outside=FALSE,
                 legend.just=c("left","top"))
@@ -146,24 +149,28 @@ shinyServer(function(input, output,session) {
   tab1 <- reactive({
     
     st_df <- nca03_state %>% 
-      dplyr::filter(n5_state == input$stateinput,
-                    strata == input$stratainput) %>% 
-      dplyr::select(variable,residence,est_ci) %>% 
-      mutate(residence = paste0(input$stateinput," ",residence))  %>% 
-      pivot_wider(names_from=residence,values_from=est_ci)
+      dplyr::filter(strata %in% c("Total","Male","Female")) %>% 
+      dplyr::filter(n5_state == input$stateinput) %>% 
+      dplyr::select(variable,residence,strata,est_ci) %>% 
+      mutate(residence = paste0(input$stateinput," ",residence," ",strata))  %>% 
+      dplyr::select(-strata) %>% 
+      pivot_wider(names_from=residence,values_from=est_ci) 
     
     nt_df <- nca02_national %>% 
-      dplyr::filter(strata == input$stratainput) %>% 
-      dplyr::select(variable,residence,est_ci) %>% 
-      mutate(residence = paste0("India ",residence)) %>% 
-      pivot_wider(names_from=residence,values_from=est_ci)
+      dplyr::filter(strata %in% c("Total","Male","Female")) %>% 
+      dplyr::select(variable,strata,residence,est_ci) %>% 
+      mutate(residence = paste0("India ",residence," ",strata)) %>% 
+      dplyr::select(-strata) %>% 
+      pivot_wider(names_from=residence,values_from=est_ci) 
     
     dt_df <- nca04_district %>% 
       dplyr::filter(strata == input$stratainput,
                     D_NAME == input$districtinput) %>% 
-      dplyr::select(variable,D_NAME,est_ci) %>% 
+      dplyr::select(variable,strata,D_NAME,est_ci) %>% 
       rename(residence = D_NAME)  %>% 
-      pivot_wider(names_from=residence,values_from=est_ci)
+      mutate(residence = paste0(residence," ",strata)) %>% 
+      dplyr::select(-strata) %>% 
+      pivot_wider(names_from=residence,values_from=est_ci) 
     
     left_join(
       nt_df ,
@@ -171,7 +178,9 @@ shinyServer(function(input, output,session) {
       by = "variable"
     ) %>% 
       left_join(dt_df,
-                by="variable")
+                by="variable") %>% 
+      mutate_all(function(x) str_replace(x," \\(","<br>\\(")) %>% 
+      rename(Cascade = variable)
   })
 
   
@@ -179,7 +188,7 @@ shinyServer(function(input, output,session) {
     
     tab1()
     
-  })
+  },bordered = TRUE, sanitize.text.function=identity,align = "c")
   
 
 })

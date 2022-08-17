@@ -14,6 +14,7 @@ map2018_sdist <- readxl::read_excel(file.path("data","maps.xlsx"),sheet="map2018
 
 
 sidebar <- dashboardSidebar(
+  h3("Please wait for Maps to load before changing inputs"),
   selectInput("stateinput","Select State:",unique(map2016_v024$n5_state)),
   selectInput("districtinput","Select District:",c("")),
   selectInput("varinput","Select Variable:",c("Screened","Diabetes","Diagnosed","Treated","Controlled")),
@@ -26,15 +27,16 @@ body <- dashboardBody(
   
   fluidRow(
     box(
-      tmap::tmapOutput("nationalmap",height=800),
+      tmap::tmapOutput("nationalmap",height=600),
       ),
     
     box(
-    tmap::tmapOutput("statemap",height=800),
+    tmap::tmapOutput("statemap",height=600),
         ),
   ),
   
-  box("Care Cascade",solidHeader=TRUE,status="warning",width=20,
+  box(solidHeader=FALSE,status="warning",width=20,title = "Diabetes Care Cascade",
+      background = "aqua",
       tableOutput("tableoutput")
       )
 )
@@ -43,7 +45,7 @@ body <- dashboardBody(
 
 
 dashboardPage(
-  dashboardHeader(title = "Diabetes Care Cascade, 2019-21"),
+  dashboardHeader(title = "Diabetes Care Cascade, 2019-21",titleWidth = 400),
   
   sidebar,
   
