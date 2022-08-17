@@ -16,7 +16,7 @@ map2018_sdist <- readxl::read_excel(file.path("data","maps.xlsx"),sheet="map2018
 sidebar <- dashboardSidebar(
   selectInput("stateinput","Select State:",unique(map2016_v024$n5_state)),
   selectInput("districtinput","Select District:",c("")),
-  selectInput("varinput","Select Variable:",c("Screening","Diabetes","Diagnosed","Treated","Controlled")),
+  selectInput("varinput","Select Variable:",c("Screened","Diabetes","Diagnosed","Treated","Controlled")),
   selectInput("mapinput","Select Display:",c("Urban","Rural")),
   selectInput("stratainput","Select Strata:",c("Total","Male","Female"))
   
@@ -24,17 +24,19 @@ sidebar <- dashboardSidebar(
 
 body <- dashboardBody(
   
-  # fluidRow(
-    # box(
+  fluidRow(
+    box(
       tmap::tmapOutput("nationalmap",height=800),
-      # ),
+      ),
     
-    # box(
+    box(
     tmap::tmapOutput("statemap",height=800),
-        # ),
-  # ),
+        ),
+  ),
   
-  box("Care Cascade",solidHeader=TRUE,status="warning",width=6,tableOutput("tableoutput"))
+  box("Care Cascade",solidHeader=TRUE,status="warning",width=20,
+      tableOutput("tableoutput")
+      )
 )
   
   

@@ -11,11 +11,12 @@ if(run_manual){
   district_shp <- readRDS(file.path("diabetes_cascade/data","district_shp.RDS"))
   state_shp <- readRDS(file.path("diabetes_cascade/data","state_shp.RDS"))
   
-  district_df <- readRDS(file.path("diabetes_cascade/data","nca04_district.RDS"))
-  state_df <- readRDS(file.path("diabetes_cascade/data","nca03_state.RDS"))
-  national_df <- readRDS(file.path("diabetes_cascade/data","nca02_national.RDS"))
+  nca04_district <- readRDS(file.path("diabetes_cascade/data","nca04_district.RDS"))
+  nca03_state <- readRDS(file.path("diabetes_cascade/data","nca03_state.RDS"))
+  nca02_national <- readRDS(file.path("diabetes_cascade/data","nca02_national.RDS"))
   
-  input = data.frame(varinput = "Diagnosed",mapinput = "Rural",stratainput = "Total") %>% mutate_all(~as.character(.))
+  input = data.frame(stateinput = "Kerala",districtinput = "Kottayam",
+                     varinput = "Diagnosed",mapinput = "Rural",stratainput = "Total") %>% mutate_all(~as.character(.))
 }
 
 map2016_v024 <- readxl::read_excel(file.path("data","maps.xlsx"),sheet="map2016_v024")
@@ -23,77 +24,93 @@ map2018_sdist <- readxl::read_excel(file.path("data","maps.xlsx"),sheet="map2018
 
 district_shp <- readRDS(file.path("data","district_shp.RDS"))
 state_shp <- readRDS(file.path("data","state_shp.RDS"))
-district_df <- readRDS(file.path("data","nca04_district.RDS"))
-state_df <- readRDS(file.path("data","nca03_state.RDS"))
-national_df <- readRDS(file.path("data","nca02_national.RDS"))
+nca04_district <- readRDS(file.path("data","nca04_district.RDS"))
+nca03_state <- readRDS(file.path("data","nca03_state.RDS"))
+nca02_national <- readRDS(file.path("data","nca02_national.RDS"))
 
 
 
 
 # Define server logic required to draw a histogram
-shinyServer(function(input, output) {
+shinyServer(function(input, output,session) {
 
+  
+  n5_state_input <- reactive({
+    input$stateinput
+  })
+  
   # https://stackoverflow.com/questions/64796206/dynamically-update-two-selectinput-boxes-based-on-the-others-selection-in-r-shin
-    reactive({
-      if(!is.null(input$stateinput)){
-        updateSelectInput("districtinput",
-                          choices = map2018_sdist[map2018_sdist$n5_state == input$stateinput,]$D_NAME,
-                          selected = isolate(input$districtinput))
-      }
-      
-      
-    })
+  observe({
+    d_i = map2018_sdist[map2018_sdist$n5_state == n5_state_input(),]$D_NAME
+    updateSelectInput(session, "districtinput", choices = na.omit(d_i)) 
+  })  
+
   
   nm_merge <- reactive({
-    state_shp %>% 
-    sp::merge(state_df %>%
+    ss <- state_shp %>% 
+    sp::merge(nca03_state %>%
                 dplyr::filter(variable == input$varinput,
                               residence == input$mapinput,
                               strata == input$stratainput)  %>% 
                 dplyr::select(n5_state,ST_NM,estimate),
               by.x="ST_NM",by.y="ST_NM",all.x=TRUE)
+    
+    ss
   })
   
   
-  # tmap_mode("plot")
+  palette_chr <- reactive({
+    case_when(input$varinput == "Screened" ~ "RdYlGn",
+                   TRUE ~ "-RdYlGn")
+        })
   
+  breaks <- reactive({
+    if(input$varinput == "Screened"){
+      seq(0,100,by=20)
+      
+    }
+    else{c(0,2.5,5,7.5,10,15,20)}
+    
+  })
+  
+
   output$nationalmap <- tmap::renderTmap({
     
-    palette_chr = "-RdYlGn"
-    breaks = c(0,2.5,5,7.5,10,15,20)
     
     
-    nm <- tm_shape(shp = nm_merge()) +
+    
+    nm <- tmap_mode("view") +
+      tm_shape(shp = nm_merge()) +
       tm_fill(title= "",
               col="estimate",
-              palette = palette_chr,
+              palette = palette_chr(),
               style = "fixed",
-              breaks= breaks,
+              breaks= breaks(),
               # midpoint = NA,
               textNA="Data not available",
               colorNA = "white")+ 
       tm_borders(col="black") + 
-      tm_text(text="ST_NM",col="black",size=0.5,remove.overlap = TRUE)+
-      tm_legend(legend.position = c("right","top"),
+      tm_text(text="n5_state",col="black",size=0.5,remove.overlap = TRUE)+
+      tm_view(legend.position = c("right","top")) +
+      tm_legend(
                 legend.outside=FALSE,
                 legend.just=c("left","top"))
-    # tm_layout(plot_title,title.size = 2,
-    #           legend.text.size = 1,
-    #           legend.title.size = 1)
-    print(nm)
+    nm
     
     
     
   })
   
   sm_merge <- reactive({
-    district_shp %>% 
-      sp::merge(district_df %>%
+    ds <- district_shp %>% 
+      sp::merge(nca04_district %>%
                   dplyr::filter(variable == input$varinput,
                                 strata == input$stratainput)  %>% 
-                  dplyr::select(district_df,n5_state,estimate),
-                by.x="D_CODE",by.y="district_df",all.x=TRUE) %>% 
-      dplyr::filter(n5_state == input$stateinput)
+                  dplyr::select(D_CODE,n5_state,estimate),
+                by.x="D_CODE",by.y="D_CODE",all.x=TRUE) 
+    
+    # https://stackoverflow.com/questions/52384937/subsetting-spatial-polygon-dataframe
+    subset(ds,n5_state == input$stateinput)
   })
   
   
@@ -101,50 +118,51 @@ shinyServer(function(input, output) {
   
   output$statemap <- tmap::renderTmap({
     
-    sm <- tmap_mode("plot") +
-      tm_shape(sm_merge(),ext=1.2,bbox = reactive({sm_merge@bbox})) + 
+    sm <- tmap_mode("view") +
+      tm_shape(sm_merge(),ext=1.2) + 
       tm_fill(title= "",
               col="estimate",
-              palette = palette_chr,
+              palette = palette_chr(),
               style = "fixed",
-              breaks= breaks,
+              breaks= breaks(),
               # midpoint = NA,
               textNA="Data not available",
               colorNA = "white")+ 
       tm_borders(col="black") + 
-      tm_text(text="ST_NM",col="black",size=0.5,remove.overlap = TRUE)+
-      tm_legend(legend.position = c("right","top"),
+      tm_text(text="D_NAME",col="black",size=0.5,remove.overlap = TRUE)+
+      tm_view(legend.position = c("right","top"))
+      tm_legend(
                 legend.outside=FALSE,
                 legend.just=c("left","top"))
     # tm_layout(plot_title,title.size = 2,
     #           legend.text.size = 1,
     #           legend.title.size = 1)
     
-    print(sm)
+    sm
     
   })
   
   # Table --------
-  to <- reactive({
+  tab1 <- reactive({
     
-    st_df <- state_df %>% 
+    st_df <- nca03_state %>% 
       dplyr::filter(n5_state == input$stateinput,
                     strata == input$stratainput) %>% 
       dplyr::select(variable,residence,est_ci) %>% 
       mutate(residence = paste0(input$stateinput," ",residence))  %>% 
       pivot_wider(names_from=residence,values_from=est_ci)
     
-    nt_df <- national_df %>% 
+    nt_df <- nca02_national %>% 
       dplyr::filter(strata == input$stratainput) %>% 
       dplyr::select(variable,residence,est_ci) %>% 
       mutate(residence = paste0("India ",residence)) %>% 
       pivot_wider(names_from=residence,values_from=est_ci)
     
-    dt_df <- district_df %>% 
+    dt_df <- nca04_district %>% 
       dplyr::filter(strata == input$stratainput,
                     D_NAME == input$districtinput) %>% 
       dplyr::select(variable,D_NAME,est_ci) %>% 
-      rename_at(residence = D_NAME)  %>% 
+      rename(residence = D_NAME)  %>% 
       pivot_wider(names_from=residence,values_from=est_ci)
     
     left_join(
@@ -159,7 +177,7 @@ shinyServer(function(input, output) {
   
   output$tableoutput <- renderTable({
     
-    print(to)
+    tab1()
     
   })
   

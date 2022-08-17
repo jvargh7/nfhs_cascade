@@ -12,7 +12,8 @@ nca02_national <- read_csv(file = "analysis/nca02_national level care cascade.cs
   mutate(variable = str_replace(variable,"dm_","")) %>% 
   mutate(variable = factor(variable,levels=c("screened","disease","diagnosed","treated","controlled"),
                            labels=c("Screened","Diabetes","Diagnosed","Treated","Controlled")),
-         strata = case_when(is.na(strata) ~ "Total",
+         strata = case_when(is.na(strata) & is.na(stratification) ~ "Total",
+                            is.na(strata) ~ "Missing",
                             TRUE ~ strata),
          stratification = case_when(is.na(stratification) ~ "",
                                     TRUE ~ stratification))
@@ -41,10 +42,16 @@ nca04_district <- read_csv("analysis/nca04_district2018 level care cascade.csv",
   mutate(variable = str_replace(variable,"dm_","")) %>% 
   mutate(variable = factor(variable,levels=c("screened","disease","diagnosed","treated","controlled"),
                            labels=c("Screened","Diabetes","Diagnosed","Treated","Controlled")),
-         D_CODE = as.numeric(district_df),
          strata = case_when(is.na(strata) ~ "Total",
                             TRUE ~ strata)) %>% 
-  dplyr::select(D_CODE,variable,estimate,lci,uci,strata,est_ci)
+  rename(D_CODE = district_df) %>% 
+  # There are missing values in D_CODE from subsetting on map
+  dplyr::filter(!is.na(D_CODE)) %>% 
+  left_join(readxl::read_excel("diabetes_cascade/data/maps.xlsx","map2018_sdist") %>% 
+              dplyr::select(D_CODE,n5_state,v024,D_NAME) %>% 
+              mutate(D_CODE = sprintf("%03d",as.numeric(D_CODE))),
+            by=c("D_CODE")) %>% 
+  dplyr::select(D_CODE,D_NAME,n5_state,v024,variable,estimate,lci,uci,strata,est_ci)
 saveRDS(nca04_district,file="diabetes_cascade/data/nca04_district.RDS")
 
 
