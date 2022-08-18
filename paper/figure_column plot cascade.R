@@ -4,14 +4,15 @@ unmet_cascade <- read_csv(file = "analysis/nca05_state unmet need care cascade.c
   mutate(variable = factor(variable,levels=c("Unscreened","Undiagnosed","Untreated","Uncontrolled")))
 
 fig_uc <- unmet_cascade %>% 
-  ggplot(data=.,aes(x = n5_state,y = estimate,
+  ggplot(data=.,aes(x = n5_state,y = estimate,ymin = lci,ymax=uci,
                     group=interaction(residence,n5_state),
                     fill=residence)) +
   geom_col(position=position_dodge(width=0.9)) +
+  geom_errorbar(position = position_dodge(width=0.9),width=0.1) +
   theme_bw() + 
   coord_flip() +
   facet_grid(zone~variable,scales="free_y",space="free_y") +
-  scale_fill_manual(name="",values=c("darkblue","red")) +
+  scale_fill_manual(name="",values=c("blue","red")) +
   scale_shape_discrete(name="") +
   theme(
     legend.text = element_text(size=12),
