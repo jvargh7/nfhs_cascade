@@ -1,5 +1,6 @@
 
-group_vars = c("","sex","age_category")
+group_vars = c("","sex","age_category","education",
+               "caste","religion","wealthq_ur")
 
 source("C:/code/external/functions/survey/svysummary.R")
 
@@ -103,3 +104,11 @@ bind_rows(unmet_svysummary_dm,
             by=c("state"="v024")) %>% 
   write_csv(.,file = "analysis/nca05_state unmet need care cascade.csv")
 
+
+# df <- read_csv(file="analysis/nca05_state unmet need care cascade.csv") %>%
+#   dplyr::select(-n5_state,-contains("zone")) %>%
+#   left_join(readxl::read_excel("data/NFHS Cascade Variable List.xlsx",sheet="map2020_v024") %>%
+#               dplyr::select(v024,n5_state,zone) %>%
+#               distinct(v024,n5_state,.keep_all=TRUE),
+#             by=c("state"="v024"))
+# write_csv(df,file = "analysis/nca05_state unmet need care cascade.csv")

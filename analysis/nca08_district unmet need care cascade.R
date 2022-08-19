@@ -100,9 +100,18 @@ bind_rows(unmet_svysummary_dm,
   rename(D_CODE = district_df) %>% 
   # There are missing values in D_CODE from subsetting on map
   dplyr::filter(!is.na(D_CODE)) %>% 
-  left_join(readxl::read_excel("diabetes_cascade/data/maps.xlsx","map2018_sdist") %>% 
+  left_join(readxl::read_excel("data/NFHS Cascade Variable List.xlsx","map2018_sdist") %>% 
               dplyr::select(D_CODE,n5_state,v024,D_NAME) %>% 
               mutate(D_CODE = sprintf("%03d",as.numeric(D_CODE))),
             by=c("D_CODE")) %>% 
   write_csv(.,file = "analysis/nca08_district unmet need care cascade.csv")
 
+
+# df <- read_csv("analysis/nca08_district unmet need care cascade.csv") %>%
+#   dplyr::select(-n5_state,-v024,-D_NAME) %>%
+#   left_join(readxl::read_excel("data/NFHS Cascade Variable List.xlsx","map2018_sdist") %>%
+#               dplyr::select(D_CODE,n5_state,v024,D_NAME) %>%
+#               mutate(D_CODE = sprintf("%03d",as.numeric(D_CODE))),
+#             by=c("D_CODE"))
+# write_csv(df,file = "analysis/nca08_district unmet need care cascade.csv")
+# 

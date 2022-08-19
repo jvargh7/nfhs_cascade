@@ -4,6 +4,7 @@ library(shinydashboard)
 library(tidyverse)
 library(readxl)
 library(tmap)
+library(ggpubr)
 run_manual = FALSE
 if(run_manual){
   map2016_v024 <- readxl::read_excel(file.path("diabetes_cascade/data","maps.xlsx"),sheet="map2016_v024")
@@ -14,6 +15,11 @@ if(run_manual){
   nca04_district <- readRDS(file.path("diabetes_cascade/data","nca04_district.RDS"))
   nca03_state <- readRDS(file.path("diabetes_cascade/data","nca03_state.RDS"))
   nca02_national <- readRDS(file.path("diabetes_cascade/data","nca02_national.RDS"))
+  nca05_state_unmet <- readRDS(file.path("diabetes_cascade/data","nca05_state_unmet.RDS"))
+  nca08_district_unmet <- readRDS(file.path("diabetes_cascade/data","nca08_district_unmet.RDS"))
+  
+  source("diabetes_cascade/code/cascade_plot.R")
+  
   
   input = data.frame(stateinput = "Kerala",districtinput = "Kottayam",
                      varinput = "Diagnosed",mapinput = "Rural",stratainput = "Total") %>% mutate_all(~as.character(.))
@@ -28,31 +34,35 @@ nca04_district <- readRDS(file.path("data","nca04_district.RDS"))
 nca03_state <- readRDS(file.path("data","nca03_state.RDS"))
 nca02_national <- readRDS(file.path("data","nca02_national.RDS"))
 
+nca05_state_unmet <- readRDS(file.path("data","nca05_state_unmet.RDS"))
+nca08_district_unmet <- readRDS(file.path("data","nca08_district_unmet.RDS"))
 
+source("code/cascade_plot.R")
 
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output,session) {
 
-  
+  # Panel 1: Overview ----------------
   n5_state_input <- reactive({
-    input$stateinput
+    input$stateinput1
   })
   
   # https://stackoverflow.com/questions/64796206/dynamically-update-two-selectinput-boxes-based-on-the-others-selection-in-r-shin
   observe({
     d_i = map2018_sdist[map2018_sdist$n5_state == n5_state_input(),]$D_NAME
-    updateSelectInput(session, "districtinput", choices = na.omit(d_i)) 
+    updateSelectInput(session, "districtinput1", choices = na.omit(d_i)) 
   })  
 
   
   nm_merge <- reactive({
     ss <- state_shp %>% 
     sp::merge(nca03_state %>%
-                dplyr::filter(variable == input$varinput,
-                              residence == input$mapinput,
-                              strata == input$stratainput)  %>% 
-                dplyr::select(n5_state,ST_NM,estimate),
+                dplyr::filter(variable == input$varinput1,
+                              residence == input$mapinput1,
+                              strata == input$stratainput1)  %>% 
+                dplyr::select(n5_state,ST_NM,estimate) %>% 
+                rename_at(vars(estimate),~paste0(input$mapinput1," ",input$stratainput1," ",input$varinput1)),
               by.x="ST_NM",by.y="ST_NM",all.x=TRUE)
     
     ss
@@ -60,12 +70,12 @@ shinyServer(function(input, output,session) {
   
   
   palette_chr <- reactive({
-    case_when(input$varinput == "Screened" ~ "RdYlGn",
+    case_when(input$varinput1 == "Screened" ~ "RdYlGn",
                    TRUE ~ "-RdYlGn")
         })
   
   breaks <- reactive({
-    if(input$varinput == "Screened"){
+    if(input$varinput1 == "Screened"){
       seq(0,100,by=20)
       
     }
@@ -73,7 +83,7 @@ shinyServer(function(input, output,session) {
     
   })
   
-
+# output$nationalmap -----------
   output$nationalmap <- tmap::renderTmap({
     
     
@@ -82,7 +92,7 @@ shinyServer(function(input, output,session) {
     nm <- tmap_mode("view") +
       tm_shape(shp = nm_merge(),id = "n5_state") +
       tm_fill(title= "",
-              col="estimate",
+              col=paste0(input$mapinput1," ",input$stratainput1," ",input$varinput1),
               palette = palette_chr(),
               style = "fixed",
               breaks= breaks(),
@@ -104,27 +114,28 @@ shinyServer(function(input, output,session) {
   sm_merge <- reactive({
     ds <- district_shp %>% 
       sp::merge(nca04_district %>%
-                  dplyr::filter(variable == input$varinput,
-                                strata == input$stratainput)  %>% 
-                  dplyr::select(D_CODE,n5_state,estimate),
+                  dplyr::filter(variable == input$varinput1,
+                                strata == input$stratainput1)  %>% 
+                  dplyr::select(D_CODE,n5_state,estimate) %>% 
+                  rename_at(vars(estimate),~paste0(input$mapinput1," ",input$stratainput1," ",input$varinput1)),
                 by.x="D_CODE",by.y="D_CODE",all.x=TRUE) 
     
     ds@data <- ds@data %>% 
       dplyr::select(D_NAME,D_CODE,everything())
     
     # https://stackoverflow.com/questions/52384937/subsetting-spatial-polygon-dataframe
-    subset(ds,n5_state == input$stateinput)
+    subset(ds,n5_state == input$stateinput1)
   })
   
   
   
-  
+  # output$statemap -----------
   output$statemap <- tmap::renderTmap({
     
     sm <- tmap_mode("view") +
       tm_shape(sm_merge(),ext=1.2,id="D_NAME") + 
       tm_fill(title= "",
-              col="estimate",
+              col=paste0(input$mapinput1," ",input$stratainput1," ",input$varinput1),
               palette = palette_chr(),
               style = "fixed",
               breaks= breaks(),
@@ -150,9 +161,9 @@ shinyServer(function(input, output,session) {
     
     st_df <- nca03_state %>% 
       dplyr::filter(strata %in% c("Total","Male","Female")) %>% 
-      dplyr::filter(n5_state == input$stateinput) %>% 
+      dplyr::filter(n5_state == input$stateinput1) %>% 
       dplyr::select(variable,residence,strata,est_ci) %>% 
-      mutate(residence = paste0(input$stateinput," ",residence," ",strata))  %>% 
+      mutate(residence = paste0(input$stateinput1," ",residence," ",strata))  %>% 
       dplyr::select(-strata) %>% 
       pivot_wider(names_from=residence,values_from=est_ci) 
     
@@ -164,8 +175,8 @@ shinyServer(function(input, output,session) {
       pivot_wider(names_from=residence,values_from=est_ci) 
     
     dt_df <- nca04_district %>% 
-      dplyr::filter(strata == input$stratainput,
-                    D_NAME == input$districtinput) %>% 
+      dplyr::filter(strata == input$stratainput1,
+                    D_NAME == input$districtinput1) %>% 
       dplyr::select(variable,strata,D_NAME,est_ci) %>% 
       rename(residence = D_NAME)  %>% 
       mutate(residence = paste0(residence," ",strata)) %>% 
@@ -183,12 +194,121 @@ shinyServer(function(input, output,session) {
       rename(Cascade = variable)
   })
 
-  
+  # output$tableoutput -----------
   output$tableoutput <- renderTable({
     
     tab1()
     
   },bordered = TRUE, sanitize.text.function=identity,align = "c")
+  
+  # Panel 2: State ------------------
+  
+  panel2_n5_state <- reactive({
+    input$stateinput2
+  })
+  
+  district_cm_merge <- reactive({
+    scm <- nca08_district_unmet %>% 
+      dplyr::filter(strata == input$stratainput2,
+                    n5_state == panel2_n5_state())
+    
+    scm
+    
+  })
+  
+  # output$unmet_districts -----------
+  
+  output$unmet_districts <- renderPlot({
+    
+    fig_prevalence <- district_cm_merge() %>% 
+      dplyr::filter(variable == "Diabetes") %>% 
+      ggplot(data=.,aes(x = D_NAME,y = estimate,ymin = lci,ymax=uci,
+                        group=D_NAME)) +
+      geom_col(position=position_dodge(width=0.9),fill="lightblue") +
+      geom_errorbar(position = position_dodge(width=0.9),width=0.1) +
+      theme_bw() + 
+      coord_flip() +
+      facet_grid(~variable,scales="free",space="free_y") +
+      scale_y_continuous(limits=c(0,40),breaks=seq(0,40,by=10)) +
+      facet_grid(~variable,scales="free_y",space="free_y") +
+      theme(
+        legend.text = element_text(size=12),
+        axis.text = element_text(size = 12),
+        strip.background.y = element_blank(),
+        strip.text.x = element_text(size=12),
+        strip.text.y = element_blank(),
+        legend.position = "bottom") +
+      # scale_y_continuous(limits=c(0,50)) +
+      ylab("Prevalence (%)") +
+      xlab("") 
+    
+    fig_uc <- district_cm_merge() %>% 
+      dplyr::filter(variable != "Diabetes") %>% 
+      ggplot(data=.,aes(x = D_NAME,y = estimate,ymin = lci,ymax=uci,
+                        group=D_NAME),fill="lightblue") +
+      geom_col(position=position_dodge(width=0.9)) +
+      geom_errorbar(position = position_dodge(width=0.9),width=0.1) +
+      theme_bw() + 
+      coord_flip() +
+      facet_grid(~variable,scales="free",space="free_y") +
+      scale_y_continuous(limits=c(0,100),breaks=c(0,25,50,75,100)) +
+      theme(
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        legend.text = element_text(size=12),
+        axis.text = element_text(size = 12),
+        strip.text = element_text(size=12),
+        legend.position = "bottom") +
+      # scale_y_continuous(limits=c(0,50)) +
+      ylab("Prevalence (%)") +
+      xlab("") 
+    
+    ggarrange(fig_prevalence,fig_uc,nrow=1,ncol=2,
+              common.legend = TRUE,legend="bottom",
+              widths = c(1.5,2))
+  })
+  
+  # output$cascade_state --------------
+  
+  state_cs_merge <- reactive({
+    
+    nca03_state %>% 
+      dplyr::filter(n5_state == panel2_n5_state()) %>% 
+      mutate(cascade = str_replace(variable,"dm_","") %>% str_to_title()) %>% 
+      mutate(cascade = factor(cascade,levels=c("Screened","Disease","Diagnosed","Treated","Controlled"),
+                              labels=c("Screened","Diabetes","Diagnosed","Taking Medication","Under Control"))) %>% 
+      mutate(group = case_when(is.na(strata) ~ paste0(residence,"\nTotal"),
+                               TRUE ~ paste0(residence,"\n",strata)))
+    
+  })
+  
+  output$cascade_state <- renderPlot({
+    
+    figA <- state_cs_merge() %>% 
+      dplyr::filter(is.na(stratification)|stratification == "sex") %>% 
+      cascade_plot(.,limits_y = c(0,40))
+    figB <- state_cs_merge() %>% 
+      dplyr::filter(stratification == "age_category") %>% 
+      cascade_plot(.,limits_y = c(0,40))
+    # figC <- state_cs_merge() %>% 
+    #   dplyr::filter(stratification == "education") %>% 
+    #   cascade_plot(.,limits_y = c(0,25))
+    # figD <- state_cs_merge() %>% 
+    #   dplyr::filter(stratification == "caste") %>% 
+    #   cascade_plot(.,limits_y = c(0,25))
+    # figE <- state_cs_merge() %>% 
+    #   dplyr::filter(stratification == "wealthq_ur") %>% 
+    #   cascade_plot(.,limits_y = c(0,25))
+    
+    ggarrange(figA,
+              figB,
+              # figC,
+              # figD,
+              # figE,
+              labels = LETTERS[1:2],ncol = 1,nrow=2,common.legend = TRUE,legend="bottom")
+    
+    
+  })
   
 
 })

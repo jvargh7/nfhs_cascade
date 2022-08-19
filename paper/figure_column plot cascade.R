@@ -7,20 +7,23 @@ unmet_cascade <- bind_rows(read_csv(file = "analysis/nca05_state unmet need care
             dplyr::filter(variable == "Disease") %>% 
             mutate(variable = "Diabetes")
           ) %>% 
+  dplyr::filter(n > 100) %>% 
   mutate(variable = factor(variable,levels=c("Diabetes","Unscreened","Undiagnosed","Untreated","Uncontrolled")))
 
 
-fig_prevalence <- fig_uc <- unmet_cascade %>% 
+fig_prevalence <- unmet_cascade %>% 
   dplyr::filter(variable == "Diabetes") %>% 
-  ggplot(data=.,aes(x = n5_state,y = estimate,
+  ggplot(data=.,aes(x = n5_state,y = estimate,ymin = lci,ymax=uci,
                     group=interaction(residence,n5_state),
                     fill=residence)) +
   geom_col(position=position_dodge(width=0.9)) +
+  geom_errorbar(position = position_dodge(width=0.9),width=0.1) +
   theme_bw() + 
   coord_flip() +
   facet_grid(zone~variable,scales="free",space="free_y") +
   scale_y_continuous(limits=c(0,20),breaks=seq(0,20,by=5)) +
-  scale_fill_manual(name="",values=c("darkblue","red")) +
+  facet_grid(zone~variable,scales="free_y",space="free_y") +
+  scale_fill_manual(name="",values=c("lightblue","orange")) +
   scale_shape_discrete(name="") +
   theme(
     legend.text = element_text(size=12),
@@ -35,15 +38,16 @@ fig_prevalence <- fig_uc <- unmet_cascade %>%
 
 fig_uc <- unmet_cascade %>% 
   dplyr::filter(variable != "Diabetes") %>% 
-  ggplot(data=.,aes(x = n5_state,y = estimate,
+  ggplot(data=.,aes(x = n5_state,y = estimate,ymin = lci,ymax=uci,
                     group=interaction(residence,n5_state),
                     fill=residence)) +
   geom_col(position=position_dodge(width=0.9)) +
+  geom_errorbar(position = position_dodge(width=0.9),width=0.1) +
   theme_bw() + 
   coord_flip() +
   facet_grid(zone~variable,scales="free",space="free_y") +
   scale_y_continuous(limits=c(0,75),breaks=c(0,25,50,75)) +
-  scale_fill_manual(name="",values=c("darkblue","red")) +
+  scale_fill_manual(name="",values=c("lightblue","orange")) +
   scale_shape_discrete(name="") +
   theme(
     axis.text.y = element_blank(),

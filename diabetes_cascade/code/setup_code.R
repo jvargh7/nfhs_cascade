@@ -48,6 +48,38 @@ nca04_district <- read_csv("analysis/nca04_district2018 level care cascade.csv",
 saveRDS(nca04_district,file="diabetes_cascade/data/nca04_district.RDS")
 
 
+# nca05_state - Unmet need ----------
+nca05_state <- bind_rows(read_csv(file = "analysis/nca05_state unmet need care cascade.csv") %>% 
+                             dplyr::filter(is.na(stratification)) %>% 
+                             mutate(variable = str_replace(variable,"dm_","") %>% str_to_title()),
+                           read_csv(file="analysis/nca03_state level care cascade.csv") %>% 
+                             dplyr::filter(is.na(stratification)) %>% 
+                             mutate(variable = str_replace(variable,"dm_","") %>% str_to_title()) %>% 
+                             dplyr::filter(variable == "Disease") %>% 
+                             mutate(variable = "Diabetes")
+) %>% 
+  # dplyr::filter(n > 100) %>% 
+  mutate(variable = factor(variable,levels=c("Diabetes","Unscreened","Undiagnosed","Untreated","Uncontrolled"))) 
+saveRDS(nca05_state,file="diabetes_cascade/data/nca05_state_unmet.RDS")
 
 
+# nca08_district - Unmet need --------
 
+nca08_district <- bind_rows(read_csv(file = "analysis/nca08_district unmet need care cascade.csv") %>% 
+                           mutate(variable = str_replace(variable,"dm_","") %>% str_to_title()),
+                         read_csv(file="analysis/nca04_district2018 level care cascade.csv") %>% 
+                           mutate(variable = str_replace(variable,"dm_","") %>% str_to_title()) %>% 
+                           dplyr::filter(variable == "Disease") %>% 
+                           mutate(variable = "Diabetes")
+) %>% 
+  mutate(strata = case_when(is.na(strata) ~ "Total",
+         TRUE ~ strata)) %>% 
+  # dplyr::filter(n > 100) %>% 
+  mutate(variable = factor(variable,levels=c("Diabetes","Unscreened","Undiagnosed","Untreated","Uncontrolled"))) %>% 
+  dplyr::select(D_CODE,D_NAME,n5_state,v024,variable,estimate,lci,uci,strata,est_ci)
+
+saveRDS(nca08_district,file="diabetes_cascade/data/nca08_district_unmet.RDS")
+
+# Copying functions --------
+
+file.copy("functions/cascade_plot.R",to = "diabetes_cascade/code/cascade_plot.R")
