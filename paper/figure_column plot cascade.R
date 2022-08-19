@@ -1,19 +1,53 @@
-unmet_cascade <- read_csv(file = "analysis/nca05_state unmet need care cascade.csv") %>% 
-  dplyr::filter(is.na(stratification)) %>% 
-  mutate(variable = str_replace(variable,"dm_","") %>% str_to_title()) %>% 
-  mutate(variable = factor(variable,levels=c("Unscreened","Undiagnosed","Untreated","Uncontrolled")))
+unmet_cascade <- bind_rows(read_csv(file = "analysis/nca05_state unmet need care cascade.csv") %>% 
+            dplyr::filter(is.na(stratification)) %>% 
+            mutate(variable = str_replace(variable,"dm_","") %>% str_to_title()),
+          read_csv(file="analysis/nca03_state level care cascade.csv") %>% 
+            dplyr::filter(is.na(stratification)) %>% 
+            mutate(variable = str_replace(variable,"dm_","") %>% str_to_title()) %>% 
+            dplyr::filter(variable == "Disease") %>% 
+            mutate(variable = "Diabetes")
+          ) %>% 
+  mutate(variable = factor(variable,levels=c("Diabetes","Unscreened","Undiagnosed","Untreated","Uncontrolled")))
 
-fig_uc <- unmet_cascade %>% 
+
+fig_prevalence <- fig_uc <- unmet_cascade %>% 
+  dplyr::filter(variable == "Diabetes") %>% 
   ggplot(data=.,aes(x = n5_state,y = estimate,
                     group=interaction(residence,n5_state),
                     fill=residence)) +
   geom_col(position=position_dodge(width=0.9)) +
   theme_bw() + 
   coord_flip() +
-  facet_grid(zone~variable,scales="free_y",space="free_y") +
+  facet_grid(zone~variable,scales="free",space="free_y") +
+  scale_y_continuous(limits=c(0,20),breaks=seq(0,20,by=5)) +
   scale_fill_manual(name="",values=c("darkblue","red")) +
   scale_shape_discrete(name="") +
   theme(
+    legend.text = element_text(size=12),
+    axis.text = element_text(size = 12),
+    strip.background.y = element_blank(),
+    strip.text.x = element_text(size=12),
+    strip.text.y = element_blank(),
+    legend.position = "bottom") +
+  # scale_y_continuous(limits=c(0,50)) +
+  ylab("Prevalence (%)") +
+  xlab("") 
+
+fig_uc <- unmet_cascade %>% 
+  dplyr::filter(variable != "Diabetes") %>% 
+  ggplot(data=.,aes(x = n5_state,y = estimate,
+                    group=interaction(residence,n5_state),
+                    fill=residence)) +
+  geom_col(position=position_dodge(width=0.9)) +
+  theme_bw() + 
+  coord_flip() +
+  facet_grid(zone~variable,scales="free",space="free_y") +
+  scale_y_continuous(limits=c(0,75),breaks=c(0,25,50,75)) +
+  scale_fill_manual(name="",values=c("darkblue","red")) +
+  scale_shape_discrete(name="") +
+  theme(
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank(),
     legend.text = element_text(size=12),
     axis.text = element_text(size = 12),
     strip.text = element_text(size=12),
@@ -22,6 +56,8 @@ fig_uc <- unmet_cascade %>%
   ylab("Prevalence (%)") +
   xlab("") 
 
-
-fig_uc %>% 
+require(ggpubr)
+ggarrange(fig_prevalence,fig_uc,nrow=1,ncol=2,
+          common.legend = TRUE,legend="bottom",
+          widths = c(1.5,2)) %>% 
   ggsave(.,filename = paste0(path_cascade_folder,"/figures/figure_column cascade.png"),width=15,height=8)

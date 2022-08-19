@@ -51,5 +51,14 @@ district_svysummary <- future_map_dfr(group_vars,
                                      
                                    })
 
+district_svysummary <- district_svysummary %>% 
+  rename(D_CODE = district_df) %>% 
+  # There are missing values in D_CODE from subsetting on map
+  dplyr::filter(!is.na(D_CODE)) %>% 
+  left_join(readxl::read_excel("diabetes_cascade/data/maps.xlsx","map2018_sdist") %>% 
+              dplyr::select(D_CODE,n5_state,v024,D_NAME) %>% 
+              mutate(D_CODE = sprintf("%03d",as.numeric(D_CODE))),
+            by=c("D_CODE"))
+
 write_csv(district_svysummary,file = "analysis/nca04_district2018 level care cascade.csv")
 

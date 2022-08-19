@@ -54,8 +54,16 @@ state_svysummary <- future_map_dfr(group_vars,
 
 state_svysummary %>% 
   left_join(readxl::read_excel("data/NFHS Cascade Variable List.xlsx",sheet="map2020_v024") %>% 
-              dplyr::select(v024,n5_state) %>% 
-              distinct(v024,n5_state),
+              dplyr::select(v024,n5_state,zone) %>% 
+              distinct(v024,n5_state,.keep_all=TRUE),
             by=c("state"="v024")) %>% 
 write_csv(.,file = "analysis/nca03_state level care cascade.csv")
 
+
+# df <- read_csv(file="analysis/nca03_state level care cascade.csv") %>% 
+#   dplyr::select(-n5_state) %>% 
+#   left_join(readxl::read_excel("data/NFHS Cascade Variable List.xlsx",sheet="map2020_v024") %>% 
+#               dplyr::select(v024,n5_state,zone) %>% 
+#               distinct(v024,n5_state,.keep_all=TRUE),
+#             by=c("state"="v024"))
+# write_csv(df,file = "analysis/nca03_state level care cascade.csv")
