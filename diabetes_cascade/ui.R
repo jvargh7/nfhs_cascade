@@ -51,7 +51,7 @@ panel_overview <- tabPanel("Overview",value = 1,
 panel_state <- tabPanel("State",value = 2,
                         fluidRow(
                           box(plotOutput("unmet_districts",height = 800)),
-                          box(plotOutput("cascade_state",height = 600))
+                          box(plotOutput("cascade_state",height = 800))
                           
                           
                         )

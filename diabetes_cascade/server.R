@@ -271,11 +271,11 @@ shinyServer(function(input, output,session) {
   # output$cascade_state --------------
   
   state_cs_merge <- reactive({
-    
-    nca03_state %>% 
+    # panel2_n5_state = "Kerala"
+    scm <- nca03_state %>% 
       dplyr::filter(n5_state == panel2_n5_state()) %>% 
       mutate(cascade = str_replace(variable,"dm_","") %>% str_to_title()) %>% 
-      mutate(cascade = factor(cascade,levels=c("Screened","Disease","Diagnosed","Treated","Controlled"),
+      mutate(cascade = factor(cascade,levels=c("Screened","Diabetes","Diagnosed","Treated","Controlled"),
                               labels=c("Screened","Diabetes","Diagnosed","Taking Medication","Under Control"))) %>% 
       mutate(group = case_when(is.na(strata) ~ paste0(residence,"\nTotal"),
                                TRUE ~ paste0(residence,"\n",strata)))
@@ -290,22 +290,28 @@ shinyServer(function(input, output,session) {
     figB <- state_cs_merge() %>% 
       dplyr::filter(stratification == "age_category") %>% 
       cascade_plot(.,limits_y = c(0,40))
-    # figC <- state_cs_merge() %>% 
-    #   dplyr::filter(stratification == "education") %>% 
-    #   cascade_plot(.,limits_y = c(0,25))
-    # figD <- state_cs_merge() %>% 
-    #   dplyr::filter(stratification == "caste") %>% 
-    #   cascade_plot(.,limits_y = c(0,25))
-    # figE <- state_cs_merge() %>% 
-    #   dplyr::filter(stratification == "wealthq_ur") %>% 
-    #   cascade_plot(.,limits_y = c(0,25))
+    figC <- state_cs_merge() %>%
+      dplyr::filter(stratification == "education") %>%
+      cascade_plot(.,limits_y = c(0,45))
+    figD <- state_cs_merge() %>%
+      dplyr::filter(stratification == "caste") %>%
+      cascade_plot(.,limits_y = c(0,40))
+    figE <- state_cs_merge() %>%
+      dplyr::filter(stratification == "swealthq_ur") %>%
+      mutate(group = factor(group,
+                             levels = paste0(rep(c("Rural","Urban"),each =5),
+                                             "\n",
+                                             rep(c("Wealth: Lowest","Wealth: Low",
+                                                   "Wealth: Medium","Wealth: High",
+                                                   "Wealth: Highest"),times=2)),ordered=TRUE)) %>% 
+      cascade_plot(.,limits_y = c(0,40))
     
     ggarrange(figA,
               figB,
-              # figC,
-              # figD,
-              # figE,
-              labels = LETTERS[1:2],ncol = 1,nrow=2,common.legend = TRUE,legend="bottom")
+              figC,
+              figD,
+              figE,
+              labels = LETTERS[1:5],ncol = 1,nrow=5,common.legend = TRUE,legend="top")
     
     
   })

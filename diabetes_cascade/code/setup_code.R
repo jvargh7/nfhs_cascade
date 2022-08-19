@@ -27,6 +27,11 @@ nca03_state <- read_csv("analysis/nca03_state level care cascade.csv",guess_max 
   mutate(variable = factor(variable,levels=c("screened","disease","diagnosed","treated","controlled"),
                            labels=c("Screened","Diabetes","Diagnosed","Treated","Controlled")),
          strata = case_when(is.na(strata) ~ "Total",
+                            stratification == "swealthq_ur" & strata == 1 ~ "Wealth: Lowest",
+                            stratification == "swealthq_ur" & strata == 2 ~ "Wealth: Low",
+                            stratification == "swealthq_ur" & strata == 3 ~ "Wealth: Medium",
+                            stratification == "swealthq_ur" & strata == 4 ~ "Wealth: High",
+                            stratification == "swealthq_ur" & strata == 5 ~ "Wealth: Highest",
                             TRUE ~ strata),
          stratification = case_when(is.na(stratification) ~ "",
                                     TRUE ~ stratification)) %>% 
