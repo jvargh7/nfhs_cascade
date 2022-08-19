@@ -207,20 +207,20 @@ shinyServer(function(input, output,session) {
     input$stateinput2
   })
   
-  district_cm_merge <- reactive({
-    scm <- nca08_district_unmet %>% 
+  district_cm_merge2 <- reactive({
+    dcm2 <- nca08_district_unmet %>% 
       dplyr::filter(strata == input$stratainput2,
                     n5_state == panel2_n5_state())
     
-    scm
+    dcm2
     
   })
   
   # output$unmet_districts -----------
   
-  output$unmet_districts <- renderPlot({
+  output$unmet_districts2 <- renderPlot({
     
-    fig_prevalence <- district_cm_merge() %>% 
+    fig_prevalence <- district_cm_merge2() %>% 
       dplyr::filter(variable == "Diabetes") %>% 
       ggplot(data=.,aes(x = D_NAME,y = estimate,ymin = lci,ymax=uci,
                         group=D_NAME)) +
@@ -242,7 +242,7 @@ shinyServer(function(input, output,session) {
       ylab("Prevalence (%)") +
       xlab("") 
     
-    fig_uc <- district_cm_merge() %>% 
+    fig_uc <- district_cm_merge2() %>% 
       dplyr::filter(variable != "Diabetes") %>% 
       ggplot(data=.,aes(x = D_NAME,y = estimate,ymin = lci,ymax=uci,
                         group=D_NAME),fill="lightblue") +
@@ -268,12 +268,78 @@ shinyServer(function(input, output,session) {
               widths = c(1.5,2))
   })
   
-  # output$cascade_state --------------
+  # Panel 3: Stratified ---------
+  panel3_n5_state <- reactive({
+    input$stateinput3
+  })
+  
+  district_cm_merge3 <- reactive({
+    dcm3 <- nca08_district_unmet %>% 
+      dplyr::filter(strata == input$stratainput3,
+                    n5_state == panel3_n5_state())
+    
+    dcm3
+    
+  })
+  
+  # output$unmet_districts3 -------
+  output$unmet_districts3 <- renderPlot({
+    
+    fig_prevalence <- district_cm_merge3() %>% 
+      dplyr::filter(variable == "Diabetes") %>% 
+      ggplot(data=.,aes(x = D_NAME,y = estimate,ymin = lci,ymax=uci,
+                        group=D_NAME)) +
+      geom_col(position=position_dodge(width=0.9),fill="lightblue") +
+      geom_errorbar(position = position_dodge(width=0.9),width=0.1) +
+      theme_bw() + 
+      coord_flip() +
+      facet_grid(~variable,scales="free",space="free_y") +
+      scale_y_continuous(limits=c(0,40),breaks=seq(0,40,by=10)) +
+      facet_grid(~variable,scales="free_y",space="free_y") +
+      theme(
+        legend.text = element_text(size=12),
+        axis.text = element_text(size = 12),
+        strip.background.y = element_blank(),
+        strip.text.x = element_text(size=12),
+        strip.text.y = element_blank(),
+        legend.position = "bottom") +
+      # scale_y_continuous(limits=c(0,50)) +
+      ylab("Prevalence (%)") +
+      xlab("") 
+    
+    fig_uc <- district_cm_merge3() %>% 
+      dplyr::filter(variable != "Diabetes") %>% 
+      ggplot(data=.,aes(x = D_NAME,y = estimate,ymin = lci,ymax=uci,
+                        group=D_NAME),fill="lightblue") +
+      geom_col(position=position_dodge(width=0.9)) +
+      geom_errorbar(position = position_dodge(width=0.9),width=0.1) +
+      theme_bw() + 
+      coord_flip() +
+      facet_grid(~variable,scales="free",space="free_y") +
+      scale_y_continuous(limits=c(0,100),breaks=c(0,25,50,75,100)) +
+      theme(
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        legend.text = element_text(size=12),
+        axis.text = element_text(size = 12),
+        strip.text = element_text(size=12),
+        legend.position = "bottom") +
+      # scale_y_continuous(limits=c(0,50)) +
+      ylab("Prevalence (%)") +
+      xlab("") 
+    
+    ggarrange(fig_prevalence,fig_uc,nrow=1,ncol=2,
+              common.legend = TRUE,legend="bottom",
+              widths = c(1.5,2))
+  })
+  
+  
+  # output$cascade_state3 --------------
   
   state_cs_merge <- reactive({
     # panel2_n5_state = "Kerala"
     scm <- nca03_state %>% 
-      dplyr::filter(n5_state == panel2_n5_state()) %>% 
+      dplyr::filter(n5_state == panel3_n5_state()) %>% 
       mutate(cascade = str_replace(variable,"dm_","") %>% str_to_title()) %>% 
       mutate(cascade = factor(cascade,levels=c("Screened","Diabetes","Diagnosed","Treated","Controlled"),
                               labels=c("Screened","Diabetes","Diagnosed","Taking Medication","Under Control"))) %>% 
@@ -282,20 +348,20 @@ shinyServer(function(input, output,session) {
     
   })
   
-  output$cascade_state <- renderPlot({
+  output$cascade_state3 <- renderPlot({
     
     figA <- state_cs_merge() %>% 
       dplyr::filter(is.na(stratification)|stratification == "sex") %>% 
-      cascade_plot(.,limits_y = c(0,40))
+      cascade_plot(.,limits_y = c(0,45))
     figB <- state_cs_merge() %>% 
       dplyr::filter(stratification == "age_category") %>% 
-      cascade_plot(.,limits_y = c(0,40))
+      cascade_plot(.,limits_y = c(0,45))
     figC <- state_cs_merge() %>%
       dplyr::filter(stratification == "education") %>%
       cascade_plot(.,limits_y = c(0,45))
     figD <- state_cs_merge() %>%
       dplyr::filter(stratification == "caste") %>%
-      cascade_plot(.,limits_y = c(0,40))
+      cascade_plot(.,limits_y = c(0,45))
     figE <- state_cs_merge() %>%
       dplyr::filter(stratification == "swealthq_ur") %>%
       mutate(group = factor(group,
@@ -304,7 +370,7 @@ shinyServer(function(input, output,session) {
                                              rep(c("Wealth: Lowest","Wealth: Low",
                                                    "Wealth: Medium","Wealth: High",
                                                    "Wealth: Highest"),times=2)),ordered=TRUE)) %>% 
-      cascade_plot(.,limits_y = c(0,40))
+      cascade_plot(.,limits_y = c(0,45))
     
     ggarrange(figA,
               figB,

@@ -29,10 +29,18 @@ sidebar_state <- conditionalPanel(condition="input.selectedpanel==2",
                                      selectInput("stratainput2","Select Strata:",c("Total","Male","Female"))
 )
 
+sidebar_stratified <- conditionalPanel(condition="input.selectedpanel==3",
+                                  h3("Please select inputs for unmet need chart"),
+                                  selectInput("stateinput3","Select State:",unique(map2016_v024$n5_state)),
+                                  # selectInput("varinput3","Select Variable:",c("Screened","Diabetes","Diagnosed","Treated","Controlled")),
+                                  # selectInput("mapinput3","Select Display:",c("Urban","Rural")),
+                                  selectInput("stratainput3","Select Strata:",c("Total","Male","Female"))
+)
 
 sidebar <- dashboardSidebar(
   sidebar_overview,
-  sidebar_state
+  sidebar_state,
+  sidebar_stratified
   
   )
 
@@ -50,18 +58,28 @@ panel_overview <- tabPanel("Overview",value = 1,
 
 panel_state <- tabPanel("State",value = 2,
                         fluidRow(
-                          box(plotOutput("unmet_districts",height = 800)),
-                          box(plotOutput("cascade_state",height = 800))
+                          box(plotOutput("unmet_districts2",height = 800))
+                          # box(plotOutput("cascade_state2",height = 800))
                           
                           
                         )
                         
 )
 
+panel_stratified <- tabPanel("Within State Disparities",value =3,
+                             fluidRow(
+                               box(plotOutput("unmet_districts3",height = 800)),
+                               box(plotOutput("cascade_state3",height = 800))
+                               
+                               
+                             )
+                             )
+
 body <- dashboardBody(
   tabsetPanel(
     panel_overview,
     panel_state,
+    panel_stratified,
     id = "selectedpanel"
   )
   

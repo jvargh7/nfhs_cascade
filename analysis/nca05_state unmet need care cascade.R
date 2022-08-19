@@ -1,6 +1,6 @@
 
 group_vars = c("","sex","age_category","education",
-               "caste","religion","wealthq_ur")
+               "caste","religion","swealthq_ur")
 
 source("C:/code/external/functions/survey/svysummary.R")
 
