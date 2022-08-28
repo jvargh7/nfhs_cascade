@@ -31,6 +31,8 @@ map2018_sdist <- readxl::read_excel(file.path("data","maps.xlsx"),sheet="map2018
 district_shp <- readRDS(file.path("data","district_shp.RDS"))
 state_shp <- readRDS(file.path("data","state_shp.RDS"))
 nca04_district <- readRDS(file.path("data","nca04_district.RDS"))
+ncz02_state <- readRDS(file.path("data","ncz02_state.RDS"))
+ncz01_national <- readRDS(file.path("data","ncz01_national.RDS"))
 nca03_state <- readRDS(file.path("data","nca03_state.RDS"))
 nca02_national <- readRDS(file.path("data","nca02_national.RDS"))
 
@@ -202,6 +204,15 @@ shinyServer(function(input, output,session) {
   },bordered = TRUE, sanitize.text.function=identity,align = "c")
   
   # Panel 2: State ------------------
+  
+  observeEvent(input$stateinput2,
+               {
+                 updateSelectInput(session = session,
+                                   inputId = "stateinput3",
+                                   selected = input$stateinput2)
+               })
+  
+  
   
   panel2_n5_state <- reactive({
     input$stateinput2

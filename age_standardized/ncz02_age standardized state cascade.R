@@ -68,4 +68,12 @@ state_svysummary <- future_map_dfr(group_vars,
                             })
 
 
-write_csv(state_svysummary,path = "age_standardized/ncz02_age standardized care cascade.csv")
+write_csv(state_svysummary,path = "age_standardized/ncz02_age standardized state cascade.csv")
+
+
+# df <- read_csv(file="age_standardized/ncz02_age standardized state cascade.csv") %>%
+#   left_join(readxl::read_excel("data/NFHS Cascade Variable List.xlsx",sheet="map2020_v024") %>%
+#               dplyr::select(v024,n5_state,zone) %>%
+#               distinct(v024,n5_state,.keep_all=TRUE),
+#             by=c("state"="v024"))
+# write_csv(df,file = "age_standardized/ncz02_age standardized state cascade.csv")

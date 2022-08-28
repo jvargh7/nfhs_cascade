@@ -19,6 +19,16 @@ nca02_national <- read_csv(file = "analysis/nca02_national level care cascade.cs
                                     TRUE ~ stratification))
 saveRDS(nca02_national,file="diabetes_cascade/data/nca02_national.RDS")
 
+ncz01_national <- read_csv(file = "age_standardized/ncz01_age standardized national care cascade.csv")  %>% 
+  mutate(variable = str_replace(variable,"dm_","")) %>% 
+  mutate(variable = factor(variable,levels=c("screened","disease","diagnosed","treated","controlled"),
+                           labels=c("Screened","Diabetes","Diagnosed","Treated","Controlled")),
+         strata = case_when(is.na(strata) & is.na(stratification) ~ "Total",
+                            is.na(strata) ~ "Missing",
+                            TRUE ~ strata),
+         stratification = case_when(is.na(stratification) ~ "",
+                                    TRUE ~ stratification))
+saveRDS(ncz01_national,file="diabetes_cascade/data/ncz01_national.RDS")
 
 
 # nca03_state ----------
@@ -41,6 +51,27 @@ nca03_state <- read_csv("analysis/nca03_state level care cascade.csv",guess_max 
                            n5_state == "Nct Of Delhi" ~ "Delhi",
                            TRUE ~ n5_state)) 
 saveRDS(nca03_state,file="diabetes_cascade/data/nca03_state.RDS")
+
+
+ncz02_state <- read_csv("age_standardized/ncz02_age standardized state cascade.csv",guess_max = 6000) %>% 
+  mutate(variable = str_replace(variable,"dm_","")) %>% 
+  mutate(variable = factor(variable,levels=c("screened","disease","diagnosed","treated","controlled"),
+                           labels=c("Screened","Diabetes","Diagnosed","Treated","Controlled")),
+         strata = case_when(is.na(strata) ~ "Total",
+                            stratification == "swealthq_ur" & strata == 1 ~ "Wealth: Lowest",
+                            stratification == "swealthq_ur" & strata == 2 ~ "Wealth: Low",
+                            stratification == "swealthq_ur" & strata == 3 ~ "Wealth: Medium",
+                            stratification == "swealthq_ur" & strata == 4 ~ "Wealth: High",
+                            stratification == "swealthq_ur" & strata == 5 ~ "Wealth: Highest",
+                            TRUE ~ strata),
+         stratification = case_when(is.na(stratification) ~ "",
+                                    TRUE ~ stratification)) %>% 
+  dplyr::select(state,n5_state,residence,variable,estimate,lci,uci,stratification,strata,est_ci) %>% 
+  mutate(ST_NM = case_when(n5_state == "Andaman & Nicobar Islands" ~ "Andaman & Nicobar",
+                           n5_state == "Dadra & Nagar Haveli and Daman & Diu" ~ "Dadra and Nagar Haveli and Daman and Diu",
+                           n5_state == "Nct Of Delhi" ~ "Delhi",
+                           TRUE ~ n5_state)) 
+saveRDS(ncz02_state,file="diabetes_cascade/data/ncz02_state.RDS")
 
 # nca04_district --------
 nca04_district <- read_csv("analysis/nca04_district2018 level care cascade.csv",guess_max = 6000) %>% 

@@ -11,6 +11,8 @@ unmet_cascade <- bind_rows(read_csv(file = "analysis/nca05_state unmet need care
   mutate(variable = factor(variable,levels=c("Diabetes","Unscreened","Undiagnosed","Untreated","Uncontrolled")))
 
 
+
+
 fig_prevalence <- unmet_cascade %>% 
   dplyr::filter(variable == "Diabetes") %>% 
   ggplot(data=.,aes(x = n5_state,y = estimate,ymin = lci,ymax=uci,
@@ -65,3 +67,61 @@ ggarrange(fig_prevalence,fig_uc,nrow=1,ncol=2,
           common.legend = TRUE,legend="bottom",
           widths = c(1.5,2)) %>% 
   ggsave(.,filename = paste0(path_cascade_folder,"/figures/figure_column cascade.png"),width=15,height=8)
+
+# Results: State-level care cascade ---------
+
+unmet_cascade %>% 
+  dplyr::filter(variable == "Unscreened",is.na(stratification),n>100) %>% 
+  dplyr::select(state,residence,estimate) %>% 
+  # Count of states with unscreened >= 20
+  mutate(cutoff = case_when(estimate < 20 ~ 1,
+                            TRUE ~ 0)) %>% 
+  group_by(residence) %>% 
+  summarize(cutoff = sum(cutoff,na.rm = TRUE),
+            total = sum(!is.na(estimate)))
+
+unmet_cascade %>% 
+  dplyr::filter(variable == "Undiagnosed",is.na(stratification),n>100) %>% 
+  dplyr::select(state,residence,estimate)  %>% 
+  # Count of states with undiagnosed >= 20
+  mutate(cutoff = case_when(estimate >= 20 ~ 1,
+                            TRUE ~ 0)) %>% 
+  group_by(residence) %>% 
+  summarize(cutoff = sum(cutoff,na.rm = TRUE),
+            total = sum(!is.na(estimate)))
+
+
+unmet_cascade %>% 
+  dplyr::filter(variable == "Untreated",is.na(stratification),n>100) %>% 
+  dplyr::select(state,residence,estimate)  %>% 
+  # Count of states with undiagnosed >= 20
+  mutate(cutoff = case_when(estimate >= 20 ~ 1,
+                            TRUE ~ 0)) %>% 
+  group_by(residence) %>% 
+  summarize(cutoff = sum(cutoff,na.rm = TRUE),
+            total = sum(!is.na(estimate)))
+
+
+unmet_cascade %>% 
+  dplyr::filter(variable == "Uncontrolled",is.na(stratification),n>100) %>% 
+  dplyr::select(state,residence,estimate)  %>% 
+  # Count of states with undiagnosed >= 20
+  mutate(cutoff = case_when(estimate >= 20 ~ 1,
+                            TRUE ~ 0)) %>% 
+  group_by(residence) %>% 
+  summarize(cutoff = sum(cutoff,na.rm = TRUE),
+            total = sum(!is.na(estimate)))
+
+
+
+unmet_cascade %>% 
+  dplyr::filter(variable == "Untreated",is.na(stratification),n>100) %>% 
+  dplyr::select(state,residence,zone,estimate)  %>% 
+  # Count of states with undiagnosed >= 20
+  mutate(cutoff = case_when(estimate >= 20 ~ 1,
+                            TRUE ~ 0)) %>% 
+  group_by(residence,zone) %>% 
+  summarize(cutoff = sum(cutoff,na.rm = TRUE),
+            total = sum(!is.na(estimate)),
+            median = median(estimate)) %>% 
+  View()

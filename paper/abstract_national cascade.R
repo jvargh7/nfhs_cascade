@@ -10,15 +10,25 @@ source("preprocessing/ncpre05_nfhs5 diagnosed svydesign.R")
 proportion_vars <- c("dm_screened","dm_diagnosed","dm_unscreened","dm_undiagnosed",
                      "dm_treated","dm_controlled","dm_untreated","dm_uncontrolled")
 
+
+pop_age <- read_csv("data/population for age standardization.csv") %>% 
+  dplyr::select(n) %>% 
+  pull()
+
+nfhs5dmz_svydesign = svystandardize(nfhs5dm_svydesign,by=~age_category,over = ~education + caste + religion + wealthq_ur,
+                                    population = pop_age)
+nfhs5dmdiagz_svydesign = svystandardize(nfhs5dmdiag_svydesign,by=~age_category,over = ~education + caste + religion + wealthq_ur,
+                                        population = pop_age)
+
 require(furrr)
 options(future.globals.maxSize= (6*1024*1024)^2) #4GB
 # https://stackoverflow.com/questions/40536067/how-to-adjust-future-global-maxsize
 plan(multisession, workers = 3)
 unmet_svysummary_dm <- future_map_dfr(group_vars,
                                       function(g_v){
-                                        id_vars = c("district_df",g_v);
+                                        id_vars = c(g_v);
                                         print(g_v);
-                                        n5_sy_dm <- svysummary(nfhs5dm_svydesign,
+                                        n5_sy_dm <- svysummary(nfhs5dmz_svydesign,
                                                                # c_vars = continuous_vars,
                                                                p_vars = proportion_vars[1:4],
                                                                # g_vars = grouped_vars,
@@ -45,7 +55,7 @@ unmet_svysummary_dm <- future_map_dfr(group_vars,
                                                                by=c(id_vars[id_vars!=""],"variable")) %>% 
                                           
                                           # Restrict to those cells with more than 100 observations
-                                          # dplyr::filter(n > 100) %>% 
+                                          dplyr::filter(n > 100) %>%
                                           mutate(stratification = g_v) %>% 
                                           rename_at(vars(one_of(g_v)),~c("strata")) %>% 
                                           mutate_at(vars(one_of("strata")),~as.character(.));
@@ -57,9 +67,9 @@ unmet_svysummary_dm <- future_map_dfr(group_vars,
 
 unmet_svysummary_dmdiag <- future_map_dfr(group_vars,
                                           function(g_v){
-                                            id_vars = c("district_df",g_v);
+                                            id_vars = c(g_v);
                                             print(g_v);
-                                            n5_sy_dmdiag <- svysummary(nfhs5dmdiag_svydesign,
+                                            n5_sy_dmdiag <- svysummary(nfhs5dmdiagz_svydesign,
                                                                        # c_vars = continuous_vars,
                                                                        p_vars = proportion_vars[5:8],
                                                                        # g_vars = grouped_vars,
@@ -86,7 +96,7 @@ unmet_svysummary_dmdiag <- future_map_dfr(group_vars,
                                                                        by=c(id_vars[id_vars!=""],"variable")) %>% 
                                               
                                               # Restrict to those cells with more than 100 observations
-                                              # dplyr::filter(n > 100) %>% 
+                                              dplyr::filter(n > 100) %>%
                                               mutate(stratification = g_v) %>% 
                                               rename_at(vars(one_of(g_v)),~c("strata")) %>% 
                                               mutate_at(vars(one_of("strata")),~as.character(.));
@@ -98,34 +108,5 @@ unmet_svysummary_dmdiag <- future_map_dfr(group_vars,
 
 bind_rows(unmet_svysummary_dm,
           unmet_svysummary_dmdiag) %>% 
-  dplyr::filter(str_detect(variable,"dm_un")) %>% 
-  rename(D_CODE = district_df) %>% 
-  # There are missing values in D_CODE from subsetting on map
-  dplyr::filter(!is.na(D_CODE)) %>% 
-  left_join(readxl::read_excel("data/NFHS Cascade Variable List.xlsx","map2018_sdist") %>% 
-              dplyr::select(D_CODE,n5_state,v024,D_NAME) %>% 
-              mutate(D_CODE = sprintf("%03d",as.numeric(D_CODE))),
-            by=c("D_CODE")) %>% 
-  write_csv(.,file = "analysis/nca08_district unmet need care cascade.csv")
+  write_csv(.,file = "paper/abstract_national cascade.csv")
 
-
-bind_rows(unmet_svysummary_dm,
-          unmet_svysummary_dmdiag) %>% 
-  dplyr::filter(!str_detect(variable,"dm_un")) %>% 
-  rename(D_CODE = district_df) %>% 
-  # There are missing values in D_CODE from subsetting on map
-  dplyr::filter(!is.na(D_CODE)) %>% 
-  left_join(readxl::read_excel("data/NFHS Cascade Variable List.xlsx","map2018_sdist") %>% 
-              dplyr::select(D_CODE,n5_state,v024,D_NAME) %>% 
-              mutate(D_CODE = sprintf("%03d",as.numeric(D_CODE))),
-            by=c("D_CODE")) %>% 
-  write_csv(.,file = "analysis/nca08_district met need care cascade.csv")
-
-# df <- read_csv("analysis/nca08_district unmet need care cascade.csv") %>%
-#   dplyr::select(-n5_state,-v024,-D_NAME) %>%
-#   left_join(readxl::read_excel("data/NFHS Cascade Variable List.xlsx","map2018_sdist") %>%
-#               dplyr::select(D_CODE,n5_state,v024,D_NAME) %>%
-#               mutate(D_CODE = sprintf("%03d",as.numeric(D_CODE))),
-#             by=c("D_CODE"))
-# write_csv(df,file = "analysis/nca08_district unmet need care cascade.csv")
-# 

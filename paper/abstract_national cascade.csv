@@ -1,0 +1,25 @@
+variable,estimate,lci,uci,type,est_ci,n,stratification,strata
+dm_screened,82.4,81.8,83.1,Proportion,"82.4 (81.8, 83.1)",91814,,NA
+dm_diagnosed,70.1,69.3,71,Proportion,"70.1 (69.3, 71)",91814,,NA
+dm_unscreened,17.6,16.9,18.2,Proportion,"17.6 (16.9, 18.2)",91814,,NA
+dm_undiagnosed,29.9,29,30.7,Proportion,"29.9 (29, 30.7)",91814,,NA
+dm_screened,84,83.1,84.9,Proportion,"84 (83.1, 84.9)",47426,sex,Female
+dm_diagnosed,72.3,71.2,73.3,Proportion,"72.3 (71.2, 73.3)",47426,sex,Female
+dm_unscreened,16,15.1,16.9,Proportion,"16 (15.1, 16.9)",47426,sex,Female
+dm_undiagnosed,27.7,26.7,28.8,Proportion,"27.7 (26.7, 28.8)",47426,sex,Female
+dm_screened,80.6,79.7,81.5,Proportion,"80.6 (79.7, 81.5)",44388,sex,Male
+dm_diagnosed,67.5,66.4,68.6,Proportion,"67.5 (66.4, 68.6)",44388,sex,Male
+dm_unscreened,19.4,18.5,20.3,Proportion,"19.4 (18.5, 20.3)",44388,sex,Male
+dm_undiagnosed,32.5,31.4,33.6,Proportion,"32.5 (31.4, 33.6)",44388,sex,Male
+dm_treated,59.4,58.1,60.6,Proportion,"59.4 (58.1, 60.6)",67209,,NA
+dm_controlled,34.5,33.5,35.5,Proportion,"34.5 (33.5, 35.5)",67209,,NA
+dm_untreated,40.6,39.4,41.9,Proportion,"40.6 (39.4, 41.9)",67209,,NA
+dm_uncontrolled,65.5,64.5,66.5,Proportion,"65.5 (64.5, 66.5)",67209,,NA
+dm_treated,57,55.5,58.6,Proportion,"57 (55.5, 58.6)",35392,sex,Female
+dm_controlled,33.3,32,34.6,Proportion,"33.3 (32, 34.6)",35392,sex,Female
+dm_untreated,43,41.4,44.5,Proportion,"43 (41.4, 44.5)",35392,sex,Female
+dm_uncontrolled,66.7,65.4,68,Proportion,"66.7 (65.4, 68)",35392,sex,Female
+dm_treated,62.5,61.1,63.8,Proportion,"62.5 (61.1, 63.8)",31817,sex,Male
+dm_controlled,36.1,34.9,37.3,Proportion,"36.1 (34.9, 37.3)",31817,sex,Male
+dm_untreated,37.5,36.2,38.9,Proportion,"37.5 (36.2, 38.9)",31817,sex,Male
+dm_uncontrolled,63.9,62.7,65.1,Proportion,"63.9 (62.7, 65.1)",31817,sex,Male
