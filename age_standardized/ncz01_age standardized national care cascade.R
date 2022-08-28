@@ -9,9 +9,7 @@ source("preprocessing/ncpre03_nfhs5 total svydesign.R")
 proportion_vars <- c("dm_screened","dm_disease","dm_diagnosed","dm_treated","dm_controlled")
 
 
-pop_age <- nfhs5_svydesign %>% 
-  group_by(age_category) %>% 
-  survey_tally() %>% 
+pop_age <- read_csv("data/population for age standardization.csv") %>% 
   dplyr::select(n) %>% 
   pull()
 
