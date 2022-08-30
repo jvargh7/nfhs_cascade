@@ -4,7 +4,7 @@ require(lubridate)
 
 source("preprocessing/ncp_preprocessing.R")
 
-iapr7a_variables <- readxl::read_excel("data/NFHS Cascade Variable List.xlsx",sheet="7a variables")%>% 
+iapr7a_variables <- readxl::read_excel("data/NFHS Cascade Variable List.xlsx",sheet="7a variables") %>% 
   rename("selected" = iapr7a_women) %>% 
   dplyr::select(new_var,selected) %>% 
   dplyr::filter(!is.na(selected))
