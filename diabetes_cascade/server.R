@@ -12,12 +12,18 @@ if(run_manual){
   district_shp <- readRDS(file.path("diabetes_cascade/data","district_shp.RDS"))
   state_shp <- readRDS(file.path("diabetes_cascade/data","state_shp.RDS"))
   
-  nca04_district <- readRDS(file.path("diabetes_cascade/data","nca04_district.RDS"))
-  nca03_state <- readRDS(file.path("diabetes_cascade/data","nca03_state.RDS"))
   nca02_national <- readRDS(file.path("diabetes_cascade/data","nca02_national.RDS"))
-  nca05_state_unmet <- readRDS(file.path("diabetes_cascade/data","nca05_state_unmet.RDS"))
-  nca08_district_unmet <- readRDS(file.path("diabetes_cascade/data","nca08_district_unmet.RDS"))
+  national_nested <- readRDS(file.path("diabetes_cascade/data","national_nested.RDS"))
   
+  
+  nca03_state <- readRDS(file.path("diabetes_cascade/data","nca03_state.RDS"))
+  nca05_state_unmet <- readRDS(file.path("diabetes_cascade/data","nca05_state_unmet.RDS"))
+  state_nested <- readRDS(file.path("diabetes_cascade/data","state_nested.RDS"))
+  
+  nca04_district <- readRDS(file.path("diabetes_cascade/data","nca04_district.RDS"))
+  nca08_district_unmet <- readRDS(file.path("diabetes_cascade/data","nca08_district_unmet.RDS"))
+  district_nested <- readRDS(file.path("diabetes_cascade/data","district_nested.RDS"))
+
   source("diabetes_cascade/code/cascade_plot.R")
   
   
@@ -30,14 +36,18 @@ map2018_sdist <- readxl::read_excel(file.path("data","maps.xlsx"),sheet="map2018
 
 district_shp <- readRDS(file.path("data","district_shp.RDS"))
 state_shp <- readRDS(file.path("data","state_shp.RDS"))
-nca04_district <- readRDS(file.path("data","nca04_district.RDS"))
-ncz02_state <- readRDS(file.path("data","ncz02_state.RDS"))
 ncz01_national <- readRDS(file.path("data","ncz01_national.RDS"))
-nca03_state <- readRDS(file.path("data","nca03_state.RDS"))
 nca02_national <- readRDS(file.path("data","nca02_national.RDS"))
+national_nested <- readRDS(file.path("data","national_nested.RDS"))
 
+ncz02_state <- readRDS(file.path("data","ncz02_state.RDS"))
+nca03_state <- readRDS(file.path("data","nca03_state.RDS"))
 nca05_state_unmet <- readRDS(file.path("data","nca05_state_unmet.RDS"))
+state_nested <- readRDS(file.path("data","state_nested.RDS"))
+
+nca04_district <- readRDS(file.path("data","nca04_district.RDS"))
 nca08_district_unmet <- readRDS(file.path("data","nca08_district_unmet.RDS"))
+district_nested <- readRDS(file.path("data","district_nested.RDS"))
 
 source("code/cascade_plot.R")
 
@@ -59,7 +69,7 @@ shinyServer(function(input, output,session) {
   
   nm_merge <- reactive({
     ss <- state_shp %>% 
-    sp::merge(nca03_state %>%
+    sp::merge(state_nested %>%
                 dplyr::filter(variable == input$varinput1,
                               residence == input$mapinput1,
                               strata == input$stratainput1)  %>% 
@@ -72,7 +82,7 @@ shinyServer(function(input, output,session) {
   
   
   palette_chr <- reactive({
-    case_when(input$varinput1 == "Screened" ~ "RdYlGn",
+    case_when(input$varinput1 == "Diabetes" ~ "RdYlGn",
                    TRUE ~ "-RdYlGn")
         })
   
@@ -115,7 +125,7 @@ shinyServer(function(input, output,session) {
   
   sm_merge <- reactive({
     ds <- district_shp %>% 
-      sp::merge(nca04_district %>%
+      sp::merge(district_nested %>%
                   dplyr::filter(variable == input$varinput1,
                                 strata == input$stratainput1)  %>% 
                   dplyr::select(D_CODE,n5_state,estimate) %>% 
@@ -161,7 +171,7 @@ shinyServer(function(input, output,session) {
   # Table --------
   tab1 <- reactive({
     
-    st_df <- nca03_state %>% 
+    st_df <- state_nested %>% 
       dplyr::filter(strata %in% c("Total","Male","Female")) %>% 
       dplyr::filter(n5_state == input$stateinput1) %>% 
       dplyr::select(variable,residence,strata,est_ci) %>% 
@@ -169,14 +179,14 @@ shinyServer(function(input, output,session) {
       dplyr::select(-strata) %>% 
       pivot_wider(names_from=residence,values_from=est_ci) 
     
-    nt_df <- nca02_national %>% 
+    nt_df <- national_nested %>% 
       dplyr::filter(strata %in% c("Total","Male","Female")) %>% 
       dplyr::select(variable,strata,residence,est_ci) %>% 
       mutate(residence = paste0("India ",residence," ",strata)) %>% 
       dplyr::select(-strata) %>% 
       pivot_wider(names_from=residence,values_from=est_ci) 
     
-    dt_df <- nca04_district %>% 
+    dt_df <- district_nested %>% 
       dplyr::filter(strata == input$stratainput1,
                     D_NAME == input$districtinput1) %>% 
       dplyr::select(variable,strata,D_NAME,est_ci) %>% 

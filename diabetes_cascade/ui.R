@@ -47,14 +47,14 @@ sidebar <- dashboardSidebar(
 panel_overview <- tabPanel("Overview",value = 1,
                            fluidRow(
                              
-                             box(solidHeader=FALSE,status="warning",title = "National Overview",
+                             box(solidHeader=FALSE,status="warning",title = "National Overview: Crude Estimates (%)",
                                  tmap::tmapOutput("nationalmap",height=600)),
                              
-                             box(solidHeader=FALSE,status="warning",title = "Selected State",
+                             box(solidHeader=FALSE,status="warning",title = "Selected State: Crude Estimates (%)",
                                  tmap::tmapOutput("statemap",height=600),),
                              
                            ),
-                           box(solidHeader=FALSE,status="warning",width=20,title = "Diabetes Care Cascade",
+                           box(solidHeader=FALSE,status="warning",width=20,title = "Diabetes Care Cascade: Crude Estimates (%)",
                                background = "light-blue",tableOutput("tableoutput"))
 )
 
