@@ -3,7 +3,7 @@ nfhs5_df <- bind_rows(readRDS(paste0(path_cascade_folder,"/working/nfhs5 iapr_wo
                                mutate(sex = "Female"),
                              readRDS(paste0(path_cascade_folder,"/working/nfhs5 iapr_men.RDS")) %>% 
                                mutate(sex = "Male")) %>%
-  dplyr::filter(!is.na(dm_free)) %>% 
+  dplyr::filter(!is.na(dm_free)) %>%
   mutate(residence = case_when(residence == 1 ~ "Urban",
                                residence == 2 ~ "Rural")) %>% 
   left_join(sdist %>% 
@@ -13,6 +13,8 @@ nfhs5_df <- bind_rows(readRDS(paste0(path_cascade_folder,"/working/nfhs5 iapr_wo
   mutate(htn_disease_cat = case_when(is.na(htn_disease) ~ "Missing",
                                      htn_disease == 1 ~ "Yes",
                                      htn_disease == 0 ~ "No"))
+
+
 
 nfhs5_svydesign <- nfhs5_df %>% 
   as_survey_design(.data = .,
