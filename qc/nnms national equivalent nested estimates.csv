@@ -1,0 +1,10 @@
+variable,estimate,lci,uci,type,est_ci,n,stratification,strata
+dm_diagnosed,72.3,71.7,72.9,Proportion,"72.3 (71.7, 72.9)",78911,,NA
+dm_treated,50.1,49.4,50.9,Proportion,"50.1 (49.4, 50.9)",78911,,NA
+dm_controlled,28,27.4,28.6,Proportion,"28 (27.4, 28.6)",78911,,NA
+dm_diagnosed,74,73.3,74.7,Proportion,"74 (73.3, 74.7)",41329,sex,Female
+dm_treated,51.3,50.4,52.2,Proportion,"51.3 (50.4, 52.2)",41329,sex,Female
+dm_controlled,28.4,27.6,29.1,Proportion,"28.4 (27.6, 29.1)",41329,sex,Female
+dm_diagnosed,70.4,69.6,71.1,Proportion,"70.4 (69.6, 71.1)",37582,sex,Male
+dm_treated,48.8,48,49.7,Proportion,"48.8 (48, 49.7)",37582,sex,Male
+dm_controlled,27.6,26.8,28.3,Proportion,"27.6 (26.8, 28.3)",37582,sex,Male

@@ -21,11 +21,17 @@ Nationally, the prevalence of diabetes was 6.5% (95%CI: 6.4, 6.6), with higher a
 ## Conclusions 
 There is a high unmet need in screening, diagnosis, treatment, and control of diabetes nationally, and this is most pronounced in rural adults.    
 
+## Comparison with NNMS 2017-18
+The prevalence of diagnosed population in total population is 4.3% (9.3% $\times$ 45.8%) in NNMS and 4.3% (5.9% $\times$ 72.3%) in NFHS-5 for the same study population.   
+
+| Study Name | Years | doi | Study Population | Diabetes (%) | Diagnosed/Aware (%) | Treated (%) | Controlled (%) |
+| ---------- | --- |--- | --- | --- | --- | --- |--- |
+| Mathur 2022 | NNMS 2017-18 | 10.3389/fpubh.2022.748157 | 18-69y; n = 9721 | 9.3% | 45.8% | 36.1% | 15.7% |
+| Current Study | NFHS-5 2019-21 | - | 18+ y; n = 1552032 | 5.9% | 72.3% | 50.1% | 28.0% |
 
 
 
-
-## Comparison with LASI
+## Comparison with LASI 2017-18
 The prevalence of diagnosed population in total population is 11.9% (19.7% $\times$ 60.4%) in LASI and 9.1% (12.1% $\times$ 75.5%) in NFHS-5 for the same study population.   
 
 | Study Name | Years | doi | Study Population | Diabetes (%) | Diagnosed/Aware (%) | Treated (%) | Controlled (%) |
