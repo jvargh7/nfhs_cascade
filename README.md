@@ -27,7 +27,7 @@ The prevalence of diagnosed population in total population is 4.3% (9.3% $\times
 | Study Name | Years | doi | Study Population | Diabetes (%) | Diagnosed/Aware (%) | Treated (%) | Controlled (%) |
 | ---------- | --- |--- | --- | --- | --- | --- |--- |
 | Mathur 2022 | NNMS 2017-18 | 10.3389/fpubh.2022.748157 | 18-69y; n = 9721 | 9.3% | 45.8% | 36.1% | 15.7% |
-| Current Study | NFHS-5 2019-21 | - | 18+ y; n = 1552032 | 5.9% | 72.3% | 50.1% | 28.0% |
+| Current Study | NFHS-5 2019-21 | - | 18-69y; n = 1552032 | 5.9% | 72.3% | 50.1% | 28.0% |
 
 
 
