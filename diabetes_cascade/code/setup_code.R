@@ -137,7 +137,7 @@ saveRDS(state_nested,file="diabetes_cascade/data/state_nested.RDS")
 statez_nested <- bind_rows(
   read_csv("age_standardized/ncz02_age standardized state cascade.csv") %>% 
     dplyr::filter(variable %in% c("dm_screened","dm_disease")),
-  read_csv(file = "analysis/ncz04_state met need care cascade.csv") %>% 
+  read_csv(file = "age_standardized/ncz04_state met need care cascade.csv") %>% 
     dplyr::filter(variable %in% c("dm_diagnosed","dm_treated","dm_controlled")))  %>% 
   mutate(variable = str_replace(variable,"dm_","")) %>% 
   mutate(variable = factor(variable,levels=c("screened","disease","diagnosed","treated","controlled"),
@@ -233,11 +233,7 @@ districtz_nested <- bind_rows(
                             TRUE ~ strata),
          stratification = case_when(is.na(stratification) ~ "",
                                     TRUE ~ stratification)) %>% 
-  dplyr::select(state,n5_state,residence,variable,estimate,lci,uci,stratification,strata,est_ci) %>% 
-  mutate(ST_NM = case_when(n5_state == "Andaman & Nicobar Islands" ~ "Andaman & Nicobar",
-                           n5_state == "Dadra & Nagar Haveli and Daman & Diu" ~ "Dadra and Nagar Haveli and Daman and Diu",
-                           n5_state == "Nct Of Delhi" ~ "Delhi",
-                           TRUE ~ n5_state)) 
+  dplyr::select(D_CODE,D_NAME,n5_state,v024,variable,estimate,lci,uci,strata,est_ci)
 
 
 saveRDS(districtz_nested,file="diabetes_cascade/data/districtz_nested.RDS")

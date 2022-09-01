@@ -19,16 +19,18 @@ if(run_manual){
   nca03_state <- readRDS(file.path("diabetes_cascade/data","nca03_state.RDS"))
   nca05_state_unmet <- readRDS(file.path("diabetes_cascade/data","nca05_state_unmet.RDS"))
   state_nested <- readRDS(file.path("diabetes_cascade/data","state_nested.RDS"))
+  statez_nested <- readRDS(file.path("diabetes_cascade/data","statez_nested.RDS"))
   
   nca04_district <- readRDS(file.path("diabetes_cascade/data","nca04_district.RDS"))
   nca08_district_unmet <- readRDS(file.path("diabetes_cascade/data","nca08_district_unmet.RDS"))
   district_nested <- readRDS(file.path("diabetes_cascade/data","district_nested.RDS"))
+  districtz_nested <- readRDS(file.path("diabetes_cascade/data","districtz_nested.RDS"))
 
   source("diabetes_cascade/code/cascade_plot.R")
   
   
-  input = data.frame(stateinput = "Kerala",districtinput = "Kottayam",
-                     varinput = "Diagnosed",mapinput = "Rural",stratainput = "Total") %>% mutate_all(~as.character(.))
+  input = data.frame(stateinput1 = "Kerala",districtinput1 = "Kottayam",
+                     varinput1 = "Diagnosed",mapinput1 = "Rural",stratainput1 = "Total") %>% mutate_all(~as.character(.))
 }
 
 map2016_v024 <- readxl::read_excel(file.path("data","maps.xlsx"),sheet="map2016_v024")
@@ -44,10 +46,12 @@ ncz02_state <- readRDS(file.path("data","ncz02_state.RDS"))
 nca03_state <- readRDS(file.path("data","nca03_state.RDS"))
 nca05_state_unmet <- readRDS(file.path("data","nca05_state_unmet.RDS"))
 state_nested <- readRDS(file.path("data","state_nested.RDS"))
+statez_nested <- readRDS(file.path("data","statez_nested.RDS"))
 
 nca04_district <- readRDS(file.path("data","nca04_district.RDS"))
 nca08_district_unmet <- readRDS(file.path("data","nca08_district_unmet.RDS"))
 district_nested <- readRDS(file.path("data","district_nested.RDS"))
+districtz_nested <- readRDS(file.path("data","districtz_nested.RDS"))
 
 source("code/cascade_plot.R")
 
@@ -55,7 +59,38 @@ source("code/cascade_plot.R")
 # Define server logic required to draw a histogram
 shinyServer(function(input, output,session) {
 
-  # Panel 1: Overview ----------------
+  # Panel 1: About -----------
+  
+  output$tabledef <- renderTable({
+    
+    data.frame(Indicator = c("Age standardization","Screening","Diabetes","",
+                             "Diagnosed","Treated","Controlled"),
+                                Definition = c("Age standardized to national distribution as per NFHS-5 [18-39: 50.26%, 40-64: 38.78%, 65+: 10.96%]",
+                                               "Blood glucose ever checked previously",
+                                               "(a) Self-reported diabetes",
+                                               "(b) High blood glucose (≥126 mg/dL if fasting or ≥200 mg/dL if not fasting)",
+                                               "Told had high glucose on two or more occasions by a medical provider among those with Diabetes",
+                                               "Currently taking a prescribed medicine to lower glucose among those with Diabetes",
+                                               "Blood glucose in non-hyperglycemic range (<126 mg/dL if fasted and <200 mg/dL if non-fasted) among those with Diabetes")
+                                )
+    })
+
+
+  
+  
+  
+  # Panel 2: Overview ----------------
+  nested_s1 <- reactive({
+    if(input$zinput1 == "Yes"){
+      return(statez_nested)
+      
+      
+    } else{
+      return(state_nested)
+    }
+  })
+  print(head(nested_s1))
+  
   n5_state_input <- reactive({
     input$stateinput1
   })
@@ -68,8 +103,9 @@ shinyServer(function(input, output,session) {
 
   
   nm_merge <- reactive({
+    
     ss <- state_shp %>% 
-    sp::merge(state_nested %>%
+    sp::merge(nested_s1() %>%
                 dplyr::filter(variable == input$varinput1,
                               residence == input$mapinput1,
                               strata == input$stratainput1)  %>% 
@@ -82,16 +118,16 @@ shinyServer(function(input, output,session) {
   
   
   palette_chr <- reactive({
-    case_when(input$varinput1 == "Diabetes" ~ "RdYlGn",
-                   TRUE ~ "-RdYlGn")
+    case_when(input$varinput1 == "Diabetes" ~ "-RdYlGn",
+                   TRUE ~ "RdYlGn")
         })
   
   breaks <- reactive({
-    if(input$varinput1 == "Screened"){
-      seq(0,100,by=20)
+    if(input$varinput1 == "Diabetes"){
+      c(0,5,10,15,25,40)
       
     }
-    else{c(0,2.5,5,7.5,10,20,30)}
+    else{seq(0,100,by=20)}
     
   })
   
@@ -123,9 +159,25 @@ shinyServer(function(input, output,session) {
     
   })
   
+  
+  
+  
+  
+  # output$statemap -----------
+  
+  nested_d1 <- reactive({
+    if(input$zinput1 == "Yes"){
+      return(districtz_nested)
+    }
+    if(input$zinput1 == "No"){
+      return(district_nested)
+    }
+  })
+  
+  
   sm_merge <- reactive({
     ds <- district_shp %>% 
-      sp::merge(district_nested %>%
+      sp::merge(nested_d1() %>%
                   dplyr::filter(variable == input$varinput1,
                                 strata == input$stratainput1)  %>% 
                   dplyr::select(D_CODE,n5_state,estimate) %>% 
@@ -140,8 +192,6 @@ shinyServer(function(input, output,session) {
   })
   
   
-  
-  # output$statemap -----------
   output$statemap <- tmap::renderTmap({
     
     sm <- tmap_mode("view") +
@@ -171,7 +221,7 @@ shinyServer(function(input, output,session) {
   # Table --------
   tab1 <- reactive({
     
-    st_df <- state_nested %>% 
+    st_df <- nested_s1() %>% 
       dplyr::filter(strata %in% c("Total","Male","Female")) %>% 
       dplyr::filter(n5_state == input$stateinput1) %>% 
       dplyr::select(variable,residence,strata,est_ci) %>% 
@@ -186,7 +236,7 @@ shinyServer(function(input, output,session) {
       dplyr::select(-strata) %>% 
       pivot_wider(names_from=residence,values_from=est_ci) 
     
-    dt_df <- district_nested %>% 
+    dt_df <- nested_d1() %>% 
       dplyr::filter(strata == input$stratainput1,
                     D_NAME == input$districtinput1) %>% 
       dplyr::select(variable,strata,D_NAME,est_ci) %>% 
@@ -213,7 +263,18 @@ shinyServer(function(input, output,session) {
     
   },bordered = TRUE, sanitize.text.function=identity,align = "c")
   
-  # Panel 2: State ------------------
+  # Panel 3: State ------------------
+  
+  
+  unmet_d2 <- reactive({
+    if(input$zinput2 == "Yes"){
+      return(districtz_nested)
+    }
+    if(input$zinput2 == "No"){
+      return(district_nested)
+    }
+  })
+  
   
   observeEvent(input$stateinput2,
                {
@@ -229,9 +290,10 @@ shinyServer(function(input, output,session) {
   })
   
   district_cm_merge2 <- reactive({
-    dcm2 <- nca08_district_unmet %>% 
-      dplyr::filter(strata == input$stratainput2,
-                    n5_state == panel2_n5_state())
+    dcm2 <- unmet_d2() %>% 
+        dplyr::filter(strata == input$stratainput2,
+                      n5_state == panel2_n5_state())
+    
     
     dcm2
     
@@ -264,7 +326,7 @@ shinyServer(function(input, output,session) {
       xlab("") 
     
     fig_uc <- district_cm_merge2() %>% 
-      dplyr::filter(variable != "Diabetes") %>% 
+      dplyr::filter(!variable %in% c("Diabetes","Screened")) %>% 
       ggplot(data=.,aes(x = D_NAME,y = estimate,ymin = lci,ymax=uci,
                         group=D_NAME),fill="lightblue") +
       geom_col(position=position_dodge(width=0.9)) +
@@ -289,13 +351,33 @@ shinyServer(function(input, output,session) {
               widths = c(1.5,2))
   })
   
-  # Panel 3: Stratified ---------
+  # Panel 4: Stratified ---------
+  
+  unmet_d3 <- reactive({
+    if(input$zinput3 == "Yes"){
+      return(districtz_nested)
+    }
+    if(input$zinput3 == "No"){
+      return(district_nested)
+    }
+  })
+  
+  
+  unmet_s3 <- reactive({
+    if(input$zinput3 == "Yes"){
+      return(statez_nested)
+    }
+    if(input$zinput3 == "No"){
+      return(state_nested)
+    }
+  })
+  
   panel3_n5_state <- reactive({
     input$stateinput3
   })
   
   district_cm_merge3 <- reactive({
-    dcm3 <- nca08_district_unmet %>% 
+    dcm3 <- unmet_d3() %>% 
       dplyr::filter(strata == input$stratainput3,
                     n5_state == panel3_n5_state())
     
@@ -303,69 +385,18 @@ shinyServer(function(input, output,session) {
     
   })
   
-  # output$unmet_districts3 -------
-  output$unmet_districts3 <- renderPlot({
-    
-    fig_prevalence <- district_cm_merge3() %>% 
-      dplyr::filter(variable == "Diabetes") %>% 
-      ggplot(data=.,aes(x = D_NAME,y = estimate,ymin = lci,ymax=uci,
-                        group=D_NAME)) +
-      geom_col(position=position_dodge(width=0.9),fill="lightblue") +
-      geom_errorbar(position = position_dodge(width=0.9),width=0.1) +
-      theme_bw() + 
-      coord_flip() +
-      facet_grid(~variable,scales="free",space="free_y") +
-      scale_y_continuous(limits=c(0,40),breaks=seq(0,40,by=10)) +
-      facet_grid(~variable,scales="free_y",space="free_y") +
-      theme(
-        legend.text = element_text(size=12),
-        axis.text = element_text(size = 12),
-        strip.background.y = element_blank(),
-        strip.text.x = element_text(size=12),
-        strip.text.y = element_blank(),
-        legend.position = "bottom") +
-      # scale_y_continuous(limits=c(0,50)) +
-      ylab("Prevalence (%)") +
-      xlab("") 
-    
-    fig_uc <- district_cm_merge3() %>% 
-      dplyr::filter(variable != "Diabetes") %>% 
-      ggplot(data=.,aes(x = D_NAME,y = estimate,ymin = lci,ymax=uci,
-                        group=D_NAME),fill="lightblue") +
-      geom_col(position=position_dodge(width=0.9)) +
-      geom_errorbar(position = position_dodge(width=0.9),width=0.1) +
-      theme_bw() + 
-      coord_flip() +
-      facet_grid(~variable,scales="free",space="free_y") +
-      scale_y_continuous(limits=c(0,100),breaks=c(0,25,50,75,100)) +
-      theme(
-        axis.text.y = element_blank(),
-        axis.ticks.y = element_blank(),
-        legend.text = element_text(size=12),
-        axis.text = element_text(size = 12),
-        strip.text = element_text(size=12),
-        legend.position = "bottom") +
-      # scale_y_continuous(limits=c(0,50)) +
-      ylab("Prevalence (%)") +
-      xlab("") 
-    
-    ggarrange(fig_prevalence,fig_uc,nrow=1,ncol=2,
-              common.legend = TRUE,legend="bottom",
-              widths = c(1.5,2))
-  })
-  
-  
   # output$cascade_state3 --------------
   
   state_cs_merge <- reactive({
     # panel2_n5_state = "Kerala"
-    scm <- nca03_state %>% 
+    scm <- unmet_s3() %>% 
       dplyr::filter(n5_state == panel3_n5_state()) %>% 
-      mutate(cascade = str_replace(variable,"dm_","") %>% str_to_title()) %>% 
-      mutate(cascade = factor(cascade,levels=c("Screened","Diabetes","Diagnosed","Treated","Controlled"),
+      # mutate(cascade = str_replace(variable,"dm_","") %>% str_to_title()) %>% 
+      mutate(cascade = factor(variable,levels=c("Screened","Diabetes","Diagnosed","Treated","Controlled"),
                               labels=c("Screened","Diabetes","Diagnosed","Taking Medication","Under Control"))) %>% 
       mutate(group = case_when(is.na(strata) ~ paste0(residence,"\nTotal"),
                                TRUE ~ paste0(residence,"\n",strata)))
+    scm
     
   })
   

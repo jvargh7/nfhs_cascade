@@ -1,4 +1,4 @@
-cascade_plot <- function(df,limits_y = c(0,65),exclude = "Screened",multiplier = 1){
+cascade_plot <- function(df,limits_y = c(0,100),exclude = "Screened",multiplier = 1){
   df2 <- df %>% 
     dplyr::filter(!cascade %in% exclude)
   
@@ -17,7 +17,7 @@ cascade_plot <- function(df,limits_y = c(0,65),exclude = "Screened",multiplier =
     theme_bw() +
     xlab("") +
     ylab("Prevalence (%)") +
-    scale_y_continuous(limits = limits_y) + 
+    # scale_y_continuous(limits = limits_y) + 
     guides(fill = guide_legend(nrow = 1)) +
     scale_fill_manual(name = "",values = fill_values) 
   

@@ -15,13 +15,13 @@ pop_age <- read_csv("data/population for age standardization.csv") %>%
 
 # id_vars = c("residence",group_vars[4]);
 
-nfhs5_svystdz <- svystandardize(nfhs5_svydesign,by=~age_category,over = ~state + education + caste + religion + wealthq_ur,
+nfhs5_svystdz <- svystandardize(nfhs5_svydesign,by=~age_category,over = ~education + caste + religion + wealthq_ur,
                                 population = pop_age)
 rm(nfhs5_svydesign);gc();
 
 
 require(furrr)
-options(future.globals.maxSize= (6*1024*1024)^2) #4GB
+options(future.globals.maxSize= (6*1024*1024)^2) #6GB
 # https://stackoverflow.com/questions/40536067/how-to-adjust-future-global-maxsize
 plan(multisession, workers = 2)
 
@@ -65,8 +65,16 @@ district_svysummary <- future_map_dfr(group_vars,
                                      
                                    })
 
-
-write_csv(district_svysummary,path = "age_standardized/ncz06_age standardized district cascade.csv")
+district_svysummary %>% 
+  rename(D_CODE = district_df) %>% 
+  # There are missing values in D_CODE from subsetting on map
+  dplyr::filter(!is.na(D_CODE)) %>% 
+  left_join(readxl::read_excel("data/NFHS Cascade Variable List.xlsx","map2018_sdist") %>% 
+              dplyr::select(D_CODE,n5_state,v024,D_NAME) %>% 
+              mutate(D_CODE = sprintf("%03d",as.numeric(D_CODE))),
+            by=c("D_CODE")) %>%
+  
+write_csv(.,path = "age_standardized/ncz06_age standardized district cascade.csv")
 
 
 # df <- read_csv(file="age_standardized/ncz02_age standardized state cascade.csv") %>%

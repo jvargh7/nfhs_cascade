@@ -1,5 +1,5 @@
 group_vars <- c("","sex","age_category","education",
-                "caste","religion","wealthq_ur","htn_disease_cat")
+                "caste","religion","swealthq_ur","htn_disease_cat")
 
 
 source("C:/code/external/functions/survey/svysummary.R")
@@ -9,23 +9,21 @@ source("preprocessing/ncpre03_nfhs5 total svydesign.R")
 proportion_vars <- c("dm_screened","dm_disease","dm_diagnosed","dm_treated","dm_controlled")
 
 
-pop_age <- nfhs5_svydesign %>% 
-  group_by(age_category) %>% 
-  survey_tally() %>% 
+pop_age <- read_csv("data/population for age standardization.csv") %>% 
   dplyr::select(n) %>% 
   pull()
 
 # id_vars = c("residence",group_vars[4]);
 
-nfhs5_svystdz <- svystandardize(nfhs5_svydesign,by=~age_category,over = ~state + education + caste + religion + wealthq_ur,
+nfhs5_svystdz <- svystandardize(nfhs5_svydesign,by=~age_category,over = ~education + caste + religion + swealthq_ur,
                                 population = pop_age)
 rm(nfhs5_svydesign);gc();
 
 
 require(furrr)
-options(future.globals.maxSize= (6*1024*1024)^2) #4GB
+options(future.globals.maxSize= (8*1024*1024)^2) #8GB
 # https://stackoverflow.com/questions/40536067/how-to-adjust-future-global-maxsize
-plan(multisession, workers = 3)
+plan(multisession, workers = 2)
 
 state_svysummary <- future_map_dfr(group_vars,
                             function(g_v){
@@ -62,13 +60,18 @@ state_svysummary <- future_map_dfr(group_vars,
                                 mutate(stratification = g_v) %>% 
                                 rename_at(vars(one_of(g_v)),~c("strata")) %>% 
                                 mutate_at(vars(one_of("strata")),~as.character(.));
-                              
+                              gc();
                               return(n5_out)
                               
                             })
 
 
-write_csv(state_svysummary,path = "age_standardized/ncz02_age standardized state cascade.csv")
+state_svysummary %>% 
+  left_join(readxl::read_excel("data/NFHS Cascade Variable List.xlsx",sheet="map2020_v024") %>% 
+              dplyr::select(v024,n5_state,zone) %>% 
+              distinct(v024,n5_state,.keep_all=TRUE),
+            by=c("state"="v024")) %>% 
+write_csv(.,path = "age_standardized/ncz02_age standardized state cascade.csv")
 
 
 # df <- read_csv(file="age_standardized/ncz02_age standardized state cascade.csv") %>%
