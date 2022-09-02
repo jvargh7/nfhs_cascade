@@ -91,7 +91,7 @@ ncp_preprocessing <- function(df, sex = "Female"){
     mutate(sbp = rowMeans(.[,c("sbp1","sbp2","sbp3")],na.rm=TRUE),
            
            # "sb18d" has 108 everywhere
-           dbp = rowMeans(.[,c("dbp2","dbp3")],na.rm=TRUE),
+           dbp = rowMeans(.[,c("dbp1","dbp2","dbp3")],na.rm=TRUE),
            htn = case_when(diagnosed_bp == 1 ~ 1,
                            is.na(sbp) | is.na(dbp) ~ NA_real_,
                            sbp >= sbp_cutoff ~ 1,
