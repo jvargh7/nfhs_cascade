@@ -410,6 +410,9 @@ shinyServer(function(input, output,session) {
       cascade_plot(.,limits_y = c(0,45))
     figC <- state_cs_merge() %>%
       dplyr::filter(stratification == "education") %>%
+      mutate(group = factor(group, levels=c("Rural\nNo education","Rural\nPrimary","Rural\nSecondary","Rural\nHigher",
+                                            "Urban\nNo education","Urban\nPrimary","Urban\nSecondary","Urban\nHigher"
+                                            ))) %>% 
       cascade_plot(.,limits_y = c(0,45))
     figD <- state_cs_merge() %>%
       dplyr::filter(stratification == "caste") %>%

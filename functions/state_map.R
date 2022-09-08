@@ -4,7 +4,9 @@
 require(tmap)
 state_map <- function(df,plot_variable,map_version = 2016,
                       plot_title = "A",breaks = c(0,2.5,5,7.5,10,15,20),
-                      palette_chr = "-RdYlGn"){
+                      palette_chr = "-RdYlGn",
+                      lgd_width = 0.25,
+                      lgd_height = 0.25){
   
   
   
@@ -44,7 +46,9 @@ state_map <- function(df,plot_variable,map_version = 2016,
     tm_ylab("") +
     tm_layout(plot_title,title.size = 2,
               legend.text.size = 1,
-              legend.title.size = 1)
+              legend.title.size = 1,
+              legend.width = lgd_width,
+              legend.height = lgd_height)
   
   return(s_p)
   

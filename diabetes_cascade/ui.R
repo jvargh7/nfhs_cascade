@@ -13,10 +13,10 @@ map2016_v024 <- readxl::read_excel(file.path("data","maps.xlsx"),sheet="map2016_
 map2018_sdist <- readxl::read_excel(file.path("data","maps.xlsx"),sheet="map2018_sdist")
 
 sidebar_about <- conditionalPanel(condition = "input.selectedpanel == 1",
-                                  h3("Dashboard takes 30-60 seconds to load"))
+                                  h3(""))
 
 sidebar_overview <- conditionalPanel(condition="input.selectedpanel==2",
-                                     h3("Please wait for Maps to load before changing inputs"),
+                                     h3(""),
                                      selectInput("zinput1","Age Standardized:",choices = c("Yes","No"),selected = "Yes"),
                                      selectInput("stateinput1","Select State:",unique(map2016_v024$n5_state),selected = "Kerala"),
                                      selectInput("districtinput1","Select District:",c(""),selected = "Kottayam"),
@@ -26,7 +26,7 @@ sidebar_overview <- conditionalPanel(condition="input.selectedpanel==2",
                                      )
 
 sidebar_state <- conditionalPanel(condition="input.selectedpanel==3",
-                                     h3("Please select inputs for unmet need chart"),
+                                     h3(""),
                                      selectInput("zinput2","Age Standardized:",choices = c("Yes","No"),selected = "Yes"),
                                      selectInput("stateinput2","Select State:",unique(map2016_v024$n5_state),selected = "Kerala"),
                                      # selectInput("varinput2","Select Variable:",c("Screened","Diabetes","Diagnosed","Treated","Controlled")),
@@ -35,12 +35,12 @@ sidebar_state <- conditionalPanel(condition="input.selectedpanel==3",
 )
 
 sidebar_stratified <- conditionalPanel(condition="input.selectedpanel==4",
-                                  h3("Please select inputs for unmet need chart"),
+                                  h3(""),
                                   selectInput("zinput3","Age Standardized:",choices = c("Yes","No"),selected = "Yes"),
-                                  selectInput("stateinput3","Select State:",unique(map2016_v024$n5_state),selected = "Kerala"),
+                                  selectInput("stateinput3","Select State:",unique(map2016_v024$n5_state),selected = "Kerala")
                                   # selectInput("varinput3","Select Variable:",c("Screened","Diabetes","Diagnosed","Treated","Controlled")),
                                   # selectInput("mapinput3","Select Display:",c("Urban","Rural")),
-                                  selectInput("stratainput3","Select Strata:",c("Total","Male","Female"),selected = "Female")
+                                  # selectInput("stratainput3","Select Strata:",c("Total","Male","Female"),selected = "Female")
 )
 
 sidebar <- dashboardSidebar(
@@ -60,8 +60,11 @@ panel_about <- tabPanel("About",value = 1,
                              
                              box(solidHeader=FALSE,status="warning",title = "Team",
                                  # https://stackoverflow.com/questions/36182535/how-to-place-an-image-in-an-r-shiny-title
-                                 tags$img(src = file.path("gdrc.jpg"),height='200',width='400'),
-                                 p("Conceptualization and Development: Jithin Sam Varghese, Mohammed K. Ali"))
+                                 tags$img(src = file.path("Logo 1.jpg"),height='100',width='200'),
+                                 tags$img(src = file.path("gdrc.png")),
+                                 tags$img(src = file.path("Logo 2.jpg"),height='100',width='200'),
+                                 tags$img(src = file.path("Logo 3.jpg"),height='100',width='200'),
+                                 p("Conceptualization and Development: Jithin Sam Varghese,....,Mohammed K. Ali"))
                              
                            ),
                            fluidRow(
@@ -73,13 +76,13 @@ panel_about <- tabPanel("About",value = 1,
                              
                              box(solidHeader=FALSE,status="warning",title = "Reproducibility",
                                  p("Data available at:"),
-                                 tags$a(href="www.dhsprogram.com", 
-                                        "www.dhsprogram.com"),
+                                 tags$a(href="https://www.dhsprogram.com", 
+                                        "https://www.dhsprogram.com"),
                                  p(""),
                              
                                  p("Code available at:"),
-                                 tags$a(href="https//github.com/jvargh7/nfhs_cascade", 
-                                        "https//github.com/jvargh7/nfhs_cascade"))
+                                 tags$a(href="https://github.com/jvargh7/nfhs_cascade", 
+                                        "https://github.com/jvargh7/nfhs_cascade"))
                                  
                              
                            )
@@ -88,7 +91,7 @@ panel_about <- tabPanel("About",value = 1,
 
 panel_overview <- tabPanel("Overview",value = 2,
                            fluidRow(
-                             
+                                h3("Please wait for 15 to 20 seconds for maps to load",align='center'),
                              
                                  box(solidHeader=FALSE,status="warning",title = "National Overview (%)",
                                  tmap::tmapOutput("nationalmap"), width = 6),
@@ -106,6 +109,8 @@ panel_overview <- tabPanel("Overview",value = 2,
 
 panel_state <- tabPanel("District Disparities",value = 3,
                         fluidRow(
+                          h3("Please select inputs from panel on left",align='center'),
+                          
                           box(solidHeader=FALSE,status="warning",width = 12,
                               title = "Between-district Disparities (%)",
                               plotOutput("unmet_districts2",height=600))
@@ -118,7 +123,7 @@ panel_state <- tabPanel("District Disparities",value = 3,
 
 panel_stratified <- tabPanel("Socio-demographic Disparities",value =4,
                              fluidRow(
-                               
+                               h3("Please select inputs from panel on left",align='center'),
                                box(solidHeader=FALSE,status="warning",width=12,
                                    title = "Socio-demographic Disparities (%)",
                                    plotOutput("cascade_state3",height = 1000))
