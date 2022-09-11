@@ -1,0 +1,13 @@
+sex,residence,is.na(dm_free),is.na(diagnosed_dm),is.na(glucose),n
+Female,Rural,FALSE,FALSE,FALSE,654910
+Female,Rural,FALSE,FALSE,TRUE,216
+Female,Rural,TRUE,FALSE,TRUE,62313
+Female,Urban,FALSE,FALSE,FALSE,212672
+Female,Urban,FALSE,FALSE,TRUE,98
+Female,Urban,TRUE,FALSE,TRUE,29259
+Male,Rural,FALSE,FALSE,FALSE,589400
+Male,Rural,FALSE,FALSE,TRUE,187
+Male,Rural,TRUE,FALSE,TRUE,103867
+Male,Urban,FALSE,FALSE,FALSE,193624
+Male,Urban,FALSE,FALSE,TRUE,69
+Male,Urban,TRUE,FALSE,TRUE,48682

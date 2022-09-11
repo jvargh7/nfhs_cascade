@@ -1,11 +1,17 @@
-state_cascade <- read_csv(file = "analysis/nca03_state level care cascade.csv")
+unmet_cascade <- bind_rows(read_csv(file = "analysis/nca05_state unmet need care cascade.csv") %>% 
+                             dplyr::filter(is.na(stratification)) %>% 
+                             mutate(variable = str_replace(variable,"dm_","") %>% str_to_title()),
+                           read_csv(file="analysis/nca03_state level care cascade.csv") %>% 
+                             dplyr::filter(is.na(stratification)) %>% 
+                             mutate(variable = str_replace(variable,"dm_","") %>% str_to_title()) %>% 
+                             dplyr::filter(variable == "Disease") %>% 
+                             mutate(variable = "Diabetes")
+) %>% 
+  dplyr::filter(n > 100) %>% 
+  mutate(variable = factor(variable,levels=c("Diabetes","Unscreened","Undiagnosed","Untreated","Uncontrolled")))
 
 source("functions/state_map.R")
 
-state_cascade %>% 
-  dplyr::filter(is.na(stratification)) %>% 
-  group_by(residence,variable) %>% 
-  summarize_at(vars(estimate),.funs=list(~min(.),~max(.)))
          
 
 # figA <- state_cascade %>% 
@@ -16,39 +22,39 @@ state_cascade %>%
 #   dplyr::filter(residence == "Urban",is.na(stratification)) %>% 
 #   state_map(.,plot_variable = "dm_screened",plot_title = "B. Urban Screening",breaks = seq(0,100,by=20),palette_chr = "RdYlGn")
 
-figA <- state_cascade %>% 
+figA <- unmet_cascade %>% 
   dplyr::filter(residence == "Rural",is.na(stratification)) %>% 
-  state_map(.,plot_variable = "dm_disease",plot_title = "A. Rural Diabetes",breaks = seq(0,20,by=5),palette_chr = "-RdYlGn")
+  state_map(.,plot_variable = "Diabetes",plot_title = "A. Rural Diabetes",breaks = seq(0,20,by=5),palette_chr = "-RdYlGn")
 
-figB <- state_cascade %>% 
+figB <- unmet_cascade %>% 
   dplyr::filter(residence == "Rural",is.na(stratification)) %>% 
-  state_map(.,plot_variable = "dm_diagnosed",plot_title = "B. Rural Diagnosed",breaks = seq(0,20,by=5),palette_chr = "-RdYlGn")
+  state_map(.,plot_variable = "Undiagnosed",plot_title = "B. Rural Diagnosed",breaks = seq(0,100,by=20),palette_chr = "-RdYlGn")
 
-figC <- state_cascade %>% 
+figC <- unmet_cascade %>% 
   dplyr::filter(residence == "Rural",is.na(stratification)) %>% 
-  state_map(.,plot_variable = "dm_treated",plot_title = "C. Rural Treated",breaks = seq(0,20,by=5),palette_chr = "-RdYlGn")
+  state_map(.,plot_variable = "Untreated",plot_title = "C. Rural Treated",breaks = seq(0,100,by=20),palette_chr = "-RdYlGn")
 
-figD <- state_cascade %>% 
+figD <- unmet_cascade %>% 
   dplyr::filter(residence == "Rural",is.na(stratification)) %>% 
-  state_map(.,plot_variable = "dm_controlled",plot_title = "D. Rural Controlled",breaks = seq(0,20,by=5),palette_chr = "-RdYlGn")
+  state_map(.,plot_variable = "Uncontrolled",plot_title = "D. Rural Controlled",breaks = seq(0,100,by=20),palette_chr = "-RdYlGn")
 
-figE <- state_cascade %>% 
+figE <- unmet_cascade %>% 
   dplyr::filter(residence == "Urban",is.na(stratification)) %>% 
-  state_map(.,plot_variable = "dm_disease",plot_title = "E. Urban Diabetes",breaks = seq(0,20,by=5),palette_chr = "-RdYlGn")
+  state_map(.,plot_variable = "Diabetes",plot_title = "E. Urban Diabetes",breaks = seq(0,100,by=20),palette_chr = "-RdYlGn")
 
-figF <- state_cascade %>% 
+figF <- unmet_cascade %>% 
   dplyr::filter(residence == "Urban",is.na(stratification)) %>% 
-  state_map(.,plot_variable = "dm_diagnosed",plot_title = "F. Urban Diagnosed",breaks = seq(0,20,by=5),palette_chr = "-RdYlGn")
+  state_map(.,plot_variable = "Undiagnosed",plot_title = "F. Urban Diagnosed",breaks = seq(0,100,by=20),palette_chr = "-RdYlGn")
 
-figG <- state_cascade %>% 
+figG <- unmet_cascade %>% 
   dplyr::filter(residence == "Urban",is.na(stratification)) %>% 
-  state_map(.,plot_variable = "dm_treated",plot_title = "G. Urban Treated",breaks = seq(0,20,by=5),palette_chr = "-RdYlGn")
+  state_map(.,plot_variable = "Untreated",plot_title = "G. Urban Treated",breaks = seq(0,100,by=20),palette_chr = "-RdYlGn")
 
 
 
-figH <- state_cascade %>% 
+figH <- unmet_cascade %>% 
   dplyr::filter(residence == "Urban",is.na(stratification)) %>% 
-  state_map(.,plot_variable = "dm_controlled",plot_title = "H. Urban Controlled",breaks = seq(0,20,by=5),palette_chr = "-RdYlGn")
+  state_map(.,plot_variable = "Uncontrolled",plot_title = "H. Urban Controlled",breaks = seq(0,100,by=20),palette_chr = "-RdYlGn")
 
 tmap_arrange(
              figA,figB,figC,figD,

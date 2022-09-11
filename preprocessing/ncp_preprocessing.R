@@ -247,6 +247,8 @@ ncp_preprocessing <- function(df, sex = "Female"){
     mutate_at(vars(glucose), function(x) case_when(is.na(x) | x > 498 ~ NA_real_,
                                                    TRUE ~ as.numeric(x))) %>% 
     # Caste
+    mutate(na_caste = case_when(is.na(caste) | caste == 8 ~ 1,
+                                TRUE ~ 0)) %>% 
     mutate_at(vars(caste),function(x) case_when(x == 1 ~ "Schedule Caste",
                                                 x == 2 ~ "Schedule Tribe",
                                                 x == 3 ~ "OBC",

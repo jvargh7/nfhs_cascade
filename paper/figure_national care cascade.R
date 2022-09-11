@@ -9,10 +9,10 @@ source("functions/cascade_plot.R")
 
 figA <- national_cascade %>% 
   dplyr::filter(is.na(stratification)|stratification == "sex") %>% 
-  cascade_plot(.,limits_y = c(0,25))
+  cascade_plot(.,limits_y = c(0,28))
 figB <- national_cascade %>% 
   dplyr::filter(stratification == "age_category") %>% 
-  cascade_plot(.,limits_y = c(0,25))
+  cascade_plot(.,limits_y = c(0,28))
 
 require(ggpubr)
 ggarrange(figA,
