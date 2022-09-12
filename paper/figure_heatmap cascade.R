@@ -43,6 +43,7 @@ figure_rural <- unmet_cascade %>%
   theme(
     legend.text = element_text(size=12),
     axis.text.y = element_blank(),
+    axis.text.x = element_text(size = 12),
     axis.ticks.y = element_blank(),
     strip.background.y = element_blank(),
     strip.text.x = element_text(size=12),
