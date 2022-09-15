@@ -1,5 +1,5 @@
 group_vars <- c("","sex","age_category","education",
-                "caste","religion","wealthq_ur","htn_disease")
+                "caste","religion","wealthq_ur")
 
 
 source("C:/code/external/functions/survey/svysummary.R")

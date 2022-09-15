@@ -21,7 +21,7 @@ rm(nfhs5_svydesign);gc();
 
 
 require(furrr)
-options(future.globals.maxSize= (6*1024*1024)^2) #6GB
+options(future.globals.maxSize= (4*1024*1024)^2) #6GB
 # https://stackoverflow.com/questions/40536067/how-to-adjust-future-global-maxsize
 plan(multisession, workers = 2)
 

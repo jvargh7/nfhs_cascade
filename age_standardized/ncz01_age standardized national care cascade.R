@@ -1,5 +1,5 @@
 group_vars <- c("","sex","age_category","education",
-                "caste","religion","wealthq_ur","htn_disease_cat")
+                "caste","religion","wealthq_ur")
 
 
 source("C:/code/external/functions/survey/svysummary.R")
@@ -71,3 +71,15 @@ nfhs5_svysummary <- map_dfr(group_vars,
 
 
 write_csv(nfhs5_svysummary,path = "age_standardized/ncz01_age standardized care cascade.csv")
+
+
+
+svysummary(nfhs5_svystdz,
+           # c_vars = continuous_vars,
+           p_vars = proportion_vars,
+           # g_vars = grouped_vars,
+           id_vars = id_vars
+) %>% 
+  mutate_at(vars(estimate,lci,uci),~round(.,1)) %>% 
+  mutate(est_ci = paste0(estimate," (",
+                         lci,", ",uci,")"))

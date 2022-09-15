@@ -18,7 +18,7 @@ options(survey.lonely.psu="adjust")
 female_covariates <- " ~ ns(f_age,df=4)"
 male_covariates <- " ~ ns(m_age,df=4)"
 
-fasting_time <- 11.9
+fasting_time <- 7.9
 
 bmi_max = 6000
 

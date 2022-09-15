@@ -1,5 +1,5 @@
 group_vars <- c("","sex","age_category","education",
-                "caste","religion","swealthq_ur","htn_disease_cat")
+                "caste","religion","swealthq_ur")
 
 
 source("C:/code/external/functions/survey/svysummary.R")
@@ -21,7 +21,7 @@ rm(nfhs5_svydesign);gc();
 
 
 require(furrr)
-options(future.globals.maxSize= (8*1024*1024)^2) #8GB
+options(future.globals.maxSize= (4*1024*1024)^2) #8GB
 # https://stackoverflow.com/questions/40536067/how-to-adjust-future-global-maxsize
 plan(multisession, workers = 2)
 

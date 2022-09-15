@@ -256,6 +256,8 @@ ncp_preprocessing <- function(df, sex = "Female"){
                                                 x == 8 ~ "General",
                                                 TRUE ~ "General")) %>% 
     # Education
+    mutate(na_education = case_when(is.na(education) | education == 9 ~ 1,
+                                TRUE ~ 0)) %>% 
     mutate_at(vars(education),function(x) case_when(x == 0 ~ "No education",
                                                     x == 1 ~ "Primary",
                                                     x == 2 ~ "Secondary",

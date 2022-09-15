@@ -12,9 +12,9 @@ proportion_vars <- c("dm_screened","dm_diagnosed","dm_unscreened","dm_undiagnose
                      "dm_treated","dm_controlled","dm_untreated","dm_uncontrolled")
 
 require(furrr)
-options(future.globals.maxSize= (6*1024*1024)^2) #4GB
+options(future.globals.maxSize= (4*1024*1024)^2) #4GB
 # https://stackoverflow.com/questions/40536067/how-to-adjust-future-global-maxsize
-plan(multisession, workers = 3)
+plan(multisession, workers = 2)
 unmet_svysummary_dm <- future_map_dfr(group_vars,
                                       function(g_v){
                                         id_vars = c("residence",g_v);
