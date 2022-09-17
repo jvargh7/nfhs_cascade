@@ -40,7 +40,7 @@ figD <- unmet_cascade %>%
 
 figE <- unmet_cascade %>% 
   dplyr::filter(residence == "Urban",is.na(stratification)) %>% 
-  state_map(.,plot_variable = "Diabetes",plot_title = "E. Urban Diabetes",breaks = seq(0,100,by=20),palette_chr = "-RdYlGn")
+  state_map(.,plot_variable = "Diabetes",plot_title = "E. Urban Diabetes",breaks = seq(0,20,by=5),palette_chr = "-RdYlGn")
 
 figF <- unmet_cascade %>% 
   dplyr::filter(residence == "Urban",is.na(stratification)) %>% 

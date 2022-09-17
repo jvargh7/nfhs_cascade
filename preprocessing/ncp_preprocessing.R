@@ -471,6 +471,9 @@ ncp_preprocessing <- function(df, sex = "Female"){
            swealths_ur = case_when(!is.na(suwealths) ~ suwealths,
                                    TRUE ~ srwealths)
            ) %>% 
+    mutate(bmi = bmi/100)  %>% 
+    mutate(age_category10 = cut(age,breaks=c(18,30,40,50,60,70,80,100),include.lowest=TRUE,right=FALSE),
+           age_category5 = cut(age,breaks=seq(15,100,by=5),include.lowest=TRUE,right=FALSE)) %>% 
     
     return(.)
 }
