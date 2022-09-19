@@ -26,7 +26,7 @@ figure_urban <- unmet_cascade %>%
     axis.text = element_text(size = 12),
     strip.background.y = element_blank(),
     strip.text.x = element_text(size=12),
-    strip.text.y = element_blank(),
+    strip.text.y = element_text(size=12),
     legend.position = "bottom")
 
   
@@ -47,13 +47,13 @@ figure_rural <- unmet_cascade %>%
     axis.ticks.y = element_blank(),
     strip.background.y = element_blank(),
     strip.text.x = element_text(size=12),
-    strip.text.y = element_blank(),
+    strip.text.y = element_text(size=12),
     legend.position = "bottom")
 
 require(ggpubr)
   ggarrange(figure_urban,figure_rural,nrow=1,ncol=2,
             labels = c("A","B"),
             common.legend = TRUE,legend="bottom",
-            widths = c(2,1.5)) %>% 
+            widths = c(2.2,1.5)) %>% 
     ggsave(.,filename = paste0(path_cascade_folder,"/figures/figure_heatmap cascade.png"),width=15,height=8)
   
