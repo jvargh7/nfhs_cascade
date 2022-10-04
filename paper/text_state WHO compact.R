@@ -1,7 +1,7 @@
-district_met <- read_csv("analysis/nca08_district met need care cascade.csv",guess_max = 4000) %>% 
+state_met <- read_csv("analysis/nca05_state met need care cascade.csv",guess_max = 4000) %>% 
   dplyr::filter(is.na(strata))
 
-district_met %>% 
+state_met %>% 
   mutate(n_category = case_when(n >= 50 ~ 1,
                                 n %in% c(25:49) ~ 2,
                                 n < 25 ~ 3)) %>% 
@@ -16,10 +16,20 @@ district_met %>%
 
 
 
-district_met %>% 
+state_met %>% 
   dplyr::filter(is.na(stratification), n > 50) %>%
-  group_by(variable) %>% 
+  group_by(residence,variable) %>% 
   summarize(count = sum(estimate > 80),
             prop = sum(estimate > 80)/n(),
             n = n()) 
-  
+
+
+state_met %>% 
+  dplyr::filter(is.na(stratification), n > 50) %>%
+  group_by(residence,zone, variable) %>% 
+  summarize(count = sum(estimate > 80),
+            prop = sum(estimate > 80)/n(),
+            median = median(estimate),
+            n = n()) %>% 
+  dplyr::filter(variable == "dm_treated")
+
