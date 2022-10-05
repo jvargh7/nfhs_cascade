@@ -60,18 +60,21 @@ panel_about <- tabPanel("About",value = 1,
                              
                              box(solidHeader=FALSE,status="warning",title = "Team",
                                  # https://stackoverflow.com/questions/36182535/how-to-place-an-image-in-an-r-shiny-title
-                                 tags$img(src = file.path("Logo 1.jpg"),height='100',width='200'),
-                                 tags$img(src = file.path("gdrc.png")),
-                                 tags$img(src = file.path("Logo 2.jpg"),height='100',width='200'),
-                                 tags$img(src = file.path("Logo 3.jpg"),height='100',width='200'),
-                                 p("Conceptualization and Development: Jithin Sam Varghese,....,Mohammed K. Ali"))
+                                 # tags$img(src = file.path("Logo 1.jpg"),height='100',width='200'),
+                                 tags$img(src = file.path("gdrc combined.png"),height='200',width='400'),
+                                 # tags$img(src = file.path("Logo 2.jpg"),height='100',width='200'),
+                                 # tags$img(src = file.path("Logo 3.jpg"),height='100',width='200'),
+                                 )
                              
                            ),
                            fluidRow(
                              
                              box(solidHeader=FALSE,status="warning",title = "Citation",
                                  p("Please cite as:"),
-                                 code("Varghese 2022 Insert Citation Later")
+                                 code(paste0("Varghese JS, Anjana RM, Geldsetzer P, Sudharsanan N, Manne-Goehler J, Thirumurthy H, 
+                                      Bhattacharya S, Narayan KMV, Mohan V, Tandon N, Ali MK.
+                                      Diabetes diagnosis, treatment, and control in India: results from a national survey of 1.65 million adults aged 18 years and older in India, 2019-2021.
+                                      2022; Version 1.0. Accessed on ",format(Sys.Date(),"%d %B %Y"),"."))
                                  ),
                              
                              box(solidHeader=FALSE,status="warning",title = "Reproducibility",
@@ -91,7 +94,7 @@ panel_about <- tabPanel("About",value = 1,
 
 panel_overview <- tabPanel("Overview",value = 2,
                            fluidRow(
-                                h3("Please wait for 15 to 20 seconds for maps to load",align='center'),
+                                h3("Please stay on this page for 15 to 20 seconds for dashboard to load",align='center'),
                              
                                  box(solidHeader=FALSE,status="warning",title = "National Overview (%)",
                                  tmap::tmapOutput("nationalmap"), width = 6),

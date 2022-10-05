@@ -58,7 +58,10 @@ source("code/cascade_plot.R")
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output,session) {
-
+  # https://stackoverflow.com/questions/50326110/r-shiny-popup-window-before-app
+  
+  
+  
   # Panel 1: About -----------
   
   output$tabledef <- renderTable({
@@ -80,6 +83,19 @@ shinyServer(function(input, output,session) {
   
   
   # Panel 2: Overview ----------------
+  
+  welcome_modal <- modalDialog(
+    title = "Welcome!",
+    "The dashboard takes 15-20 seconds to load once you are on the 'Overview' page",
+    
+    
+    easyClose = F
+    
+  )
+  
+  # Show the modal on start up ...
+  showModal(ui = welcome_modal)
+  
   nested_s1 <- reactive({
     if(input$zinput1 == "Yes"){
       return(statez_nested)
@@ -95,8 +111,11 @@ shinyServer(function(input, output,session) {
     input$stateinput1
   })
   
+  
+  
   # https://stackoverflow.com/questions/64796206/dynamically-update-two-selectinput-boxes-based-on-the-others-selection-in-r-shin
   observe({
+    
     d_i = map2018_sdist[map2018_sdist$n5_state == n5_state_input(),]$D_NAME
     updateSelectInput(session, "districtinput1", choices = na.omit(d_i)) 
   })  
