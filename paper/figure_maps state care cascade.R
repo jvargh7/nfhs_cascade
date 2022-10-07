@@ -7,7 +7,7 @@ unmet_cascade <- bind_rows(read_csv(file = "analysis/nca05_state unmet need care
                              dplyr::filter(variable == "Disease") %>% 
                              mutate(variable = "Diabetes")
 ) %>% 
-  dplyr::filter(n > 50) %>% 
+  dplyr::filter(n >= 50) %>% 
   mutate(variable = factor(variable,levels=c("Diabetes","Unscreened","Undiagnosed","Untreated","Uncontrolled")))
 
 source("functions/state_map.R")
