@@ -9,21 +9,12 @@ source("preprocessing/ncpre03_nfhs5 total svydesign.R")
 proportion_vars <- c("dm_screened","dm_disease","dm_diagnosed","dm_treated","dm_controlled")
 
 
-# https://stackoverflow.com/questions/40536067/how-to-adjust-future-global-maxsize
-# https://furrr.futureverse.org/articles/progress.html
-require(furrr)
-require(progressr)
-options(future.globals.maxSize= (4*1024*1024)^2) #4GB
 
-plan(multisession, workers = 2)
+# source("preprocessing/nc_parallelization.R")
 
-with_progress({
-  p <- progressor(steps = length(group_vars))
-  
-  nfhs5_svysummary <- future_map_dfr(group_vars,
+  nfhs5_svysummary <- map_dfr(group_vars,
                                      function(g_v){
                                        id_vars = c("residence",g_v);
-                                       p();
                                        n5_sy <- svysummary(nfhs5_svydesign,
                                                            # c_vars = continuous_vars,
                                                            p_vars = proportion_vars,
@@ -59,8 +50,6 @@ with_progress({
                                        return(n5_out)
                                        
                                      })
-  
-})
 
 
 

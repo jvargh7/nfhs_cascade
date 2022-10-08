@@ -73,16 +73,16 @@ ncp_preprocessing <- function(df, sex = "Female"){
              is.na(fasting) & glucose < rpg_cutoff ~ 0,
              TRUE  ~ NA_real_),
            
-           # Among those diagnosed, indicator of diabetes status
+           # Among those diagnosed, indicator of diabetes control status
            diagdm = case_when(
              diagnosed_dm == 0 ~ NA_real_,
              is.na(glucose) | glucose > 498 ~ NA_real_,
-             diagnosed_dm == 1 & fasting == 1 & glucose >= fpg_cutoff ~ 1,
-             diagnosed_dm == 1 & fasting == 0 & glucose >= rpg_cutoff ~ 1,
-             diagnosed_dm == 1 & is.na(fasting) & glucose >= rpg_cutoff ~ 1,
-             diagnosed_dm == 1 & fasting == 1 & glucose < fpg_cutoff ~ 0,
-             diagnosed_dm == 1 & fasting == 0 & glucose < rpg_cutoff ~ 0,
-             diagnosed_dm == 1 & is.na(fasting) & glucose < rpg_cutoff ~ 0,
+             diagnosed_dm == 1 & fasting == 1 & glucose > fpg_target ~ 1,
+             diagnosed_dm == 1 & fasting == 0 & glucose > rpg_target ~ 1,
+             diagnosed_dm == 1 & is.na(fasting) & glucose > rpg_target ~ 1,
+             diagnosed_dm == 1 & fasting == 1 & glucose <= fpg_target ~ 0,
+             diagnosed_dm == 1 & fasting == 0 & glucose <= rpg_target ~ 0,
+             diagnosed_dm == 1 & is.na(fasting) & glucose <= rpg_target ~ 0,
              TRUE  ~ NA_real_
            )
            
@@ -106,13 +106,15 @@ ncp_preprocessing <- function(df, sex = "Female"){
              sbp < sbp_cutoff ~ 0,
              dbp < dbp_cutoff ~ 0,
              TRUE ~ NA_real_),
+           
+           # Among those diagnosed, indicator of hypertension control status
            diaghtn = case_when(
              diagnosed_bp == 0 ~ NA_real_,
              is.na(sbp) | is.na(dbp) ~ NA_real_,
-             diagnosed_bp == 1 & sbp >= sbp_cutoff ~ 1,
-             diagnosed_bp == 1 & dbp >= dbp_cutoff ~ 1,
-             diagnosed_bp == 1 & sbp < sbp_cutoff ~ 0,
-             diagnosed_bp == 1 & dbp < dbp_cutoff ~ 0,
+             diagnosed_bp == 1 & sbp >= sbp_target ~ 1,
+             diagnosed_bp == 1 & dbp >= dbp_target ~ 1,
+             diagnosed_bp == 1 & sbp < sbp_target ~ 0,
+             diagnosed_bp == 1 & dbp < dbp_target ~ 0,
              TRUE ~ NA_real_),
     ) %>% 
     
@@ -137,7 +139,7 @@ ncp_preprocessing <- function(df, sex = "Female"){
                                         diagnosed_dm == 0 ~ 1,
                                         TRUE ~ NA_real_),
          
-         dm_undiag_uncontr = case_when(diagnosed_dm == 1 | is.na(diagnosed_dm) ~ NA_real_,
+         dm_undiag_dm = case_when(diagnosed_dm == 1 | is.na(diagnosed_dm) ~ NA_real_,
                                        # or equivalently diagnosed_dm == 0
                                        dm == 1 ~ 1,
                                        dm == 0 ~ 0,
@@ -147,7 +149,7 @@ ncp_preprocessing <- function(df, sex = "Female"){
                                      diagnosed_dm == 1 & medication_dm == 0 ~ 1,
                                      TRUE ~ NA_real_),
          
-         # Dignosis: Yes, Treated: Yes, Blood sugar: out of range
+         # Dignosis: Yes, Treated: Yes, Blood sugar: out of control range
          dm_treat_uncontr = case_when(medication_dm == 0 | is.na(medication_dm)  ~ NA_real_,
                                       medication_dm == 1 & diagdm == 1 ~ 1,
                                       medication_dm == 1 & diagdm == 0 ~ 0,
@@ -155,10 +157,10 @@ ncp_preprocessing <- function(df, sex = "Female"){
          # Dignosis: Yes, Treated: Yes, Blood sugar: in range
          dm_treat_contr = 1 - dm_treat_uncontr,
          
-         # Dignosis: Yes, Treated: Yes or No, Blood sugar: out of range
+         # Dignosis: Yes, Treated: Yes or No, Blood sugar: out of control range
          dm_diag_uncontr = case_when(diagnosed_dm == 0 | is.na(diagnosed_dm)  ~ NA_real_,
-                                     diagnosed_dm == 1 & highglucose == 1 ~ 1,
-                                     diagnosed_dm == 1 & highglucose == 0 ~ 0,
+                                     diagdm == 1 ~ 1,
+                                     diagdm == 0 ~ 0,
                                      TRUE ~ NA_real_),
          # Dignosis: Yes, Treated: No, Blood sugar: in range
          dm_diag_contr = 1 - dm_diag_uncontr
@@ -187,7 +189,7 @@ ncp_preprocessing <- function(df, sex = "Female"){
                                          diagnosed_bp == 0 ~ 1,
                                          TRUE ~ NA_real_),
          
-         htn_undiag_uncontr = case_when(diagnosed_bp == 1 | is.na(diagnosed_bp) ~ NA_real_,
+         htn_undiag_htn = case_when(diagnosed_bp == 1 | is.na(diagnosed_bp) ~ NA_real_,
                                         htn == 1 ~ 1,
                                         htn == 0 ~ 0,
                                         TRUE ~ NA_real_),
@@ -197,7 +199,7 @@ ncp_preprocessing <- function(df, sex = "Female"){
                                       diagnosed_bp == 1 & medication_bp == 0 ~ 1,
                                       TRUE ~ NA_real_),
          
-         # Dignosis: Yes, Treated: Yes, Blood pressure: out of range
+         # Dignosis: Yes, Treated: Yes, Blood pressure: out of control range
          htn_treat_uncontr = case_when(medication_bp == 0 | is.na(medication_bp)  ~ NA_real_,
                                        medication_bp == 1 & diaghtn == 1 ~ 1,
                                        medication_bp == 1 & diaghtn == 0 ~ 0,
@@ -205,12 +207,12 @@ ncp_preprocessing <- function(df, sex = "Female"){
          # Dignosis: Yes, Treated: Yes, Blood pressure: in range
          htn_treat_contr = 1 - htn_treat_uncontr,
          
-         # Dignosis: Yes, Treated: Yes, Blood pressure: out of range
+         # Dignosis: Yes, Treated: Yes or No, Blood pressure: out of control range
          htn_diag_uncontr = case_when(diagnosed_bp == 0 | is.na(diagnosed_bp)  ~ NA_real_,
-                                      diagnosed_bp == 1 &  highbp == 1 ~ 1,
-                                      diagnosed_bp == 1 &  highbp == 0 ~ 0,
+                                      diaghtn == 1 ~ 1,
+                                      diaghtn == 0 ~ 0,
                                       TRUE ~ NA_real_),
-         # Dignosis: Yes, Treated: Yes, Blood pressure: in range
+         # Dignosis: Yes, Treated: Yes, Blood pressure: in control range
          htn_diag_contr = 1 - htn_diag_uncontr
          
   ) %>%
@@ -288,14 +290,14 @@ ncp_preprocessing <- function(df, sex = "Female"){
     # From cp03_care cascade datasets.R --------
   mutate(dm_disease = case_when(is.na(dm_free) ~ NA_real_,
                                 dm_free == 1 ~ 0,
-                                dm_undiag_uncontr == 1 ~ 1,
+                                dm_undiag_dm == 1 ~ 1,
                                 dm_diag_untreat == 1 ~ 1,
                                 dm_treat_uncontr == 1 ~ 1,
                                 dm_treat_contr == 1 ~ 1,
                                 TRUE ~ 0),
          dm_screened = case_when(
            screened_dm == 1 ~ 1,
-           dm_undiag_uncontr == 1 ~ 0,
+           dm_undiag_dm == 1 ~ 0,
            dm_diag_untreat == 1 ~ 1,
            dm_treat_uncontr == 1 ~ 1,
            dm_treat_contr == 1 ~ 1,
@@ -303,7 +305,7 @@ ncp_preprocessing <- function(df, sex = "Female"){
          
          dm_diagnosed = case_when(is.na(dm_free) ~ NA_real_,
                                   dm_free == 1 ~ 0,
-                                  dm_undiag_uncontr == 1 ~ 0,
+                                  dm_undiag_dm == 1 ~ 0,
                                   dm_diag_untreat == 1 ~ 1,
                                   dm_treat_uncontr == 1 ~ 1,
                                   dm_treat_contr == 1 ~ 1,
@@ -311,7 +313,7 @@ ncp_preprocessing <- function(df, sex = "Female"){
          ),
          dm_treated = case_when(is.na(dm_free) ~ NA_real_,
                                 dm_free == 1 ~ 0,
-                                dm_undiag_uncontr == 1 ~ 0,
+                                dm_undiag_dm == 1 ~ 0,
                                 dm_diag_untreat == 1 ~ 0,
                                 dm_treat_uncontr == 1 ~ 1,
                                 dm_treat_contr == 1 ~ 1,
@@ -319,24 +321,24 @@ ncp_preprocessing <- function(df, sex = "Female"){
          ),
          dm_controlled = case_when(is.na(dm_free) ~ NA_real_,
                                    dm_free == 1 ~ 0,
-                                   dm_undiag_uncontr == 1 ~ 0,
+                                   dm_undiag_dm == 1 ~ 0,
+                                   dm_diag_contr == 1 ~ 1,
                                    dm_diag_untreat == 1 ~ 0,
                                    dm_diag_uncontr == 1 ~ 0,
-                                   dm_diag_contr == 1 ~ 1,
                                    TRUE ~ 0
          ),
          dm_screened_in_dis = case_when(
            is.na(dm_free) ~ NA_real_,
            dm_free == 1 ~ NA_real_,
            screened_dm == 1 ~ 1,
-           dm_undiag_uncontr == 1 ~ 0,
+           dm_undiag_dm == 1 ~ 0,
            dm_diag_untreat == 1 ~ 1,
            dm_treat_uncontr == 1 ~ 1,
            dm_treat_contr == 1 ~ 1,
            TRUE ~ 0),
          dm_diagnosed_in_dis = case_when(is.na(dm_free) ~ NA_real_,
                                          dm_free == 1 ~ NA_real_,
-                                         dm_undiag_uncontr == 1 ~ 0,
+                                         dm_undiag_dm == 1 ~ 0,
                                          dm_diag_untreat == 1 ~ 1,
                                          dm_treat_uncontr == 1 ~ 1,
                                          dm_treat_contr == 1 ~ 1,
@@ -344,7 +346,7 @@ ncp_preprocessing <- function(df, sex = "Female"){
          ),
          dm_treated_in_dis = case_when(is.na(dm_free) ~ NA_real_,
                                        dm_free == 1 ~ NA_real_,
-                                       dm_undiag_uncontr == 1 ~ 0,
+                                       dm_undiag_dm == 1 ~ 0,
                                        dm_diag_untreat == 1 ~ 0,
                                        dm_treat_uncontr == 1 ~ 1,
                                        dm_treat_contr == 1 ~ 1,
@@ -352,22 +354,22 @@ ncp_preprocessing <- function(df, sex = "Female"){
          ),
          dm_controlled_in_dis = case_when(is.na(dm_free) ~ NA_real_,
                                           dm_free == 1 ~ NA_real_,
-                                          dm_undiag_uncontr == 1 ~ 0,
+                                          dm_undiag_dm == 1 ~ 0,
+                                          dm_diag_contr == 1 ~ 1,
                                           dm_diag_untreat == 1 ~ 0,
                                           dm_diag_uncontr == 1 ~ 0,
-                                          dm_diag_contr == 1 ~ 1,
                                           TRUE ~ 0
          )) %>% 
     mutate(htn_disease = case_when(is.na(htn_free) ~ NA_real_,
                                    htn_free == 1 ~ 0,
-                                   htn_undiag_uncontr == 1 ~ 1,
+                                   htn_undiag_htn == 1 ~ 1,
                                    htn_diag_untreat == 1 ~ 1,
                                    htn_treat_uncontr == 1 ~ 1,
                                    htn_treat_contr == 1 ~ 1,
                                    TRUE ~ 0),
            htn_screened = case_when(
              screened_bp == 1 ~ 1,
-             htn_undiag_uncontr == 1 ~ 0,
+             htn_undiag_htn == 1 ~ 0,
              htn_diag_untreat == 1 ~ 1,
              htn_treat_uncontr == 1 ~ 1,
              htn_treat_contr == 1 ~ 1,
@@ -375,7 +377,7 @@ ncp_preprocessing <- function(df, sex = "Female"){
            
            htn_diagnosed = case_when(is.na(htn_free) ~ NA_real_,
                                      htn_free == 1 ~ 0,
-                                     htn_undiag_uncontr == 1 ~ 0,
+                                     htn_undiag_htn == 1 ~ 0,
                                      htn_diag_untreat == 1 ~ 1,
                                      htn_treat_uncontr == 1 ~ 1,
                                      htn_treat_contr == 1 ~ 1,
@@ -383,7 +385,7 @@ ncp_preprocessing <- function(df, sex = "Female"){
            ),
            htn_treated = case_when(is.na(htn_free) ~ NA_real_,
                                    htn_free == 1 ~ 0,
-                                   htn_undiag_uncontr == 1 ~ 0,
+                                   htn_undiag_htn == 1 ~ 0,
                                    htn_diag_untreat == 1 ~ 0,
                                    htn_treat_uncontr == 1 ~ 1,
                                    htn_treat_contr == 1 ~ 1,
@@ -391,24 +393,24 @@ ncp_preprocessing <- function(df, sex = "Female"){
            ),
            htn_controlled = case_when(is.na(htn_free) ~ NA_real_,
                                       htn_free == 1 ~ 0,
-                                      htn_undiag_uncontr == 1 ~ 0,
+                                      htn_undiag_htn == 1 ~ 0,
+                                      htn_diag_contr == 1 ~ 1,
                                       htn_diag_untreat == 1 ~ 0,
                                       htn_diag_uncontr == 1 ~ 0,
-                                      htn_diag_contr == 1 ~ 1,
                                       TRUE ~ 0
            ),
            htn_screened_in_dis = case_when(
              is.na(htn_free) ~ NA_real_,
              htn_free == 1 ~ NA_real_,
              screened_bp == 1 ~ 1,
-             htn_undiag_uncontr == 1 ~ 0,
+             htn_undiag_htn == 1 ~ 0,
              htn_diag_untreat == 1 ~ 1,
              htn_treat_uncontr == 1 ~ 1,
              htn_treat_contr == 1 ~ 1,
              TRUE ~ 0),
            htn_diagnosed_in_dis = case_when(is.na(htn_free) ~ NA_real_,
                                             htn_free == 1 ~ NA_real_,
-                                            htn_undiag_uncontr == 1 ~ 0,
+                                            htn_undiag_htn == 1 ~ 0,
                                             htn_diag_untreat == 1 ~ 1,
                                             htn_treat_uncontr == 1 ~ 1,
                                             htn_treat_contr == 1 ~ 1,
@@ -416,7 +418,7 @@ ncp_preprocessing <- function(df, sex = "Female"){
            ),
            htn_treated_in_dis = case_when(is.na(htn_free) ~ NA_real_,
                                           htn_free == 1 ~ NA_real_,
-                                          htn_undiag_uncontr == 1 ~ 0,
+                                          htn_undiag_htn == 1 ~ 0,
                                           htn_diag_untreat == 1 ~ 0,
                                           htn_treat_uncontr == 1 ~ 1,
                                           htn_treat_contr == 1 ~ 1,
@@ -424,10 +426,10 @@ ncp_preprocessing <- function(df, sex = "Female"){
            ),
            htn_controlled_in_dis = case_when(is.na(htn_free) ~ NA_real_,
                                              htn_free == 1 ~ NA_real_,
-                                             htn_undiag_uncontr == 1 ~ 0,
+                                             htn_undiag_htn == 1 ~ 0,
+                                             htn_diag_contr == 1 ~ 1,
                                              htn_diag_untreat == 1 ~ 0,
                                              htn_diag_uncontr == 1 ~ 0,
-                                             htn_diag_contr == 1 ~ 1,
                                              TRUE ~ 0
            )) %>% 
     

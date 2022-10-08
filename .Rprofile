@@ -43,6 +43,11 @@ rpg_cutoff <- 200
 sbp_cutoff <- 140
 dbp_cutoff <- 90
 
+fpg_target <- 126
+rpg_target <- 180 #Indian DM guidelines
+sbp_target <- 140
+dbp_target <- 90
+
 fpgpre_cutoff <- 100
 rpgpre_cutoff <- 140
 sbppre_cutoff <- 130

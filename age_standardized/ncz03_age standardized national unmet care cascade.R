@@ -21,10 +21,8 @@ nfhs5dmz_svydesign = svystandardize(nfhs5dm_svydesign,by=~age_category,over = ~e
 nfhs5dmdiagz_svydesign = svystandardize(nfhs5dmdiag_svydesign,by=~age_category,over = ~education + caste + religion + wealthq_ur,
                                      population = pop_age)
 
-require(furrr)
-options(future.globals.maxSize= (6*1024*1024)^2) #4GB
-# https://stackoverflow.com/questions/40536067/how-to-adjust-future-global-maxsize
-plan(multisession, workers = 3)
+source("preprocessing/nc_parallelization.R")
+
 unmet_svysummary_dm <- future_map_dfr(group_vars,
                                       function(g_v){
                                         id_vars = c("residence",g_v);

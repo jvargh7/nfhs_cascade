@@ -19,11 +19,8 @@ nfhs5_svystdz <- svystandardize(nfhs5_svydesign,by=~age_category,over = ~educati
                                 population = pop_age)
 rm(nfhs5_svydesign);gc();
 
+source("preprocessing/nc_parallelization.R")
 
-require(furrr)
-options(future.globals.maxSize= (4*1024*1024)^2) #6GB
-# https://stackoverflow.com/questions/40536067/how-to-adjust-future-global-maxsize
-plan(multisession, workers = 2)
 
 district_svysummary <- future_map_dfr(group_vars,
                                    function(g_v){

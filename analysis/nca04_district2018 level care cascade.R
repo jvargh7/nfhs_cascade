@@ -7,10 +7,8 @@ source("preprocessing/ncpre03_nfhs5 total svydesign.R")
 
 proportion_vars <- c("dm_screened","dm_disease","dm_diagnosed","dm_treated","dm_controlled")
 
-require(furrr)
-options(future.globals.maxSize= (4*1024*1024)^2) #4GB
-# https://stackoverflow.com/questions/40536067/how-to-adjust-future-global-maxsize
-plan(multisession, workers = 2)
+source("preprocessing/nc_parallelization.R")
+
 district_svysummary <- future_map_dfr(group_vars,
                                    function(g_v){
                                      id_vars = c("district_df",g_v);
