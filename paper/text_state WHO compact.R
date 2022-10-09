@@ -17,7 +17,7 @@ state_met %>%
 
 
 state_met %>% 
-  dplyr::filter(is.na(stratification), n > 50) %>%
+  dplyr::filter(is.na(stratification), n >= 50) %>%
   group_by(residence,variable) %>% 
   summarize(count = sum(estimate > 80),
             prop = sum(estimate > 80)/n(),
@@ -25,7 +25,7 @@ state_met %>%
 
 
 state_met %>% 
-  dplyr::filter(is.na(stratification), n > 50) %>%
+  dplyr::filter(is.na(stratification), n >= 50) %>%
   group_by(residence,zone, variable) %>% 
   summarize(count = sum(estimate > 80),
             prop = sum(estimate > 80)/n(),

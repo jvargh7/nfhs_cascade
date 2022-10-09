@@ -45,8 +45,8 @@ dbp_cutoff <- 90
 
 fpg_target <- 126
 rpg_target <- 180 #Indian DM guidelines
-sbp_target <- 140
-dbp_target <- 90
+sbp_target <- c(130,140) # Indian HTN guidelines (Shah 2020)
+dbp_target <- c(80,90)
 
 fpgpre_cutoff <- 100
 rpgpre_cutoff <- 140

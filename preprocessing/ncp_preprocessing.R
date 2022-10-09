@@ -111,10 +111,16 @@ ncp_preprocessing <- function(df, sex = "Female"){
            diaghtn = case_when(
              diagnosed_bp == 0 ~ NA_real_,
              is.na(sbp) | is.na(dbp) ~ NA_real_,
-             diagnosed_bp == 1 & sbp >= sbp_target ~ 1,
-             diagnosed_bp == 1 & dbp >= dbp_target ~ 1,
-             diagnosed_bp == 1 & sbp < sbp_target ~ 0,
-             diagnosed_bp == 1 & dbp < dbp_target ~ 0,
+             diagnosed_bp == 1 & age <= 60 & sbp > sbp_target[1] ~ 1,
+             diagnosed_bp == 1 & age <= 60 & dbp > dbp_target[1] ~ 1,
+             diagnosed_bp == 1 & age <= 60 & sbp <= sbp_target[1] ~ 0,
+             diagnosed_bp == 1 & age <= 60 & dbp <= dbp_target[1] ~ 0,
+             
+             diagnosed_bp == 1 & age > 60 & sbp > sbp_target[2] ~ 1,
+             diagnosed_bp == 1 & age > 60 & dbp > dbp_target[2] ~ 1,
+             diagnosed_bp == 1 & age > 60 & sbp <= sbp_target[2] ~ 0,
+             diagnosed_bp == 1 & age > 60 & dbp <= dbp_target[2] ~ 0,
+             
              TRUE ~ NA_real_),
     ) %>% 
     
