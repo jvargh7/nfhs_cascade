@@ -88,90 +88,90 @@ Urban,dm_undiagnosed,24.4,22.1,26.8,Proportion,"24.4 (22.1, 26.8)",7628,wealthq_
 Urban,dm_unscreened,9.9,8.1,11.8,Proportion,"9.9 (8.1, 11.8)",8458,wealthq_ur,5
 Urban,dm_undiagnosed,22.5,20.1,24.9,Proportion,"22.5 (20.1, 24.9)",8458,wealthq_ur,5
 Rural,dm_untreated,47.3,45.7,49,Proportion,"47.3 (45.7, 49)",41065,,NA
-Rural,dm_uncontrolled,69.4,68.1,70.7,Proportion,"69.4 (68.1, 70.7)",41065,,NA
+Rural,dm_uncontrolled,30.6,29.4,31.9,Proportion,"30.6 (29.4, 31.9)",41065,,NA
 Urban,dm_untreated,30.6,28.5,32.6,Proportion,"30.6 (28.5, 32.6)",26144,,NA
-Urban,dm_uncontrolled,60.1,58.5,61.6,Proportion,"60.1 (58.5, 61.6)",26144,,NA
+Urban,dm_uncontrolled,40.4,39,41.9,Proportion,"40.4 (39, 41.9)",26144,,NA
 Rural,dm_untreated,50,48,52.1,Proportion,"50 (48, 52.1)",21508,sex,Female
-Rural,dm_uncontrolled,70.6,68.9,72.3,Proportion,"70.6 (68.9, 72.3)",21508,sex,Female
+Rural,dm_uncontrolled,27.9,26.3,29.5,Proportion,"27.9 (26.3, 29.5)",21508,sex,Female
 Rural,dm_untreated,43.6,41.7,45.4,Proportion,"43.6 (41.7, 45.4)",19557,sex,Male
-Rural,dm_uncontrolled,67.7,66.2,69.3,Proportion,"67.7 (66.2, 69.3)",19557,sex,Male
+Rural,dm_uncontrolled,34.4,32.8,36,Proportion,"34.4 (32.8, 36)",19557,sex,Male
 Urban,dm_untreated,32,29.5,34.4,Proportion,"32 (29.5, 34.4)",13884,sex,Female
-Urban,dm_uncontrolled,61,59,63,Proportion,"61 (59, 63)",13884,sex,Female
+Urban,dm_uncontrolled,39.4,37.6,41.3,Proportion,"39.4 (37.6, 41.3)",13884,sex,Female
 Urban,dm_untreated,28.8,26.7,31,Proportion,"28.8 (26.7, 31)",12260,sex,Male
-Urban,dm_uncontrolled,58.8,57,60.7,Proportion,"58.8 (57, 60.7)",12260,sex,Male
+Urban,dm_uncontrolled,41.7,39.8,43.6,Proportion,"41.7 (39.8, 43.6)",12260,sex,Male
 Rural,dm_untreated,60.1,57.8,62.5,Proportion,"60.1 (57.8, 62.5)",7122,age_category,18-39
-Rural,dm_uncontrolled,75.2,73.2,77.2,Proportion,"75.2 (73.2, 77.2)",7122,age_category,18-39
+Rural,dm_uncontrolled,22,20.1,23.9,Proportion,"22 (20.1, 23.9)",7122,age_category,18-39
 Rural,dm_untreated,31.4,30.1,32.6,Proportion,"31.4 (30.1, 32.6)",23324,age_category,40-64
-Rural,dm_uncontrolled,63.9,62.9,64.9,Proportion,"63.9 (62.9, 64.9)",23324,age_category,40-64
+Rural,dm_uncontrolled,43.3,42.2,44.3,Proportion,"43.3 (42.2, 44.3)",23324,age_category,40-64
 Rural,dm_untreated,26.4,25,27.8,Proportion,"26.4 (25, 27.8)",10619,age_category,65 plus
-Rural,dm_uncontrolled,53.2,51.8,54.6,Proportion,"53.2 (51.8, 54.6)",10619,age_category,65 plus
+Rural,dm_uncontrolled,37.6,36.3,38.9,Proportion,"37.6 (36.3, 38.9)",10619,age_category,65 plus
 Urban,dm_untreated,48.8,45.2,52.4,Proportion,"48.8 (45.2, 52.4)",3507,age_category,18-39
-Urban,dm_uncontrolled,69.3,66.2,72.3,Proportion,"69.3 (66.2, 72.3)",3507,age_category,18-39
+Urban,dm_uncontrolled,30.8,27.9,33.7,Proportion,"30.8 (27.9, 33.7)",3507,age_category,18-39
 Urban,dm_untreated,19.7,18.3,21.1,Proportion,"19.7 (18.3, 21.1)",15570,age_category,40-64
-Urban,dm_uncontrolled,56.5,55.2,57.8,Proportion,"56.5 (55.2, 57.8)",15570,age_category,40-64
+Urban,dm_uncontrolled,48.1,46.8,49.4,Proportion,"48.1 (46.8, 49.4)",15570,age_category,40-64
 Urban,dm_untreated,14.6,13.2,16,Proportion,"14.6 (13.2, 16)",7067,age_category,65 plus
-Urban,dm_uncontrolled,45.7,43.9,47.4,Proportion,"45.7 (43.9, 47.4)",7067,age_category,65 plus
+Urban,dm_uncontrolled,42.4,40.7,44.1,Proportion,"42.4 (40.7, 44.1)",7067,age_category,65 plus
 Rural,dm_untreated,55.5,52.6,58.5,Proportion,"55.5 (52.6, 58.5)",3518,education,Higher
-Rural,dm_uncontrolled,73.8,71.5,76.1,Proportion,"73.8 (71.5, 76.1)",3518,education,Higher
+Rural,dm_uncontrolled,25.2,23.1,27.4,Proportion,"25.2 (23.1, 27.4)",3518,education,Higher
 Rural,dm_untreated,45.6,42.8,48.4,Proportion,"45.6 (42.8, 48.4)",14161,education,No education
-Rural,dm_uncontrolled,67.8,65.4,70.2,Proportion,"67.8 (65.4, 70.2)",14161,education,No education
+Rural,dm_uncontrolled,30.3,28,32.7,Proportion,"30.3 (28, 32.7)",14161,education,No education
 Rural,dm_untreated,45.9,42.6,49.2,Proportion,"45.9 (42.6, 49.2)",7521,education,Primary
-Rural,dm_uncontrolled,67.7,64.8,70.7,Proportion,"67.7 (64.8, 70.7)",7521,education,Primary
+Rural,dm_uncontrolled,31.8,28.9,34.6,Proportion,"31.8 (28.9, 34.6)",7521,education,Primary
 Rural,dm_untreated,47.5,45.7,49.4,Proportion,"47.5 (45.7, 49.4)",15865,education,Secondary
-Rural,dm_uncontrolled,70.5,69.1,71.9,Proportion,"70.5 (69.1, 71.9)",15865,education,Secondary
+Rural,dm_uncontrolled,31.5,30.1,33,Proportion,"31.5 (30.1, 33)",15865,education,Secondary
 Urban,dm_untreated,32.9,30.1,35.7,Proportion,"32.9 (30.1, 35.7)",5155,education,Higher
-Urban,dm_uncontrolled,58.1,55.5,60.6,Proportion,"58.1 (55.5, 60.6)",5155,education,Higher
+Urban,dm_uncontrolled,34.2,31.9,36.4,Proportion,"34.2 (31.9, 36.4)",5155,education,Higher
 Urban,dm_untreated,31.9,27.6,36.3,Proportion,"31.9 (27.6, 36.3)",4772,education,No education
-Urban,dm_uncontrolled,61.4,57.6,65.2,Proportion,"61.4 (57.6, 65.2)",4772,education,No education
+Urban,dm_uncontrolled,42.2,38.6,45.8,Proportion,"42.2 (38.6, 45.8)",4772,education,No education
 Urban,dm_untreated,29.9,26,33.8,Proportion,"29.9 (26, 33.8)",4059,education,Primary
-Urban,dm_uncontrolled,60.7,57.3,64.2,Proportion,"60.7 (57.3, 64.2)",4059,education,Primary
+Urban,dm_uncontrolled,43,39.3,46.6,Proportion,"43 (39.3, 46.6)",4059,education,Primary
 Urban,dm_untreated,29.3,27.1,31.5,Proportion,"29.3 (27.1, 31.5)",12158,education,Secondary
-Urban,dm_uncontrolled,60.2,58.3,62.1,Proportion,"60.2 (58.3, 62.1)",12158,education,Secondary
+Urban,dm_uncontrolled,41.7,39.8,43.5,Proportion,"41.7 (39.8, 43.5)",12158,education,Secondary
 Rural,dm_untreated,43.7,41.3,46.2,Proportion,"43.7 (41.3, 46.2)",12186,caste,General
-Rural,dm_uncontrolled,66.6,64.3,68.9,Proportion,"66.6 (64.3, 68.9)",12186,caste,General
+Rural,dm_uncontrolled,31.7,29.7,33.7,Proportion,"31.7 (29.7, 33.7)",12186,caste,General
 Rural,dm_untreated,49,46.4,51.6,Proportion,"49 (46.4, 51.6)",16893,caste,OBC
-Rural,dm_uncontrolled,70.5,68.6,72.4,Proportion,"70.5 (68.6, 72.4)",16893,caste,OBC
+Rural,dm_uncontrolled,30,28,32,Proportion,"30 (28, 32)",16893,caste,OBC
 Rural,dm_untreated,48.3,45.6,51,Proportion,"48.3 (45.6, 51)",7397,caste,Schedule Caste
-Rural,dm_uncontrolled,72.1,70,74.1,Proportion,"72.1 (70, 74.1)",7397,caste,Schedule Caste
+Rural,dm_uncontrolled,31.9,29.7,34.1,Proportion,"31.9 (29.7, 34.1)",7397,caste,Schedule Caste
 Rural,dm_untreated,49.3,45.5,53,Proportion,"49.3 (45.5, 53)",4589,caste,Schedule Tribe
-Rural,dm_uncontrolled,65.8,62.3,69.2,Proportion,"65.8 (62.3, 69.2)",4589,caste,Schedule Tribe
+Rural,dm_uncontrolled,24.9,21.9,27.8,Proportion,"24.9 (21.9, 27.8)",4589,caste,Schedule Tribe
 Urban,dm_untreated,27.9,25.3,30.5,Proportion,"27.9 (25.3, 30.5)",9386,caste,General
-Urban,dm_uncontrolled,57.2,54.7,59.6,Proportion,"57.2 (54.7, 59.6)",9386,caste,General
+Urban,dm_uncontrolled,40.3,38,42.6,Proportion,"40.3 (38, 42.6)",9386,caste,General
 Urban,dm_untreated,32,29.1,35,Proportion,"32 (29.1, 35)",11152,caste,OBC
-Urban,dm_uncontrolled,61.8,59.6,64,Proportion,"61.8 (59.6, 64)",11152,caste,OBC
+Urban,dm_uncontrolled,40.2,38,42.3,Proportion,"40.2 (38, 42.3)",11152,caste,OBC
 Urban,dm_untreated,31.9,28.3,35.5,Proportion,"31.9 (28.3, 35.5)",3593,caste,Schedule Caste
-Urban,dm_uncontrolled,61.3,58.5,64.1,Proportion,"61.3 (58.5, 64.1)",3593,caste,Schedule Caste
+Urban,dm_uncontrolled,42.1,39.2,45,Proportion,"42.1 (39.2, 45)",3593,caste,Schedule Caste
 Urban,dm_untreated,36.7,30.3,43.1,Proportion,"36.7 (30.3, 43.1)",2013,caste,Schedule Tribe
-Urban,dm_uncontrolled,64.4,59.4,69.3,Proportion,"64.4 (59.4, 69.3)",2013,caste,Schedule Tribe
+Urban,dm_uncontrolled,37.1,31.9,42.3,Proportion,"37.1 (31.9, 42.3)",2013,caste,Schedule Tribe
 Rural,dm_untreated,47.8,45.9,49.6,Proportion,"47.8 (45.9, 49.6)",30989,religion,Hindu
-Rural,dm_uncontrolled,69.3,67.8,70.7,Proportion,"69.3 (67.8, 70.7)",30989,religion,Hindu
+Rural,dm_uncontrolled,29.6,28.2,30.9,Proportion,"29.6 (28.2, 30.9)",30989,religion,Hindu
 Rural,dm_untreated,45.8,42.2,49.5,Proportion,"45.8 (42.2, 49.5)",4834,religion,Muslim
-Rural,dm_uncontrolled,68.7,65.6,71.8,Proportion,"68.7 (65.6, 71.8)",4834,religion,Muslim
+Rural,dm_uncontrolled,32.9,29.6,36.3,Proportion,"32.9 (29.6, 36.3)",4834,religion,Muslim
 Rural,dm_untreated,44.8,41.3,48.3,Proportion,"44.8 (41.3, 48.3)",5242,religion,Other
-Rural,dm_uncontrolled,71.7,68.6,74.7,Proportion,"71.7 (68.6, 74.7)",5242,religion,Other
+Rural,dm_uncontrolled,38,34.3,41.8,Proportion,"38 (34.3, 41.8)",5242,religion,Other
 Urban,dm_untreated,30.9,28.5,33.3,Proportion,"30.9 (28.5, 33.3)",19322,religion,Hindu
-Urban,dm_uncontrolled,60.1,58.2,61.9,Proportion,"60.1 (58.2, 61.9)",19322,religion,Hindu
+Urban,dm_uncontrolled,40.3,38.6,42,Proportion,"40.3 (38.6, 42)",19322,religion,Hindu
 Urban,dm_untreated,29.8,26,33.6,Proportion,"29.8 (26, 33.6)",3699,religion,Muslim
-Urban,dm_uncontrolled,59.3,55.9,62.7,Proportion,"59.3 (55.9, 62.7)",3699,religion,Muslim
+Urban,dm_uncontrolled,40.6,37.4,43.7,Proportion,"40.6 (37.4, 43.7)",3699,religion,Muslim
 Urban,dm_untreated,29.1,24.8,33.3,Proportion,"29.1 (24.8, 33.3)",3123,religion,Other
-Urban,dm_uncontrolled,61.1,57.3,64.8,Proportion,"61.1 (57.3, 64.8)",3123,religion,Other
+Urban,dm_uncontrolled,41.4,38,44.9,Proportion,"41.4 (38, 44.9)",3123,religion,Other
 Rural,dm_untreated,58.6,55.2,62,Proportion,"58.6 (55.2, 62)",3567,wealthq_ur,1
-Rural,dm_uncontrolled,72.1,69.1,75.1,Proportion,"72.1 (69.1, 75.1)",3567,wealthq_ur,1
+Rural,dm_uncontrolled,20.4,18,22.8,Proportion,"20.4 (18, 22.8)",3567,wealthq_ur,1
 Rural,dm_untreated,54.3,51.2,57.5,Proportion,"54.3 (51.2, 57.5)",5312,wealthq_ur,2
-Rural,dm_uncontrolled,71.7,68.9,74.5,Proportion,"71.7 (68.9, 74.5)",5312,wealthq_ur,2
+Rural,dm_uncontrolled,24.2,21.7,26.7,Proportion,"24.2 (21.7, 26.7)",5312,wealthq_ur,2
 Rural,dm_untreated,52.5,49.7,55.2,Proportion,"52.5 (49.7, 55.2)",7215,wealthq_ur,3
-Rural,dm_uncontrolled,71.3,69,73.5,Proportion,"71.3 (69, 73.5)",7215,wealthq_ur,3
+Rural,dm_uncontrolled,27.2,24.9,29.4,Proportion,"27.2 (24.9, 29.4)",7215,wealthq_ur,3
 Rural,dm_untreated,44.4,41.6,47.1,Proportion,"44.4 (41.6, 47.1)",9929,wealthq_ur,4
-Rural,dm_uncontrolled,68.3,65.9,70.6,Proportion,"68.3 (65.9, 70.6)",9929,wealthq_ur,4
+Rural,dm_uncontrolled,31.8,29.6,33.9,Proportion,"31.8 (29.6, 33.9)",9929,wealthq_ur,4
 Rural,dm_untreated,41.8,39.2,44.4,Proportion,"41.8 (39.2, 44.4)",15042,wealthq_ur,5
-Rural,dm_uncontrolled,67.8,65.7,70,Proportion,"67.8 (65.7, 70)",15042,wealthq_ur,5
+Rural,dm_uncontrolled,36.1,33.9,38.3,Proportion,"36.1 (33.9, 38.3)",15042,wealthq_ur,5
 Urban,dm_untreated,42.5,37.7,47.3,Proportion,"42.5 (37.7, 47.3)",3135,wealthq_ur,1
-Urban,dm_uncontrolled,67,63.6,70.4,Proportion,"67 (63.6, 70.4)",3135,wealthq_ur,1
+Urban,dm_uncontrolled,33.5,30.5,36.4,Proportion,"33.5 (30.5, 36.4)",3135,wealthq_ur,1
 Urban,dm_untreated,32.6,29.4,35.9,Proportion,"32.6 (29.4, 35.9)",4573,wealthq_ur,2
-Urban,dm_uncontrolled,63.1,60.2,65.9,Proportion,"63.1 (60.2, 65.9)",4573,wealthq_ur,2
+Urban,dm_uncontrolled,41.4,38.5,44.3,Proportion,"41.4 (38.5, 44.3)",4573,wealthq_ur,2
 Urban,dm_untreated,27.5,24.6,30.4,Proportion,"27.5 (24.6, 30.4)",5402,wealthq_ur,3
-Urban,dm_uncontrolled,60.2,57.3,63.1,Proportion,"60.2 (57.3, 63.1)",5402,wealthq_ur,3
+Urban,dm_uncontrolled,42.8,39.9,45.7,Proportion,"42.8 (39.9, 45.7)",5402,wealthq_ur,3
 Urban,dm_untreated,29.2,26,32.3,Proportion,"29.2 (26, 32.3)",6063,wealthq_ur,4
-Urban,dm_uncontrolled,57.9,55.1,60.7,Proportion,"57.9 (55.1, 60.7)",6063,wealthq_ur,4
+Urban,dm_uncontrolled,40.2,37.5,42.9,Proportion,"40.2 (37.5, 42.9)",6063,wealthq_ur,4
 Urban,dm_untreated,27.6,24.4,30.8,Proportion,"27.6 (24.4, 30.8)",6971,wealthq_ur,5
-Urban,dm_uncontrolled,56.7,53.8,59.6,Proportion,"56.7 (53.8, 59.6)",6971,wealthq_ur,5
+Urban,dm_uncontrolled,41.2,38.5,43.9,Proportion,"41.2 (38.5, 43.9)",6971,wealthq_ur,5
