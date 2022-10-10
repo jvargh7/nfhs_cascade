@@ -23,3 +23,9 @@ district_met %>%
             prop = sum(estimate > 80)/n(),
             n = n()) 
   
+district_met %>% 
+  dplyr::filter(is.na(stratification)) %>%
+  group_by(variable) %>% 
+  summarize(count = sum(estimate > 80),
+            prop = sum(estimate > 80)/n(),
+            n = n()) 

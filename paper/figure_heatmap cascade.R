@@ -56,4 +56,27 @@ require(ggpubr)
             common.legend = TRUE,legend="bottom",
             widths = c(2.2,1.5)) %>% 
     ggsave(.,filename = paste0(path_cascade_folder,"/figures/figure_heatmap cascade.png"),width=15,height=8)
+
   
+  
+  
+  
+unmet_cascade %>% 
+  dplyr::select(state,residence,variable,estimate) %>% 
+  pivot_wider(names_from=residence,values_from=estimate) %>% 
+  mutate(u_gt_r = case_when(Urban > Rural ~ 0,
+                            Urban <= Rural ~ 1,
+                            TRUE ~ NA_real_)) %>% 
+  group_by(variable) %>% 
+  summarize(tot = sum(u_gt_r,na.rm=TRUE),
+            n = sum(!is.na(u_gt_r)))
+
+
+unmet_cascade %>% 
+  dplyr::select(state,residence,variable,estimate,zone) %>% 
+  pivot_wider(names_from=residence,values_from=estimate) %>% 
+  mutate(u_min_r = Urban - Rural) %>% 
+  group_by(variable,zone) %>% 
+  summarize(minus = mean(u_min_r,na.rm=TRUE),
+            n = sum(!is.na(u_min_r))) %>% 
+  View()
