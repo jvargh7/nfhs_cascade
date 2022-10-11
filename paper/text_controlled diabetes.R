@@ -19,6 +19,16 @@ nfhs5dmcontrolz_svydesign = svystandardize(nfhs5dmcontrol_svydesign,by=~age_cate
                                          population = pop_age)
 
 
+national_control <- svysummary(nfhs5dmcontrolz_svydesign,
+                             # c_vars = continuous_vars,
+                             p_vars = proportion_vars,
+                             # g_vars = grouped_vars,
+                             id_vars = c("")
+) %>% 
+  mutate_at(vars(estimate,lci,uci),~round(.,1)) %>% 
+  mutate(est_ci = paste0(estimate," (",
+                         lci,", ",uci,")"))
+
 unmet_svysummary_dmcontrol <- map_dfr(group_vars,
                                     function(g_v){
                                       id_vars = c("residence",g_v);
