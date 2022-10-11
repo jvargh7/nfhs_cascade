@@ -88,6 +88,9 @@ ncp_preprocessing <- function(df, sex = "Female"){
            
            
     ) %>% 
+    
+    # Option 2: Should this be average of last 2 measurements?
+    # Option 3: ICMR suggests take 2 measurements 1 min apart, if difference in SBP > 5mmHg, take 3rd. Take lowest among closest.
     mutate(sbp = rowMeans(.[,c("sbp1","sbp2","sbp3")],na.rm=TRUE),
            
            # "sb18d" has 108 everywhere
@@ -111,15 +114,15 @@ ncp_preprocessing <- function(df, sex = "Female"){
            diaghtn = case_when(
              diagnosed_bp == 0 ~ NA_real_,
              is.na(sbp) | is.na(dbp) ~ NA_real_,
-             diagnosed_bp == 1 & age <= 60 & sbp > sbp_target[1] ~ 1,
-             diagnosed_bp == 1 & age <= 60 & dbp > dbp_target[1] ~ 1,
-             diagnosed_bp == 1 & age <= 60 & sbp <= sbp_target[1] ~ 0,
-             diagnosed_bp == 1 & age <= 60 & dbp <= dbp_target[1] ~ 0,
+             diagnosed_bp == 1 & age <= agebp_cutoff & sbp > sbp_target[1] ~ 1,
+             diagnosed_bp == 1 & age <= agebp_cutoff & dbp > dbp_target[1] ~ 1,
+             diagnosed_bp == 1 & age <= agebp_cutoff & sbp <= sbp_target[1] ~ 0,
+             diagnosed_bp == 1 & age <= agebp_cutoff & dbp <= dbp_target[1] ~ 0,
              
-             diagnosed_bp == 1 & age > 60 & sbp > sbp_target[2] ~ 1,
-             diagnosed_bp == 1 & age > 60 & dbp > dbp_target[2] ~ 1,
-             diagnosed_bp == 1 & age > 60 & sbp <= sbp_target[2] ~ 0,
-             diagnosed_bp == 1 & age > 60 & dbp <= dbp_target[2] ~ 0,
+             diagnosed_bp == 1 & age > agebp_cutoff & sbp > sbp_target[2] ~ 1,
+             diagnosed_bp == 1 & age > agebp_cutoff & dbp > dbp_target[2] ~ 1,
+             diagnosed_bp == 1 & age > agebp_cutoff & sbp <= sbp_target[2] ~ 0,
+             diagnosed_bp == 1 & age > agebp_cutoff & dbp <= dbp_target[2] ~ 0,
              
              TRUE ~ NA_real_),
     ) %>% 

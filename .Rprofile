@@ -45,8 +45,11 @@ dbp_cutoff <- 90
 
 fpg_target <- 126
 rpg_target <- 180 #Indian DM guidelines
-sbp_target <- c(130,140) # Indian HTN guidelines (Shah 2020)
-dbp_target <- c(80,90)
+# Indian HTN guidelines (Shah 2020: 130/80 for <= 60y, 140/90 otherwise)
+# Indian HTN guidelines (ICMR 2018: 140/90 for <= 80y, 150/90 otherwise)
+sbp_target <- c(140,150) 
+agebp_cutoff <- 80
+dbp_target <- c(90,90)
 
 fpgpre_cutoff <- 100
 rpgpre_cutoff <- 140
