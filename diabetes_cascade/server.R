@@ -71,10 +71,10 @@ shinyServer(function(input, output,session) {
                                 Definition = c("Age standardized to national distribution as per NFHS-5 [18-39: 50.26%, 40-64: 38.78%, 65+: 10.96%]",
                                                "Blood glucose ever checked previously",
                                                "(a) Self-reported diabetes",
-                                               "(b) High blood glucose (≥126 mg/dL if fasting or ≥200 mg/dL if not fasting)",
+                                               "(b) High blood glucose (≥126 mg/dL if fasting [≥8 hours] or ≥200 mg/dL if not fasting)",
                                                "Told had high glucose on two or more occasions by a medical provider among those with Diabetes",
                                                "Currently taking a prescribed medicine to lower glucose among those with Diabetes",
-                                               "Blood glucose in non-hyperglycemic range (<126 mg/dL if fasted and <200 mg/dL if non-fasted) among those with Diabetes")
+                                               "Blood glucose in non-hyperglycemic range (<126 mg/dL if fasted and ≤180 mg/dL if non-fasted) among those with Diabetes")
                                 )
     })
 
