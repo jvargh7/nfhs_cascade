@@ -39,7 +39,7 @@ male_whr_cutoff = 0.95
 # male_whr_cutoff = 0.9
 
 fpg_cutoff <- 126
-rpg_cutoff <- 200
+rpg_cutoff <- 220
 sbp_cutoff <- 140
 dbp_cutoff <- 90
 
