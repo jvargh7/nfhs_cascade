@@ -23,13 +23,15 @@ n5_sy <- svysummary(nfhs5_svystdz,
                     # c_vars = continuous_vars,
                     p_vars = proportion_vars,
                     # g_vars = grouped_vars,
-                    id_vars = id_vars
+                    # id_vars = id_vars
 ) %>%
   mutate_at(vars(estimate,lci,uci),~round(.,1)) %>%
   mutate(est_ci = paste0(estimate," (",
                          lci,", ",uci,")"));
 
-  
+n5_sy %>% 
+  write_csv(.,file = "age_standardized/ncz01_total age standardized national care cascade.csv")
+
 nfhs5_svysummary <- map_dfr(group_vars,
                                      function(g_v){
                                        id_vars = c("residence",g_v);
@@ -74,12 +76,13 @@ write_csv(nfhs5_svysummary,path = "age_standardized/ncz01_age standardized natio
 
 
 
-svysummary(nfhs5_svystdz,
-           # c_vars = continuous_vars,
-           p_vars = proportion_vars,
-           # g_vars = grouped_vars,
-           id_vars = id_vars
-) %>% 
-  mutate_at(vars(estimate,lci,uci),~round(.,1)) %>% 
-  mutate(est_ci = paste0(estimate," (",
-                         lci,", ",uci,")"))
+# svysummary(nfhs5_svystdz,
+#            # c_vars = continuous_vars,
+#            p_vars = proportion_vars,
+#            # g_vars = grouped_vars,
+#            id_vars = id_vars
+# ) %>% 
+#   mutate_at(vars(estimate,lci,uci),~round(.,1)) %>% 
+#   mutate(est_ci = paste0(estimate," (",
+#                          lci,", ",uci,")")) 
+

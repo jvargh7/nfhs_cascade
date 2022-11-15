@@ -4,6 +4,7 @@ group_vars = c("","sex")
 source("C:/code/external/functions/survey/svysummary.R")
 
 
+source("preprocessing/ncpre03_nfhs5 total svydesign.R")
 source("preprocessing/ncpre04_nfhs5 diabetes svydesign.R")
 source("preprocessing/ncpre05_nfhs5 diagnosed svydesign.R")
 

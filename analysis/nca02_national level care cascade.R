@@ -9,6 +9,18 @@ source("preprocessing/ncpre03_nfhs5 total svydesign.R")
 proportion_vars <- c("dm_screened","dm_disease","dm_diagnosed","dm_treated","dm_controlled")
 
 
+n5_sy <- svysummary(nfhs5_svydesign,
+                    # c_vars = continuous_vars,
+                    p_vars = proportion_vars,
+                    # g_vars = grouped_vars,
+                    # id_vars = id_vars
+) %>%
+  mutate_at(vars(estimate,lci,uci),~round(.,1)) %>%
+  mutate(est_ci = paste0(estimate," (",
+                         lci,", ",uci,")"));
+
+n5_sy %>% 
+  write_csv(.,path = "analysis/nca02_total age standardized national care cascade.csv")
 
 # source("preprocessing/nc_parallelization.R")
 
