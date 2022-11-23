@@ -59,4 +59,4 @@ dbppre_cutoff <- 85
 gc()
 
 # Need to check sdist since it results in missing values for some districts
-sdist <- readr::read_csv("C:/code/external/nfhs5_on_map2016/data/psu_on_map2018.csv")
+sdist <- readr::read_csv("C:/code/external/nfhs5_on_map2016/data/psu_on_mapnfhs5.csv")

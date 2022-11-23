@@ -105,6 +105,8 @@ unmet_svysummary_dmdiag <- future_map_dfr(group_vars,
                                           })
 
 
+
+
 bind_rows(unmet_svysummary_dm,
           unmet_svysummary_dmdiag) %>% 
   dplyr::filter(str_detect(variable,"dm_un")) %>% 
