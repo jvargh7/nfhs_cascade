@@ -3,8 +3,19 @@ state_shp <- rgdal::readOGR(paste0(path_shape_files,"/maps-master/States"),"Admi
 saveRDS(state_shp,file="diabetes_cascade/data/state_shp.RDS")
 
 
-path_district_files <- "C:/Cloud/OneDrive - Emory University/data/India Shapefiles/INDIA_2018_DISTRICTS-master"
-district_shp <- rgdal::readOGR(paste0(path_district_files),"DISTRICTS_2018")
+path_district_files <- "C:/Cloud/OneDrive - Emory University/data/dhs_program/IA/IASHP7C/shps"
+district_shp <- rgdal::readOGR(paste0(path_district_files),"sdr_subnational_boundaries2")
+district_shp@data <- district_shp@data %>% 
+  mutate(REGCODE = case_when(REGNAME == "Hamirpur" & OTHREGNA == "Uttar Pradesh" ~ 168,
+                             REGNAME == "Bijapur" & OTHREGNA == "Karnataka" ~ 557,
+                             REGNAME == "Aurangabad" & OTHREGNA == "Maharashtra" ~ 515,
+                             REGNAME == "Balrampur" & OTHREGNA == "Chhattisgarh" ~ 824,
+                             REGNAME == "Bilaspur" & OTHREGNA == "Chhattisgarh" ~ 827,
+                             REGNAME == "Pratapgarh" & OTHREGNA == "Uttar Pradesh" ~ 173,
+                             REGNAME == "Raigarh" & OTHREGNA == "Maharashtra" ~ 520,
+                             TRUE ~ REGCODE))
+
+
 saveRDS(district_shp,file="diabetes_cascade/data/district_shp.RDS")
 
 # nca02_national -------
@@ -168,7 +179,7 @@ nca04_district <- read_csv("analysis/nca04_district2018 level care cascade.csv",
                            labels=c("Screened","Diabetes","Diagnosed","Treated","Controlled")),
          strata = case_when(is.na(strata) ~ "Total",
                             TRUE ~ strata))  %>% 
-  dplyr::select(D_CODE,D_NAME,n5_state,v024,variable,estimate,lci,uci,strata,est_ci)
+  dplyr::select(REGCODE,REGNAME,n5_state,v024,variable,estimate,lci,uci,strata,est_ci)
 saveRDS(nca04_district,file="diabetes_cascade/data/nca04_district.RDS")
 
 # nca08_district - Unmet need --------
@@ -184,7 +195,7 @@ nca08_district <- bind_rows(read_csv(file = "analysis/nca08_district unmet need 
          TRUE ~ strata)) %>% 
   # dplyr::filter(n > 100) %>% 
   mutate(variable = factor(variable,levels=c("Diabetes","Unscreened","Undiagnosed","Untreated","Uncontrolled"))) %>% 
-  dplyr::select(D_CODE,D_NAME,n5_state,v024,variable,estimate,lci,uci,strata,est_ci)
+  dplyr::select(REGCODE,REGNAME,n5_state,v024,variable,estimate,lci,uci,strata,est_ci)
 
 saveRDS(nca08_district,file="diabetes_cascade/data/nca08_district_unmet.RDS")
 
@@ -208,7 +219,7 @@ district_nested <- bind_rows(
                             TRUE ~ strata),
          stratification = case_when(is.na(stratification) ~ "",
                                     TRUE ~ stratification))  %>% 
-  dplyr::select(D_CODE,D_NAME,n5_state,v024,variable,estimate,lci,uci,strata,est_ci)
+  dplyr::select(REGCODE,REGNAME,n5_state,v024,variable,estimate,lci,uci,strata,est_ci)
 
 
 saveRDS(district_nested,file="diabetes_cascade/data/district_nested.RDS")
@@ -233,7 +244,7 @@ districtz_nested <- bind_rows(
                             TRUE ~ strata),
          stratification = case_when(is.na(stratification) ~ "",
                                     TRUE ~ stratification)) %>% 
-  dplyr::select(D_CODE,D_NAME,n5_state,v024,variable,estimate,lci,uci,strata,est_ci)
+  dplyr::select(REGCODE,REGNAME,n5_state,v024,variable,estimate,lci,uci,strata,est_ci)
 
 
 saveRDS(districtz_nested,file="diabetes_cascade/data/districtz_nested.RDS")

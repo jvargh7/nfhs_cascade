@@ -8,9 +8,9 @@ nfhs5dmtreat_df <- bind_rows(readRDS(paste0(path_cascade_folder,"/working/nfhs5 
                                residence == 2 ~ "Rural"),
          dm_uncontrolled = 1 - dm_controlled) %>% 
   left_join(sdist %>% 
-              dplyr::select(DHSCLUST,D_CODE,DHSREGCO),
-            by=c("psu" = "DHSCLUST","district" = "DHSREGCO")) %>% 
-  rename(district_df = D_CODE)
+              dplyr::select(DHSCLUST,REGCODE,DHSREGCO),
+            by= district_matching) %>% 
+  rename(district_df = REGCODE)
 
 nfhs5dmtreat_svydesign <- nfhs5dmtreat_df %>% 
   as_survey_design(.data = .,

@@ -97,26 +97,24 @@ unmet_svysummary_dmdiag <- future_map_dfr(group_vars,
 bind_rows(unmet_svysummary_dm,
           unmet_svysummary_dmdiag) %>% 
   dplyr::filter(str_detect(variable,"dm_un")) %>% 
-  rename(D_CODE = district_df) %>% 
+  rename(REGCODE = district_df) %>% 
   # There are missing values in D_CODE from subsetting on map
-  dplyr::filter(!is.na(D_CODE)) %>% 
-  left_join(readxl::read_excel("data/NFHS Cascade Variable List.xlsx","map2018_sdist") %>% 
-              dplyr::select(D_CODE,n5_state,v024,D_NAME) %>% 
-              mutate(D_CODE = sprintf("%03d",as.numeric(D_CODE))),
-            by=c("D_CODE")) %>% 
+  dplyr::filter(!is.na(REGCODE)) %>% 
+  left_join(readxl::read_excel("data/NFHS Cascade Variable List.xlsx","mapnfhs5_sdist") %>% 
+              dplyr::select(REGCODE,n5_state,v024,REGNAME),
+            by=c("REGCODE")) %>% 
   write_csv(.,file = "analysis/nca08_district unmet need care cascade.csv")
 
 
 bind_rows(unmet_svysummary_dm,
           unmet_svysummary_dmdiag) %>% 
   dplyr::filter(!str_detect(variable,"dm_un")) %>% 
-  rename(D_CODE = district_df) %>% 
+  rename(REGCODE = district_df) %>% 
   # There are missing values in D_CODE from subsetting on map
-  dplyr::filter(!is.na(D_CODE)) %>% 
-  left_join(readxl::read_excel("data/NFHS Cascade Variable List.xlsx","map2018_sdist") %>% 
-              dplyr::select(D_CODE,n5_state,v024,D_NAME) %>% 
-              mutate(D_CODE = sprintf("%03d",as.numeric(D_CODE))),
-            by=c("D_CODE")) %>% 
+  dplyr::filter(!is.na(REGCODE)) %>% 
+  left_join(readxl::read_excel("data/NFHS Cascade Variable List.xlsx","mapnfhs5_sdist") %>% 
+              dplyr::select(REGCODE,n5_state,v024,REGNAME),
+            by=c("REGCODE")) %>% 
   write_csv(.,file = "analysis/nca08_district met need care cascade.csv")
 
 # df <- read_csv("analysis/nca08_district unmet need care cascade.csv") %>%

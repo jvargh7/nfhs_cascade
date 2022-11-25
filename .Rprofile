@@ -60,3 +60,4 @@ gc()
 
 # Need to check sdist since it results in missing values for some districts
 sdist <- readr::read_csv("C:/code/external/nfhs5_on_map2016/data/psu_on_mapnfhs5.csv")
+district_matching <- c("psu" = "DHSCLUST","district" = "DHSREGCO")

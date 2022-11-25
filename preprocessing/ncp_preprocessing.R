@@ -91,10 +91,19 @@ ncp_preprocessing <- function(df, sex = "Female"){
     
     # Option 2: Should this be average of last 2 measurements?
     # Option 3: ICMR suggests take 2 measurements 1 min apart, if difference in SBP > 5mmHg, take 3rd. Take lowest among closest.
-    mutate(sbp = rowMeans(.[,c("sbp1","sbp2","sbp3")],na.rm=TRUE),
+    mutate(
+           # sbp = rowMeans(.[,c("sbp1","sbp2","sbp3")],na.rm=TRUE),
+      # https://stackoverflow.com/questions/53084598/row-wise-min-on-right-hand-when-using-dplyrcase-when
+           sbp = case_when((abs(sbp1-sbp2) <= 5) ~ pmin(sbp1,sbp2,na.rm=TRUE),
+                           TRUE ~ pmin(sbp1,sbp2,sbp3,na.rm=TRUE)),
            
            # "sb18d" has 108 everywhere
-           dbp = rowMeans(.[,c("dbp1","dbp2","dbp3")],na.rm=TRUE),
+           # dbp = rowMeans(.[,c("dbp1","dbp2","dbp3")],na.rm=TRUE),
+           
+           dbp = case_when(sbp == sbp1 ~ dbp1,
+                           sbp == sbp2 ~ dbp2,
+                           sbp == sbp3 ~ dbp3),
+           
            htn = case_when(diagnosed_bp == 1 ~ 1,
                            is.na(sbp) | is.na(dbp) ~ NA_real_,
                            sbp >= sbp_cutoff ~ 1,

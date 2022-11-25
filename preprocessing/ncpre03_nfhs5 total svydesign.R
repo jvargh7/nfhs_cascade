@@ -7,9 +7,9 @@ nfhs5_df <- bind_rows(readRDS(paste0(path_cascade_folder,"/working/nfhs5 iapr_wo
   mutate(residence = case_when(residence == 1 ~ "Urban",
                                residence == 2 ~ "Rural")) %>% 
   left_join(sdist %>% 
-              dplyr::select(DHSCLUST,D_CODE,DHSREGCO),
-            by=c("psu" = "DHSCLUST","district" = "DHSREGCO")) %>% 
-  rename(district_df = D_CODE) %>% 
+              dplyr::select(DHSCLUST,REGCODE,DHSREGCO),
+            by= district_matching) %>% 
+  rename(district_df = REGCODE) %>% 
   mutate(htn_disease_cat = case_when(is.na(htn_disease) ~ "Missing",
                                      htn_disease == 1 ~ "Yes",
                                      htn_disease == 0 ~ "No"))
