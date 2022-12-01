@@ -29,3 +29,21 @@ district_met %>%
   summarize(count = sum(estimate > 80),
             prop = sum(estimate > 80)/n(),
             n = n()) 
+
+# Between district variation --------
+
+require(lme4)
+district_met %>% 
+  dplyr::filter(variable == "dm_diagnosed") %>% 
+  lmer(estimate ~ 1 + (1|n5_state),data=.) %>% 
+  performance::icc(.)
+
+district_met %>% 
+  dplyr::filter(variable == "dm_treated") %>% 
+  lmer(estimate ~ 1 + (1|n5_state),data=.) %>% 
+  performance::icc(.)
+
+district_met %>% 
+  dplyr::filter(variable == "dm_controlled") %>% 
+  lmer(estimate ~ 1 + (1|n5_state),data=.) %>% 
+  performance::icc(.)
