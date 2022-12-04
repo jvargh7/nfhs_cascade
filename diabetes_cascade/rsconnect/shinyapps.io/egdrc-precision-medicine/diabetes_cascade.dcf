@@ -5,9 +5,9 @@ account: egdrc-precision-medicine
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 6799004
-bundleId: 6391477
+bundleId: 6552405
 url: https://egdrc-precision-medicine.shinyapps.io/diabetes_cascade/
-when: 1665492183.17593
-lastSyncTime: 1665492183.17595
+when: 1669340993.90938
+lastSyncTime: 1669340993.90939
 asMultiple: FALSE
 asStatic: FALSE
