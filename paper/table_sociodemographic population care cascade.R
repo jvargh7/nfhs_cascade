@@ -1,9 +1,13 @@
 # nfhs5_svysummary <- read_csv("analysis/nca02_national level care cascade.csv")
 population <- read_csv("age_standardized/ncz01_age standardized national care cascade.csv") %>% 
-  dplyr::filter(variable %in% c("dm_screened","dm_disease"))
+  dplyr::filter(variable %in% c("dm_screened","dm_disease")) %>% 
+  mutate(residence = case_when(is.na(residence) ~ "Total",
+                               TRUE ~ residence))
 
 nested <- read_csv(file = "age_standardized/ncz03_national met need care cascade.csv") %>% 
-  dplyr::filter(variable %in% c("dm_diagnosed","dm_treated","dm_controlled"))
+  dplyr::filter(variable %in% c("dm_diagnosed","dm_treated","dm_controlled"))  %>% 
+  mutate(residence = case_when(is.na(residence) ~ "Total",
+                               TRUE ~ residence))
 
 
 bind_rows(population,
