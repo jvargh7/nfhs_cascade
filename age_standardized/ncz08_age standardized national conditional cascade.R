@@ -18,7 +18,23 @@ pop_age <- read_csv("data/population for age standardization.csv") %>%
 nfhs5dmtreatz_svydesign = svystandardize(nfhs5dmtreat_svydesign,by=~age_category,over = ~caste + religion + wealthq_ur,
                                         population = pop_age)
 
+# National ---------
 
+n5_sy <- svysummary(nfhs5dmtreatz_svydesign,
+                    # c_vars = continuous_vars,
+                    p_vars = proportion_vars,
+                    # g_vars = grouped_vars,
+                    # id_vars = id_vars
+) %>%
+  mutate_at(vars(estimate,lci,uci),~round(.,1)) %>%
+  mutate(est_ci = paste0(estimate," (",
+                         lci,", ",uci,")"));
+
+n5_sy %>% 
+  write_csv(.,file = "age_standardized/ncz08_total age standardized national conditional cascade.csv")
+
+
+# Regional -----------
 unmet_svysummary_dmtreat <- map_dfr(group_vars,
                                           function(g_v){
                                             id_vars = c("residence",g_v);

@@ -8,7 +8,8 @@ source("preprocessing/ncpre04_nfhs5 diabetes svydesign.R")
 source("preprocessing/ncpre05_nfhs5 diagnosed svydesign.R")
 
 proportion_vars <- c("dm_screened","dm_diagnosed","dm_unscreened","dm_undiagnosed",
-                     "dm_treated","dm_controlled","dm_untreated","dm_uncontrolled")
+                     "dm_treated","dm_controlled","dm_untreated","dm_uncontrolled",
+                     "highbp","invhighbp")
 
 
 pop_age <- read_csv("data/population for age standardization.csv") %>% 
@@ -70,7 +71,7 @@ unmet_svysummary_dmdiag <- future_map_dfr(group_vars,
                                             print(g_v);
                                             n5_sy_dmdiag <- svysummary(nfhs5dmdiagz_svydesign,
                                                                        # c_vars = continuous_vars,
-                                                                       p_vars = proportion_vars[5:8],
+                                                                       p_vars = proportion_vars[5:10],
                                                                        # g_vars = grouped_vars,
                                                                        id_vars = id_vars
                                             ) %>% 
@@ -83,7 +84,7 @@ unmet_svysummary_dmdiag <- future_map_dfr(group_vars,
                                               group_by_at(vars(one_of(id_vars))) %>% 
                                               summarize_at(vars(one_of(c(
                                                 # continuous_vars,
-                                                proportion_vars[5:8]
+                                                proportion_vars[5:10]
                                                 # grouped_vars
                                               ))),
                                               list(n = ~sum(!is.na(.)))) %>% 
@@ -109,7 +110,7 @@ bind_rows(unmet_svysummary_dm,
           unmet_svysummary_dmdiag) %>% 
   rename(REGCODE = district_df) %>% 
   # There are missing values in D_CODE from subsetting on map
-  dplyr::filter(!is.na(REGCODE)) %>% 
+  dplyr::filter(!is.na(REGCODE),str_detect(variable,"dm_un")) %>% 
   left_join(readxl::read_excel("data/NFHS Cascade Variable List.xlsx","mapnfhs5_sdist") %>% 
               dplyr::select(REGCODE,n5_state,v024,REGNAME),
             by=c("REGCODE")) %>% 
@@ -120,7 +121,7 @@ bind_rows(unmet_svysummary_dm,
           unmet_svysummary_dmdiag) %>% 
   rename(REGCODE = district_df) %>% 
   # There are missing values in D_CODE from subsetting on map
-  dplyr::filter(!is.na(REGCODE)) %>% 
+  dplyr::filter(!is.na(REGCODE),!str_detect(variable,"dm_un")) %>% 
   left_join(readxl::read_excel("data/NFHS Cascade Variable List.xlsx","mapnfhs5_sdist") %>% 
               dplyr::select(REGCODE,n5_state,v024,REGNAME),
             by=c("REGCODE")) %>% 

@@ -119,6 +119,8 @@ ncp_preprocessing <- function(df, sex = "Female"){
              dbp < dbp_cutoff ~ 0,
              TRUE ~ NA_real_),
            
+           invhighbp = 1 - highbp,
+           
            # Among those diagnosed, indicator of hypertension control status
            diaghtn = case_when(
              diagnosed_bp == 0 ~ NA_real_,

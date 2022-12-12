@@ -9,7 +9,8 @@ source("preprocessing/ncpre04_nfhs5 diabetes svydesign.R")
 source("preprocessing/ncpre05_nfhs5 diagnosed svydesign.R")
 
 proportion_vars <- c("dm_screened","dm_diagnosed","dm_unscreened","dm_undiagnosed",
-                     "dm_treated","dm_controlled","dm_untreated","dm_uncontrolled")
+                     "dm_treated","dm_controlled","dm_untreated","dm_uncontrolled",
+                     "highbp","invhighbp")
 
 source("preprocessing/nc_parallelization.R")
 
@@ -60,7 +61,7 @@ unmet_svysummary_dmdiag <- future_map_dfr(group_vars,
                                         print(g_v);
                                         n5_sy_dmdiag <- svysummary(nfhs5dmdiag_svydesign,
                                                                # c_vars = continuous_vars,
-                                                               p_vars = proportion_vars[5:8],
+                                                               p_vars = proportion_vars[5:10],
                                                                # g_vars = grouped_vars,
                                                                id_vars = id_vars
                                         ) %>% 
@@ -73,7 +74,7 @@ unmet_svysummary_dmdiag <- future_map_dfr(group_vars,
                                           group_by_at(vars(one_of(id_vars))) %>% 
                                           summarize_at(vars(one_of(c(
                                             # continuous_vars,
-                                            proportion_vars[5:8]
+                                            proportion_vars[5:10]
                                             # grouped_vars
                                           ))),
                                           list(n = ~sum(!is.na(.)))) %>% 
@@ -97,7 +98,7 @@ unmet_svysummary_dmdiag <- future_map_dfr(group_vars,
 
 bind_rows(unmet_svysummary_dm,
           unmet_svysummary_dmdiag) %>% 
-  dplyr::filter(str_detect(variable,"dm_un")) %>% 
+  dplyr::filter(str_detect(variable,"dm_un")|variable == "highbp") %>% 
   left_join(readxl::read_excel("data/NFHS Cascade Variable List.xlsx",sheet="map2020_v024") %>% 
               dplyr::select(v024,n5_state,zone) %>% 
               distinct(v024,n5_state,.keep_all=TRUE),
@@ -107,7 +108,7 @@ bind_rows(unmet_svysummary_dm,
 
 bind_rows(unmet_svysummary_dm,
           unmet_svysummary_dmdiag) %>% 
-  dplyr::filter(!str_detect(variable,"dm_un")) %>% 
+  dplyr::filter(!str_detect(variable,"dm_un")|variable == "invhighbp") %>% 
   left_join(readxl::read_excel("data/NFHS Cascade Variable List.xlsx",sheet="map2020_v024") %>% 
               dplyr::select(v024,n5_state,zone) %>% 
               distinct(v024,n5_state,.keep_all=TRUE),
