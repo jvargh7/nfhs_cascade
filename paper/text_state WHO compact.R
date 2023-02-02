@@ -21,6 +21,9 @@ state_met %>%
   group_by(residence,variable) %>% 
   summarize(count = sum(estimate > 80),
             prop = sum(estimate > 80)/n(),
+            median = median(estimate),
+            min = min (estimate),
+            max = max(estimate),
             n = n()) 
 
 

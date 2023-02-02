@@ -7,7 +7,7 @@ unmet_cascade <- bind_rows(read_csv(file = "analysis/nca08_district unmet need c
                              dplyr::filter(variable == "Disease") %>% 
                              mutate(variable = "Diabetes")
 ) %>% 
-  # dplyr::filter(n >= 50) %>% 
+  dplyr::filter(n >= 50) %>%
   mutate(variable = factor(variable,levels=c("Diabetes","Unscreened","Undiagnosed","Untreated","Uncontrolled")))
 
 source("functions/district_map.R")
@@ -33,4 +33,4 @@ figD <- unmet_cascade %>%
 tmap_arrange(
   figA,figB,figC,figD,
   ncol = 2,nrow=2) %>% 
-  tmap_save(.,filename=paste0(path_cascade_folder,"/figures/figure_district care cascade.png"),height=14,width=14)
+  tmap_save(.,filename=paste0(path_cascade_folder,"/figures/figure_district care cascade without 50 obs.png"),height=14,width=14)

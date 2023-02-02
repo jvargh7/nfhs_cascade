@@ -7,8 +7,9 @@ unmet_cascade <- bind_rows(read_csv(file = "analysis/nca05_state unmet need care
                              dplyr::filter(variable == "Disease") %>% 
                              mutate(variable = "Diabetes")
 ) %>% 
-  dplyr::filter(n >= 50) %>% 
-  mutate(variable = factor(variable,levels=c("Diabetes","Unscreened","Undiagnosed","Untreated","Uncontrolled")))
+  # dplyr::filter(n >= 50) %>% 
+  mutate(variable = factor(variable,levels=c("Diabetes","Unscreened","Undiagnosed","Untreated","Uncontrolled"))) %>% 
+  dplyr::filter(!is.na(variable))
 
 
 figure_urban <- unmet_cascade %>% 
@@ -61,22 +62,3 @@ require(ggpubr)
   
   
   
-unmet_cascade %>% 
-  dplyr::select(state,residence,variable,estimate) %>% 
-  pivot_wider(names_from=residence,values_from=estimate) %>% 
-  mutate(u_gt_r = case_when(Urban > Rural ~ 0,
-                            Urban <= Rural ~ 1,
-                            TRUE ~ NA_real_)) %>% 
-  group_by(variable) %>% 
-  summarize(tot = sum(u_gt_r,na.rm=TRUE),
-            n = sum(!is.na(u_gt_r)))
-
-
-unmet_cascade %>% 
-  dplyr::select(state,residence,variable,estimate,zone) %>% 
-  pivot_wider(names_from=residence,values_from=estimate) %>% 
-  mutate(u_min_r = Urban - Rural) %>% 
-  group_by(variable,zone) %>% 
-  summarize(minus = mean(u_min_r,na.rm=TRUE),
-            n = sum(!is.na(u_min_r))) %>% 
-  View()

@@ -11,13 +11,23 @@ proportion_vars <- c("highwc","fasting","dm","highglucose","diagdm",
 grouped_vars <- c("age_category","education",
                   "caste","religion","wealthq_ur","bmi_category")
 
+
+pop_age <- read_csv("data/population for age standardization.csv") %>% 
+  dplyr::select(n) %>% 
+  pull()
+
+nfhs5_svystdz <- svystandardize(nfhs5_svydesign,by=~age_category,over = ~education + caste + religion + wealthq_ur,
+                                population = pop_age)
+rm(nfhs5_svydesign);gc();
+
+
 id_vars = list(c(group_vars),
                c("residence",group_vars));
 
 analytic_sample_summary <- map_dfr(id_vars,
                                    function(i_v){
                                      
-                                     n5_sy <- svysummary(nfhs5_svydesign,
+                                     n5_sy <- svysummary(nfhs5_svystdz,
                                                          c_vars = continuous_vars,
                                                          p_vars = proportion_vars,
                                                          g_vars = grouped_vars,
@@ -58,7 +68,7 @@ analytic_sample_summary <- map_dfr(id_vars,
 analytic_sample_summary %>% 
   mutate(residence = case_when(is.na(residence) ~ "Total",
                                TRUE ~ residence)) %>% 
-
-write_csv(.,file = "analysis/nca07_analytic sample characteristics.csv")
+  
+  write_csv(.,file = "age_standardized/ncz10_analytic sample characteristics.csv")
 
 

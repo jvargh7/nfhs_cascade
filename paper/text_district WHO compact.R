@@ -47,3 +47,11 @@ district_met %>%
   dplyr::filter(variable == "dm_controlled") %>% 
   lmer(estimate ~ 1 + (1|n5_state),data=.) %>% 
   performance::icc(.)
+
+
+246/707
+76/707
+
+
+232/639
+58/538

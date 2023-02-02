@@ -46,7 +46,12 @@ dbp_cutoff <- 90
 fpg_target <- 126
 rpg_target <- 180 #Indian DM guidelines
 # Indian HTN guidelines (Shah 2020: 130/80 for <= 60y, 140/90 otherwise)
-# Indian HTN guidelines (ICMR 2018: 140/90 for <= 80y, 150/90 otherwise)
+# ICMR 2016 guidelines
+# 4.4.1 The current target for control of BP for patients under 80 years of age should
+# be systolic blood pressure less than 140 mm and diastolic blood pressure less than 90 mm.
+# 4.4.2 The current target for control of BP for patients 80 years or older should be
+# less than 150 mm systolic and less than 90 mm diastolic.
+
 sbp_target <- c(140,150) 
 agebp_cutoff <- 80
 dbp_target <- c(90,90)
