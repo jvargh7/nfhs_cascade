@@ -8,7 +8,7 @@ source("preprocessing/ncpre03_nfhs5 total svydesign.R")
 source("preprocessing/ncpre04_nfhs5 diabetes svydesign.R")
 source("preprocessing/ncpre05_nfhs5 diagnosed svydesign.R")
 
-proportion_vars <- c("dm_screened","dm_diagnosed","dm_unscreened","dm_undiagnosed",
+proportion_vars <- c("","dm_screened","dm_diagnosed","dm_unscreened","dm_undiagnosed",
                      "dm_treated","dm_controlled","dm_untreated","dm_uncontrolled")
 
 

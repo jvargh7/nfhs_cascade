@@ -59,6 +59,12 @@ require(ggpubr)
     ggsave(.,filename = paste0(path_cascade_folder,"/figures/figure_heatmap cascade.png"),width=15,height=8)
 
   
+ggarrange(figure_urban,figure_rural,nrow=1,ncol=2,
+            labels = c("A","B"),
+            common.legend = TRUE,legend="bottom",
+            widths = c(2.2,1.5)) %>% 
+    ggsave(.,filename = paste0(path_cascade_folder,"/writing/JAMA Int Med/Figure 2.jpg"),width=15,height=8)
+  
   
   
   

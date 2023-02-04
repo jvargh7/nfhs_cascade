@@ -5,6 +5,14 @@ source("C:/code/external/functions/survey/svysummary.R")
 
 source("preprocessing/ncpre03_nfhs5 total svydesign.R")
 
+svysummary(nfhs5_svydesign,
+           c_vars = "age",
+           # p_vars = proportion_vars,
+           # g_vars = grouped_vars,
+           # id_vars = i_v
+)
+
+
 continuous_vars <- c("bmi","age")
 proportion_vars <- c("highwc","fasting","dm","highglucose","diagdm",
                      "dm_screened","dm_disease","dm_diagnosed","dm_treated","dm_controlled")

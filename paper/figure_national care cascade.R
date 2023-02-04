@@ -19,3 +19,8 @@ ggarrange(figA,
           figB,
           labels = LETTERS[1:2],ncol = 1,nrow=2,common.legend = TRUE,legend="bottom") %>% 
   ggsave(.,filename = paste0(path_cascade_folder,"/figures/national care cascade.png"),width=10,height=6)
+
+ggarrange(figA,
+          figB,
+          labels = LETTERS[1:2],ncol = 1,nrow=2,common.legend = TRUE,legend="bottom") %>% 
+  ggsave(.,filename = paste0(path_cascade_folder,"/writing/JAMA Int Med/Figure 1.jpg"),width=10,height=6)

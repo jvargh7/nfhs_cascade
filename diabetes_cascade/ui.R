@@ -24,7 +24,7 @@ sidebar_overview <- conditionalPanel(condition="input.selectedpanel==2",
                                      selectInput("zinput1","Age Standardized:",choices = c("Yes","No"),selected = "Yes"),
                                      selectInput("stateinput1","Select State:",unique(mapnfhs5_v024$n5_state),selected = "Kerala"),
                                      selectInput("districtinput1","Select District:",c(""),selected = "Kottayam"),
-                                     selectInput("varinput1","Select Variable:",c("Screened","Diabetes","Diagnosed","Treated","Controlled"),selected="Diagnosed"),
+                                     selectInput("varinput1","Select Variable:",c("Diabetes","Diagnosed","Treated","Controlled"),selected="Diagnosed"),
                                      selectInput("mapinput1","Select Display:",c("Urban","Rural")),
                                      selectInput("stratainput1","Select Strata:",c("Total","Male","Female"),selected = "Female")
                                      )
