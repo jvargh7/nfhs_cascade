@@ -38,6 +38,8 @@ female_processed <- female %>%
   qc15to49_preprocessing(.)
 
 saveRDS(female_processed,paste0(path_cascade_folder,"/working/nfhs5 15to49 women.RDS"))
+# female_processed <- readRDS(paste0(path_cascade_folder,"/working/nfhs5 15to49 women.RDS")) %>% 
+#   dplyr::filter(pregnant == 1)
 
 
 
@@ -58,11 +60,12 @@ nfhs5_iair <- read_dta(paste0(path_dhs_data,"/IA/IAIR7CDT/IAIR7CFL.dta"),col_sel
               .cols = iair7a_variables$selected) %>% 
   left_join(readRDS(paste0(path_cascade_folder,"/working/nfhs5 iapr_women.RDS")),
             by = c("cluster","hhid","linenumber")) %>% 
+  # Excludes all the pregnant?
   dplyr::filter(!is.na(age)) %>% 
   
   # Join with variables created using qc15to49_preprocessing
   left_join(readRDS(paste0(path_cascade_folder,"/working/nfhs5 15to49 women.RDS")) %>% 
-              dplyr::select(cluster,hhid,linenumber,one_of(proportion_vars),contains("current"),contains("soughttx")) %>% 
+              dplyr::select(cluster,hhid,linenumber, one_of(proportion_vars),contains("current"),contains("soughttx")) %>% 
               rename_at(vars(one_of(proportion_vars)),~paste0("qc",.)),
             by = c("cluster","hhid","linenumber"))
 
@@ -70,5 +73,7 @@ nfhs5_iair <- read_dta(paste0(path_dhs_data,"/IA/IAIR7CDT/IAIR7CFL.dta"),col_sel
 saveRDS(nfhs5_iair,paste0(path_cascade_folder,"/working/nfhs5 iair_women.RDS"))
 
 
+nfhs5_iair_pregnant <- readRDS(paste0(path_cascade_folder,"/working/nfhs5 iair_women.RDS")) %>%
+  dplyr::filter(pregnant == 1)
 
 

@@ -3,7 +3,8 @@ national_cascade <- read_csv(file = "age_standardized/ncz01_age standardized nat
   mutate(cascade = factor(cascade,levels=c("Screened","Disease","Diagnosed","Treated","Controlled"),
                           labels=c("Screened","Diabetes","Diagnosed","Taking Medication","Under Control"))) %>% 
   mutate(group = case_when(is.na(strata) ~ paste0(residence,"\nTotal"),
-                           TRUE ~ paste0(residence,"\n",strata)))
+                           TRUE ~ paste0(residence,"\n",strata))) %>% 
+  dplyr::filter(!is.na(residence))
 
 source("functions/cascade_plot.R")
 

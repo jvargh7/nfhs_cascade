@@ -4,14 +4,11 @@ district_map <- function(df,plot_variable,dmap_version = 2019,smap_version=2016,
                       palette_chr = "RdYlGn"){
   
   if(smap_version == 2016){
-    path_shape_files <- "C:/Cloud/OneDrive - Emory University/data/NFHS/NFHS4 Factsheets/maps"
-    
-    state_shp <- rgdal::readOGR(paste0(path_shape_files,"/maps-master/States"),"Admin2")
+    state_shp <- readRDS(paste0(path_india_shapefiles,"cleaned/smapsmaster_sp.RDS"))
   }
   
   if(dmap_version == 2018){
-    path_district_files <- "C:/Cloud/OneDrive - Emory University/data/India Shapefiles/INDIA_2018_DISTRICTS-master"
-    map_shp <- rgdal::readOGR(paste0(path_district_files),"DISTRICTS_2018") %>% 
+    map_shp <- readRDS(paste0(path_india_shapefiles,"cleaned/d2018_sp.RDS")) %>% 
       sp::merge(df %>%
                   dplyr::filter(variable == plot_variable
                                 # residence == "Rural",is.na(strata)
@@ -22,18 +19,7 @@ district_map <- function(df,plot_variable,dmap_version = 2019,smap_version=2016,
     
   }
   if(dmap_version == 2019){
-    path_district_files <- "C:/Cloud/OneDrive - Emory University/data/dhs_program/IA/IASHP7C/shps"
-    district_shp <- rgdal::readOGR(paste0(path_district_files),"sdr_subnational_boundaries2")
-    district_shp@data <- district_shp@data %>% 
-      mutate(REGCODE = case_when(REGNAME == "Hamirpur" & OTHREGNA == "Uttar Pradesh" ~ 168,
-                                 REGNAME == "Bijapur" & OTHREGNA == "Karnataka" ~ 557,
-                                 REGNAME == "Aurangabad" & OTHREGNA == "Maharashtra" ~ 515,
-                                 REGNAME == "Balrampur" & OTHREGNA == "Chhattisgarh" ~ 824,
-                                 REGNAME == "Bilaspur" & OTHREGNA == "Chhattisgarh" ~ 827,
-                                 REGNAME == "Pratapgarh" & OTHREGNA == "Uttar Pradesh" ~ 173,
-                                 REGNAME == "Raigarh" & OTHREGNA == "Maharashtra" ~ 520,
-                                 TRUE ~ REGCODE))
-    
+    district_shp <- readRDS(paste0(path_india_shapefiles,"cleaned/dnfhs5_sp.RDS"))
     
     map_shp <- district_shp %>% 
       sp::merge(df %>%

@@ -135,7 +135,7 @@ ncp_preprocessing <- function(df, sex = "Female"){
              diagnosed_bp == 1 & age >= agebp_cutoff & sbp <= sbp_target[2] ~ 0,
              diagnosed_bp == 1 & age >= agebp_cutoff & dbp <= dbp_target[2] ~ 0,
              
-             TRUE ~ NA_real_),
+             TRUE ~ NA_real_)
     ) %>% 
     
     # Diabetes cascade -----
