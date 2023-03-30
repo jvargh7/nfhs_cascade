@@ -1,6 +1,8 @@
+require(haven)
 require(tidyverse)
 require(survey)
 require(srvyr)
+require(lubridate)
 
 
 path_dhs_data <- "C:/Cloud/OneDrive - Emory University/data/dhs_program"
