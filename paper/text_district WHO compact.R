@@ -33,20 +33,31 @@ district_met %>%
 # Between district variation --------
 
 require(lme4)
-district_met %>% 
+m_diag = district_met %>% 
   dplyr::filter(variable == "dm_diagnosed") %>% 
-  lmer(estimate ~ 1 + (1|n5_state),data=.) %>% 
+  lmer(estimate ~ 1 + (1|n5_state),data=.) 
+
+icc_diag = m_diag %>% 
   performance::icc(.)
 
-district_met %>% 
+1- icc_diag$ICC_adjusted
+
+m_treat = district_met %>% 
   dplyr::filter(variable == "dm_treated") %>% 
-  lmer(estimate ~ 1 + (1|n5_state),data=.) %>% 
+  lmer(estimate ~ 1 + (1|n5_state),data=.) 
+
+icc_treat = m_treat %>% 
   performance::icc(.)
 
-district_met %>% 
+1-icc_treat
+
+m_contr = district_met %>% 
   dplyr::filter(variable == "dm_controlled") %>% 
-  lmer(estimate ~ 1 + (1|n5_state),data=.) %>% 
+  lmer(estimate ~ 1 + (1|n5_state),data=.) 
+
+icc_contr = m_contr %>% 
   performance::icc(.)
+1-icc_contr
 
 
 246/707

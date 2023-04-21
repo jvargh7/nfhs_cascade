@@ -15,8 +15,13 @@ pop_age <- read_csv("data/population for age standardization.csv") %>%
 
 # id_vars = c("residence",group_vars[4]);
 
-nfhs5_svystdz <- svystandardize(nfhs5_svydesign,by=~age_category,over = ~education + caste + religion + swealthq_ur,
+nfhs5_svystdz <- svystandardize(nfhs5_svydesign,by=~age_category,over = ~state + residence,
                                 population = pop_age)
+# library(srvyr)
+# nfhs5_svystdz %>% 
+#   group_by(state,age_category) %>% 
+#   summarize(n = survey_total()) %>% View()
+
 rm(nfhs5_svydesign);gc();
 
 
