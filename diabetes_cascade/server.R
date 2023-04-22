@@ -18,6 +18,7 @@ if(run_manual){
   
   nca02_national <- readRDS(file.path("diabetes_cascade/data","nca02_national.RDS"))
   national_nested <- readRDS(file.path("diabetes_cascade/data","national_nested.RDS"))
+  nationalz_nested <- readRDS(file.path("diabetes_cascade/data","nationalz_nested.RDS"))
   
   
   nca03_state <- readRDS(file.path("diabetes_cascade/data","nca03_state.RDS"))
@@ -47,6 +48,7 @@ state_shp <- readRDS(file.path("data","state_shp.RDS"))
 ncz01_national <- readRDS(file.path("data","ncz01_national.RDS"))
 nca02_national <- readRDS(file.path("data","nca02_national.RDS"))
 national_nested <- readRDS(file.path("data","national_nested.RDS"))
+nationalz_nested <- readRDS(file.path("data","nationalz_nested.RDS"))
 
 ncz02_state <- readRDS(file.path("data","ncz02_state.RDS"))
 nca03_state <- readRDS(file.path("data","nca03_state.RDS"))
@@ -101,6 +103,16 @@ shinyServer(function(input, output,session) {
   
   # Show the modal on start up ...
   showModal(ui = welcome_modal)
+  
+  nested_n1 <- reactive({
+    if(input$zinput1 == "Yes"){
+      return(nationalz_nested)
+      
+      
+    } else{
+      return(national_nested)
+    }
+  })
   
   nested_s1 <- reactive({
     if(input$zinput1 == "Yes"){
@@ -254,9 +266,11 @@ shinyServer(function(input, output,session) {
       dplyr::select(-strata) %>% 
       pivot_wider(names_from=residence,values_from=est_ci) 
     
-    nt_df <- national_nested %>% 
+    nt_df <- nested_n1() %>% 
       dplyr::filter(strata %in% c("Total","Male","Female")) %>% 
       dplyr::select(variable,strata,residence,est_ci) %>% 
+      mutate(residence = case_when(is.na(residence) ~ "",
+                                   TRUE ~ residence)) %>% 
       mutate(residence = paste0("India ",residence," ",strata)) %>% 
       dplyr::select(-strata) %>% 
       pivot_wider(names_from=residence,values_from=est_ci) 

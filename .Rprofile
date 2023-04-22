@@ -42,6 +42,9 @@ male_whr_cutoff = 0.95
 
 fpg_cutoff <- 126
 rpg_cutoff <- 220
+# Alternative cutoff for RPG --> used in ncp_preprocessing2.R
+rpg_cutoff2 <- 200
+
 sbp_cutoff <- 140
 dbp_cutoff <- 90
 

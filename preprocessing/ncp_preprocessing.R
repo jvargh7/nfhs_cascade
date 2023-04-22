@@ -1,3 +1,8 @@
+# This is the main preprocessing file used for Diabetes and Hypertension cascades
+# Compared to ncp_preprocessing2:
+# 1. Uses lowest SBP measure
+# 2. Uses 220 mg/dL for rpg_cutoff
+
 ncp_preprocessing <- function(df, sex = "Female"){
   
   df %>% 
@@ -74,13 +79,14 @@ ncp_preprocessing <- function(df, sex = "Female"){
              TRUE  ~ NA_real_),
            
            # Among those diagnosed, indicator of diabetes control status
+           # <126 and <= 180
            diagdm = case_when(
              diagnosed_dm == 0 ~ NA_real_,
              is.na(glucose) | glucose > 498 ~ NA_real_,
-             diagnosed_dm == 1 & fasting == 1 & glucose > fpg_target ~ 1,
+             diagnosed_dm == 1 & fasting == 1 & glucose >= fpg_target ~ 1,
              diagnosed_dm == 1 & fasting == 0 & glucose > rpg_target ~ 1,
              diagnosed_dm == 1 & is.na(fasting) & glucose > rpg_target ~ 1,
-             diagnosed_dm == 1 & fasting == 1 & glucose <= fpg_target ~ 0,
+             diagnosed_dm == 1 & fasting == 1 & glucose < fpg_target ~ 0,
              diagnosed_dm == 1 & fasting == 0 & glucose <= rpg_target ~ 0,
              diagnosed_dm == 1 & is.na(fasting) & glucose <= rpg_target ~ 0,
              TRUE  ~ NA_real_

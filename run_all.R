@@ -83,6 +83,8 @@ source("analysis/nca04_district2018 level care cascade.R")
 rm(list=ls()); gc(); source(".Rprofile")
 source("analysis/nca08_district unmet need care cascade.R")
 
+
+
 # AGE STANDARDIZED: district --------
 
 rm(list=ls()); gc(); source(".Rprofile")
@@ -91,6 +93,19 @@ source("age_standardized/ncz05_age standardized district unmet care cascade.R")
 rm(list=ls()); gc(); source(".Rprofile")
 source("age_standardized/ncz06_age standardized district cascade.R")
 
+# DISTRICT PLOTS ---------
+
+rm(list=ls()); gc(); source(".Rprofile")
+source("paper/figure_violin plots for districts.R")
+
+rm(list=ls()); gc(); source(".Rprofile")
+source("paper/figure_maps district care cascade.R")
+
+rm(list=ls()); gc(); source(".Rprofile")
+source("paper/figure_maps district care cascade without 50 obs.R")
+
+rm(list=ls()); gc(); source(".Rprofile")
+source("paper/figure_scatterplot of district estimates.R")
 
 # SHINY --------
 

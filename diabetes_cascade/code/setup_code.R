@@ -28,7 +28,22 @@ ncz01_national <- read_csv(file = "age_standardized/ncz01_age standardized natio
                                     TRUE ~ stratification))
 saveRDS(ncz01_national,file="diabetes_cascade/data/ncz01_national.RDS")
 
+# national_nested -----
 national_nested <- bind_rows(
+  read_csv("analysis/nca02_national level care cascade.csv") %>% 
+    dplyr::filter(variable %in% c("dm_screened","dm_disease")),
+  read_csv(file = "analysis/nca09_national met need care cascade.csv") %>% 
+    dplyr::filter(variable %in% c("dm_diagnosed","dm_treated","dm_controlled")))  %>% 
+  mutate(variable = str_replace(variable,"dm_","")) %>% 
+  mutate(variable = factor(variable,levels=c("screened","disease","diagnosed","treated","controlled"),
+                           labels=c("Screened","Diabetes","Diagnosed","Treated","Controlled")),
+         strata = case_when(is.na(strata) & is.na(stratification) ~ "Total",
+                            is.na(strata) ~ "Missing",
+                            TRUE ~ strata),
+         stratification = case_when(is.na(stratification) ~ "",
+                                    TRUE ~ stratification))
+
+nationalz_nested <- bind_rows(
   read_csv("age_standardized/ncz01_age standardized national care cascade.csv") %>% 
     dplyr::filter(variable %in% c("dm_screened","dm_disease")),
   read_csv(file = "age_standardized/ncz03_national met need care cascade.csv") %>% 
@@ -44,6 +59,7 @@ national_nested <- bind_rows(
 
 
 saveRDS(national_nested,file="diabetes_cascade/data/national_nested.RDS")
+saveRDS(nationalz_nested,file="diabetes_cascade/data/nationalz_nested.RDS")
 
 
 

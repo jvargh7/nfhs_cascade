@@ -1,3 +1,9 @@
+# Compared to ncp_preprocessing, these are the changes:
+# 1. Use last 2 BP measurements based on AR and PJ comments
+# 2. Use rpg_cutoff2 = 200 mg/dL cutoff 
+
+
+
 ncp_preprocessing2 <- function(df, sex = "Female"){
   
   df %>% 
@@ -57,30 +63,31 @@ ncp_preprocessing2 <- function(df, sex = "Female"){
            dm = case_when(diagnosed_dm == 1 ~ 1,
                           is.na(glucose) | glucose > 498 ~ NA_real_,
                           fasting == 1 & glucose >= fpg_cutoff ~ 1,
-                          fasting == 0 & glucose >= rpg_cutoff ~ 1,
-                          is.na(fasting) & glucose >= rpg_cutoff ~ 1,
+                          fasting == 0 & glucose >= rpg_cutoff2 ~ 1,
+                          is.na(fasting) & glucose >= rpg_cutoff2 ~ 1,
                           fasting == 1 & glucose < fpg_cutoff ~ 0,
-                          fasting == 0 & glucose < rpg_cutoff ~ 0,
-                          is.na(fasting) & glucose < rpg_cutoff ~ 0,
+                          fasting == 0 & glucose < rpg_cutoff2 ~ 0,
+                          is.na(fasting) & glucose < rpg_cutoff2 ~ 0,
                           TRUE  ~ NA_real_),
            highglucose = case_when(
              is.na(glucose) | glucose > 498 ~ NA_real_,
              fasting == 1 & glucose >= fpg_cutoff ~ 1,
-             fasting == 0 & glucose >= rpg_cutoff ~ 1,
-             is.na(fasting) & glucose >= rpg_cutoff ~ 1,
+             fasting == 0 & glucose >= rpg_cutoff2 ~ 1,
+             is.na(fasting) & glucose >= rpg_cutoff2 ~ 1,
              fasting == 1 & glucose < fpg_cutoff ~ 0,
-             fasting == 0 & glucose < rpg_cutoff ~ 0,
-             is.na(fasting) & glucose < rpg_cutoff ~ 0,
+             fasting == 0 & glucose < rpg_cutoff2 ~ 0,
+             is.na(fasting) & glucose < rpg_cutoff2 ~ 0,
              TRUE  ~ NA_real_),
            
            # Among those diagnosed, indicator of diabetes control status
+           # <126 and <= 180
            diagdm = case_when(
              diagnosed_dm == 0 ~ NA_real_,
              is.na(glucose) | glucose > 498 ~ NA_real_,
-             diagnosed_dm == 1 & fasting == 1 & glucose > fpg_target ~ 1,
+             diagnosed_dm == 1 & fasting == 1 & glucose >= fpg_target ~ 1,
              diagnosed_dm == 1 & fasting == 0 & glucose > rpg_target ~ 1,
              diagnosed_dm == 1 & is.na(fasting) & glucose > rpg_target ~ 1,
-             diagnosed_dm == 1 & fasting == 1 & glucose <= fpg_target ~ 0,
+             diagnosed_dm == 1 & fasting == 1 & glucose < fpg_target ~ 0,
              diagnosed_dm == 1 & fasting == 0 & glucose <= rpg_target ~ 0,
              diagnosed_dm == 1 & is.na(fasting) & glucose <= rpg_target ~ 0,
              TRUE  ~ NA_real_
@@ -242,8 +249,8 @@ ncp_preprocessing2 <- function(df, sex = "Female"){
                                  is.na(glucose) | glucose > 498 ~ NA_real_,
                                  dm == 1 ~ 0,
                                  fasting == 1 & glucose >= fpgpre_cutoff & glucose < fpg_cutoff ~ 1,
-                                 fasting == 0 & glucose >= rpgpre_cutoff & glucose < rpg_cutoff~ 1,
-                                 is.na(fasting) & glucose >= rpgpre_cutoff & glucose < rpg_cutoff ~ 1,
+                                 fasting == 0 & glucose >= rpgpre_cutoff & glucose < rpg_cutoff2~ 1,
+                                 is.na(fasting) & glucose >= rpgpre_cutoff & glucose < rpg_cutoff2 ~ 1,
                                  fasting == 1 & glucose < fpgpre_cutoff ~ 0,
                                  fasting == 0 & glucose < rpgpre_cutoff ~ 0,
                                  is.na(fasting) & glucose < rpgpre_cutoff ~ 0,

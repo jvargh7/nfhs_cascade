@@ -1,0 +1,11 @@
+variable,estimate,lci,uci,type,est_ci
+dm_screened,81.4,80.7,82.1,Proportion,"81.4 (80.7, 82.1)"
+dm_diagnosed,68.7,67.9,69.5,Proportion,"68.7 (67.9, 69.5)"
+dm_unscreened,18.6,17.9,19.3,Proportion,"18.6 (17.9, 19.3)"
+dm_undiagnosed,31.3,30.5,32.1,Proportion,"31.3 (30.5, 32.1)"
+dm_treated,59.4,58.1,60.6,Proportion,"59.4 (58.1, 60.6)"
+dm_controlled,65.5,64.5,66.4,Proportion,"65.5 (64.5, 66.4)"
+dm_untreated,40.6,39.4,41.9,Proportion,"40.6 (39.4, 41.9)"
+dm_uncontrolled,34.5,33.6,35.5,Proportion,"34.5 (33.6, 35.5)"
+highbp,30,29.2,30.8,Proportion,"30 (29.2, 30.8)"
+invhighbp,70,69.2,70.8,Proportion,"70 (69.2, 70.8)"
