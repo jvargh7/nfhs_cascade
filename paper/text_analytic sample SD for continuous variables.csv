@@ -1,0 +1,13 @@
+strata,variable,estimate,type,n,stratification,residence
+Female,bmi,4.505180137550304,Continuous,601916,sex,Total
+Female,age,16.22545979560016,Continuous,867896,sex,Total
+Male,bmi,4.0212465557756625,Continuous,86812,sex,Total
+Male,age,16.691085635665534,Continuous,783280,sex,Total
+Female,bmi,4.227067778940988,Continuous,453125,sex,Rural
+Female,age,16.367826475964073,Continuous,655126,sex,Rural
+Male,bmi,3.828520355199598,Continuous,64706,sex,Rural
+Male,age,16.860737609891103,Continuous,589587,sex,Rural
+Female,bmi,4.841716630460243,Continuous,148791,sex,Urban
+Female,age,15.913169124680651,Continuous,212770,sex,Urban
+Male,bmi,4.263353454376738,Continuous,22106,sex,Urban
+Male,age,16.323791313529917,Continuous,193693,sex,Urban

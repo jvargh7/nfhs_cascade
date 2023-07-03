@@ -443,19 +443,19 @@ shinyServer(function(input, output,session) {
     
     figA <- state_cs_merge() %>% 
       dplyr::filter(is.na(stratification)|stratification == "sex") %>% 
-      cascade_plot(.,limits_y = c(0,45))
+      cascade_plot(.,limits_y = c(0,100))
     figB <- state_cs_merge() %>% 
       dplyr::filter(stratification == "age_category") %>% 
-      cascade_plot(.,limits_y = c(0,45))
+      cascade_plot(.,limits_y = c(0,100))
     figC <- state_cs_merge() %>%
       dplyr::filter(stratification == "education") %>%
       mutate(group = factor(group, levels=c("Rural\nNo education","Rural\nPrimary","Rural\nSecondary","Rural\nHigher",
                                             "Urban\nNo education","Urban\nPrimary","Urban\nSecondary","Urban\nHigher"
                                             ))) %>% 
-      cascade_plot(.,limits_y = c(0,45))
+      cascade_plot(.,limits_y = c(0,100))
     figD <- state_cs_merge() %>%
       dplyr::filter(stratification == "caste") %>%
-      cascade_plot(.,limits_y = c(0,45))
+      cascade_plot(.,limits_y = c(0,100))
     figE <- state_cs_merge() %>%
       dplyr::filter(stratification == "swealthq_ur") %>%
       mutate(group = factor(group,
@@ -464,7 +464,7 @@ shinyServer(function(input, output,session) {
                                              rep(c("Wealth: Lowest","Wealth: Low",
                                                    "Wealth: Medium","Wealth: High",
                                                    "Wealth: Highest"),times=2)),ordered=TRUE)) %>% 
-      cascade_plot(.,limits_y = c(0,45))
+      cascade_plot(.,limits_y = c(0,100))
     
     ggarrange(figA,
               figB,

@@ -12,6 +12,12 @@ unmet_cascade <- bind_rows(read_csv(file = "analysis/nca05_state unmet need care
 
 
 unmet_cascade %>% 
+  group_by(residence,variable) %>% 
+  summarize(m = paste0(median(estimate)," [",
+                       quantile(estimate,0.25),", ",
+                       quantile(estimate,0.75),"]"))
+
+unmet_cascade %>% 
   dplyr::select(state,residence,variable,estimate) %>% 
   pivot_wider(names_from=residence,values_from=estimate) %>% 
   mutate(u_gt_r = case_when(Urban > Rural ~ 0,

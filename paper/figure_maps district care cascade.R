@@ -39,3 +39,8 @@ tmap_arrange(
   figA,figB,figC,figD,
   ncol = 2,nrow=2) %>% 
   tmap_save(.,filename=paste0(path_cascade_folder,"/writing/JAMA Int Med/Figure 3.jpg"),height=14,width=14)
+
+tmap_arrange(
+  figA,figB,figC,figD,
+  ncol = 2,nrow=2) %>% 
+  tmap_save(.,filename=paste0(path_cascade_folder,"/writing/JAMA Int Med R1/Figure 3.pdf"),height=14,width=14)

@@ -24,6 +24,7 @@ figure_urban <- unmet_cascade %>%
   facet_grid(zone~.,scales="free_y",space="free_y") +
   scale_fill_gradient2("Estimate (%)",low="white",mid="lightblue",high="darkblue",midpoint = 50,limits=c(0,100),na.value = "white") +
   theme_bw() +
+  scale_x_discrete(position = "top") + 
   xlab("") +
   ylab("")  +
   theme(
@@ -43,6 +44,7 @@ figure_rural <- unmet_cascade %>%
   facet_grid(zone~.,scales="free_y",space="free_y") +
   scale_fill_gradient2("Estimate (%)",low="white",mid="lightblue",high="darkblue",midpoint = 50,limits=c(0,100),na.value = "white") +
   theme_bw() +
+  scale_x_discrete(position = "top") + 
   xlab("") +
   ylab("")  +
   theme(
@@ -67,8 +69,12 @@ ggarrange(figure_urban,figure_rural,nrow=1,ncol=2,
             labels = c("A","B"),
             common.legend = TRUE,legend="bottom",
             widths = c(2.2,1.5)) %>% 
-    ggsave(.,filename = paste0(path_cascade_folder,"/writing/JAMA Int Med R1/Figure 2.jpg"),width=15,height=8)
+    ggsave(.,filename = paste0(path_cascade_folder,"/writing/JAMA Int Med R2/Figure 2.jpg"),width=15,height=8)
   
   
-  
+ggarrange(figure_urban,figure_rural,nrow=1,ncol=2,
+          labels = c("A","B"),
+          common.legend = TRUE,legend="bottom",
+          widths = c(2.2,1.5)) %>% 
+  ggsave(.,filename = paste0(path_cascade_folder,"/writing/JAMA Int Med R2/Figure 2.pdf"),width=15,height=8)  
   

@@ -89,5 +89,9 @@ require(ggpubr)
 ggarrange(figA,figB,figC,nrow=3,ncol=1,
           labels = c("A","B","C"),
           common.legend = TRUE) %>% 
-  ggsave(.,filename = paste0(path_cascade_folder,"/figures/figure_violinplot for example states.png"),width=12,height=8)
+  ggsave(.,filename = paste0(path_cascade_folder,"/figures/figure_violinplot for example states.jpg"),width=12,height=8)
 
+ggarrange(figA,figB,figC,nrow=3,ncol=1,
+          labels = c("A","B","C"),
+          common.legend = TRUE) %>% 
+  ggsave(.,filename = paste0(path_cascade_folder,"/writing/JAMA Int Med R1/Figure 4.pdf"),width=12,height=8)
