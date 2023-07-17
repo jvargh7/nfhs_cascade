@@ -32,5 +32,5 @@ fig_absolute <- absolute_df %>%
         ) +
   scale_y_continuous(breaks=seq(0,12,by=2),limits=c(0,12))
 
-
+fig_absolute
 ggsave(fig_absolute,filename = paste0(path_cascade_folder,"/figures/nested and absolute diabetes cascade.png"),width=17.53,height=6.27)  

@@ -21,7 +21,7 @@ sidebar_about <- conditionalPanel(condition = "input.selectedpanel == 1",
 
 sidebar_overview <- conditionalPanel(condition="input.selectedpanel==2",
                                      h3(""),
-                                     selectInput("zinput1","Age Standardized:",choices = c("Yes","No"),selected = "Yes"),
+                                     selectInput("zinput1","Age Standardized:",choices = c("Yes","No"),selected = "No"),
                                      selectInput("stateinput1","Select State:",unique(mapnfhs5_v024$n5_state),selected = "Kerala"),
                                      selectInput("districtinput1","Select District:",c(""),selected = "Kottayam"),
                                      selectInput("varinput1","Select Variable:",c("Diabetes","Diagnosed","Treated","Controlled"),selected="Diagnosed"),
@@ -31,7 +31,7 @@ sidebar_overview <- conditionalPanel(condition="input.selectedpanel==2",
 
 sidebar_state <- conditionalPanel(condition="input.selectedpanel==3",
                                      h3(""),
-                                     selectInput("zinput2","Age Standardized:",choices = c("Yes","No"),selected = "Yes"),
+                                     selectInput("zinput2","Age Standardized:",choices = c("Yes","No"),selected = "No"),
                                      selectInput("stateinput2","Select State:",unique(mapnfhs5_v024$n5_state),selected = "Kerala"),
                                      # selectInput("varinput2","Select Variable:",c("Screened","Diabetes","Diagnosed","Treated","Controlled")),
                                      # selectInput("mapinput2","Select Display:",c("Urban","Rural")),
@@ -40,18 +40,22 @@ sidebar_state <- conditionalPanel(condition="input.selectedpanel==3",
 
 sidebar_stratified <- conditionalPanel(condition="input.selectedpanel==4",
                                   h3(""),
-                                  selectInput("zinput3","Age Standardized:",choices = c("Yes","No"),selected = "Yes"),
+                                  selectInput("zinput3","Age Standardized:",choices = c("Yes","No"),selected = "No"),
                                   selectInput("stateinput3","Select State:",unique(mapnfhs5_v024$n5_state),selected = "Kerala")
                                   # selectInput("varinput3","Select Variable:",c("Screened","Diabetes","Diagnosed","Treated","Controlled")),
                                   # selectInput("mapinput3","Select Display:",c("Urban","Rural")),
                                   # selectInput("stratainput3","Select Strata:",c("Total","Male","Female"),selected = "Female")
 )
 
+sidebar_contact <- conditionalPanel(condition = "input.selectedpanel == 5",
+                                  h3(""))
+
 sidebar <- dashboardSidebar(
   sidebar_about,
   sidebar_overview,
   sidebar_state,
-  sidebar_stratified
+  sidebar_stratified,
+  sidebar_contact
   
   )
 
@@ -59,8 +63,22 @@ panel_about <- tabPanel("About",value = 1,
                         # https://stackoverflow.com/questions/65587869/r-shiny-how-to-box-a-simple-text-on-a-shiny-page
                            fluidRow(
                              
-                             box(solidHeader=FALSE,status="warning",title = "Definitions",
+                             fluidRow(
+                               box(solidHeader=FALSE,status="warning",title = "Definitions",
                                  tableOutput("tabledef")),
+                             
+                               box(solidHeader=FALSE,status="warning",title = "Strengths",
+                                   p("1. Survey enumerators attempted to reach all adults in households of eligible adults"),
+                                   p("2. Absolute estimates may not be reliable, but relative comparisons should be")
+                                 ), 
+                              box(solidHeader=FALSE,status="warning",title = "Limitations",
+                                 p("1. Information bias from self-report of high blood glucose, not verified through medical records, unlike ICMR-INDIAB"),
+                                 p("2. A single capillary random blood glucose does not meet confirmatory standards for diagnosis or control, unlike other surveys"),
+                                 p("3. NFHS-5 does not collect information on older adults living by themselves, unlike LASI")
+                             )
+                             
+                             ),
+                             
 
                              
                              fluidRow(
@@ -103,8 +121,10 @@ panel_about <- tabPanel("About",value = 1,
 
 
 panel_overview <- tabPanel("Overview",value = 2,
+                           
                            fluidRow(
                                 h3("Please stay on this page for 15 to 20 seconds for dashboard to load",align='center'),
+                                
                              
                                  box(solidHeader=FALSE,status="warning",title = "National Overview (%)",
                                  tmap::tmapOutput("nationalmap"), width = 6),
@@ -112,17 +132,21 @@ panel_overview <- tabPanel("Overview",value = 2,
                                  box(solidHeader=FALSE,status="warning",title = "Selected State (%)",
                                  tmap::tmapOutput("statemap"), width = 6)
                                  ),
+                           fluidRow(box(solidHeader=FALSE,status="warning",width = 12, title = "Diabetes Care Cascade - National, State, District (%)",
+                                        # background = "light-blue",
+                                        tableOutput("tableoutput1"),
+                                        tableOutput("tableoutput2"),
+                                        tableOutput("tableoutput3")))
                               
                           
-                               box(solidHeader=FALSE,status="warning",width = 12, title = "Diabetes Care Cascade (%)",
-                               # background = "light-blue",
-                               tableOutput("tableoutput"))
+                            
                            
 )
 
 panel_state <- tabPanel("District Disparities",value = 3,
                         fluidRow(
                           h3("Please select inputs from panel on left",align='center'),
+                          h4("Age standardized to national distribution within district",align='center'),
                           
                           box(solidHeader=FALSE,status="warning",width = 12,
                               title = "Between-district Disparities (%)",
@@ -137,6 +161,8 @@ panel_state <- tabPanel("District Disparities",value = 3,
 panel_stratified <- tabPanel("Socio-demographic Disparities",value =4,
                              fluidRow(
                                h3("Please select inputs from panel on left",align='center'),
+                               h4("Age standardized to national distribution for urban-rural strata within state",align='center'),
+                               
                                box(solidHeader=FALSE,status="warning",width=12,
                                    title = "Socio-demographic Disparities (%)",
                                    plotOutput("cascade_state3",height = 1000))
@@ -145,12 +171,32 @@ panel_stratified <- tabPanel("Socio-demographic Disparities",value =4,
                              )
                              )
 
+panel_contact <- tabPanel("Contact",value = 5,
+                        # https://stackoverflow.com/questions/65587869/r-shiny-how-to-box-a-simple-text-on-a-shiny-page
+                        fluidRow(
+                          
+                          box(solidHeader=FALSE,status="warning",title = "Issues and Request for Features",
+                              p("Start an issue at:"),
+                              tags$a(href="https://github.com/jvargh7/nfhs_cascade/issues", 
+                                     "https://github.com/jvargh7/nfhs_cascade/issues"),
+                              p(""),
+                              
+                              p("Any other questions, email with subject ",strong("Diabetes Dashboard :")),
+                              strong("jvargh7@emory.edu")
+                              )
+                          
+                          
+                        )
+                        
+)
+
 body <- dashboardBody(
   tabsetPanel(
     panel_about,
     panel_overview,
     panel_state,
     panel_stratified,
+    panel_contact,
     id = "selectedpanel"
   )
   

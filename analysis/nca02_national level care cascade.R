@@ -20,7 +20,7 @@ n5_sy <- svysummary(nfhs5_svydesign,
                          lci,", ",uci,")"));
 
 n5_sy %>% 
-  write_csv(.,path = "analysis/nca02_total age standardized national care cascade.csv")
+  write_csv(.,path = "analysis/nca02_total national care cascade.csv")
 
 # source("preprocessing/nc_parallelization.R")
 

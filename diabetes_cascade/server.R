@@ -6,6 +6,9 @@ library(readxl)
 library(tmap)
 library(ggpubr)
 run_manual = FALSE
+
+
+
 if(run_manual){
   map2016_v024 <- readxl::read_excel(file.path("diabetes_cascade/data","maps.xlsx"),sheet="map2016_v024")
   map2018_sdist <- readxl::read_excel(file.path("diabetes_cascade/data","maps.xlsx"),sheet="map2018_sdist")
@@ -76,10 +79,10 @@ shinyServer(function(input, output,session) {
     
     data.frame(Indicator = c("Age standardization","Screening","Diabetes","",
                              "Diagnosed","Treated","Controlled"),
-                                Definition = c("Age standardized to national distribution as per NFHS-5 [18-39: 50.26%, 40-64: 38.78%, 65+: 10.96%]",
+                                Definition = c("Age standardized to national distribution as per NFHS-5 [18-39: 50.26%, 40-64: 38.78%, 65+: 10.96%] for national (up to subgroups of sociodemographic covariates), state (up to urban/rural strata) and district",
                                                "Blood glucose ever checked previously",
                                                "(a) Self-reported diabetes",
-                                               "(b) High blood glucose (≥126 mg/dL if fasting [≥8 hours] or ≥220 mg/dL if not fasting)",
+                                               "(b) High blood glucose (≥126 mg/dL if fasting [≥8 hours] or ≥220 mg/dL if not fasting [random])",
                                                "Told had high glucose on two or more occasions by a medical provider among those with Diabetes",
                                                "Currently taking a prescribed medicine to lower glucose among those with Diagnosed Diabetes",
                                                "Blood glucose in non-hyperglycemic range (<126 mg/dL if fasted and ≤180 mg/dL if not fasting) among those with Diagnosed Diabetes")
@@ -129,6 +132,86 @@ shinyServer(function(input, output,session) {
     input$stateinput1
   })
   
+  tab_national <- reactive({
+    
+    nested_n1() %>%
+      dplyr::filter(strata %in% c("Total","Male","Female")) %>%
+      dplyr::select(variable,strata,residence,est_ci) %>%
+      mutate(residence = case_when(is.na(residence) ~ "",
+                                   TRUE ~ residence)) %>%
+      mutate(residence = paste0("India ",residence," ",strata)) %>%
+      dplyr::select(-strata) %>%
+      pivot_wider(names_from=residence,values_from=est_ci) %>%
+      mutate_all(function(x) str_replace(x," \\(","<br>\\(")) %>%
+      rename(Cascade = variable)
+    
+  })
+  
+  tab_national <- reactive({
+    
+    nested_n1() %>%
+      dplyr::filter(strata %in% c("Total","Male","Female")) %>%
+      dplyr::select(variable,strata,residence,est_ci) %>%
+      mutate(residence = case_when(is.na(residence) ~ "",
+                                   TRUE ~ residence)) %>%
+      mutate(residence = paste0("India ",residence," ",strata)) %>%
+      dplyr::select(-strata) %>%
+      pivot_wider(names_from=residence,values_from=est_ci) %>%
+      mutate_all(function(x) str_replace(x," \\(","<br>\\(")) %>%
+      rename(Cascade = variable) %>% 
+      dplyr::select(Cascade,one_of(c("India  Male","India  Female")),
+                    one_of(c("India Rural Total","India Urban Total")),
+                    everything())
+    
+  })
+  
+  tab_state <- reactive({
+    
+    nested_s1() %>%
+      dplyr::filter(strata %in% c("Total","Male","Female")) %>%
+      dplyr::filter(n5_state == input$stateinput1) %>%
+      dplyr::select(variable,residence,strata,est_ci) %>%
+      mutate(residence = paste0(input$stateinput1," ",residence," ",strata))  %>%
+      dplyr::select(-strata) %>%
+      pivot_wider(names_from=residence,values_from=est_ci) %>%
+      mutate_all(function(x) str_replace(x," \\(","<br>\\(")) %>%
+      rename(Cascade = variable)
+    
+  })
+  
+  tab_district <- reactive({
+    
+    nested_d1() %>% 
+      dplyr::filter(
+        REGNAME == input$districtinput1) %>%
+      dplyr::select(variable,strata,REGNAME,est_ci) %>%
+      rename(residence = REGNAME)  %>%
+      mutate(residence = paste0(residence," ",strata)) %>%
+      dplyr::select(-strata) %>%
+      pivot_wider(names_from=residence,values_from=est_ci)  %>%
+      mutate_all(function(x) str_replace(x," \\(","<br>\\(")) %>%
+      rename(Cascade = variable)
+    
+  })
+  
+  # output$tableoutput -----------
+  output$tableoutput1 <- renderTable({
+    
+    tab_national()
+    
+  },bordered = TRUE, sanitize.text.function=identity,align = "c")
+  
+  output$tableoutput2 <- renderTable({
+    
+    tab_state()
+    
+  },bordered = TRUE, sanitize.text.function=identity,align = "c")
+  
+  output$tableoutput3 <- renderTable({
+    
+    tab_district()
+    
+  },bordered = TRUE, sanitize.text.function=identity,align = "c")
   
   
   # https://stackoverflow.com/questions/64796206/dynamically-update-two-selectinput-boxes-based-on-the-others-selection-in-r-shin
@@ -147,7 +230,7 @@ shinyServer(function(input, output,session) {
                               residence == input$mapinput1,
                               strata == input$stratainput1)  %>% 
                 dplyr::select(n5_state,ST_NM,estimate) %>% 
-                rename_at(vars(estimate),~paste0(input$mapinput1," ",input$stratainput1," ",input$varinput1)),
+                rename_at(vars(estimate),~paste0(input$mapinput1," ",input$stratainput1," ",input$varinput1," ")),
               by.x="ST_NM",by.y="ST_NM",all.x=TRUE)
     
     ss
@@ -168,6 +251,9 @@ shinyServer(function(input, output,session) {
     
   })
   
+  
+  
+  
 # output$nationalmap -----------
   output$nationalmap <- tmap::renderTmap({
     
@@ -177,7 +263,7 @@ shinyServer(function(input, output,session) {
     nm <- tmap_mode("view") +
       tm_shape(shp = nm_merge(),id = "n5_state") +
       tm_fill(title= "",
-              col=paste0(input$mapinput1," ",input$stratainput1," ",input$varinput1),
+              col=paste0(input$mapinput1," ",input$stratainput1," ",input$varinput1," "),
               palette = palette_chr(),
               style = "fixed",
               breaks= breaks(),
@@ -256,52 +342,45 @@ shinyServer(function(input, output,session) {
   })
   
   # Table --------
-  tab1 <- reactive({
-    
-    st_df <- nested_s1() %>% 
-      dplyr::filter(strata %in% c("Total","Male","Female")) %>% 
-      dplyr::filter(n5_state == input$stateinput1) %>% 
-      dplyr::select(variable,residence,strata,est_ci) %>% 
-      mutate(residence = paste0(input$stateinput1," ",residence," ",strata))  %>% 
-      dplyr::select(-strata) %>% 
-      pivot_wider(names_from=residence,values_from=est_ci) 
-    
-    nt_df <- nested_n1() %>% 
-      dplyr::filter(strata %in% c("Total","Male","Female")) %>% 
-      dplyr::select(variable,strata,residence,est_ci) %>% 
-      mutate(residence = case_when(is.na(residence) ~ "",
-                                   TRUE ~ residence)) %>% 
-      mutate(residence = paste0("India ",residence," ",strata)) %>% 
-      dplyr::select(-strata) %>% 
-      pivot_wider(names_from=residence,values_from=est_ci) 
-    
-    dt_df <- nested_d1() %>% 
-      dplyr::filter(strata == input$stratainput1,
-                    REGNAME == input$districtinput1) %>% 
-      dplyr::select(variable,strata,REGNAME,est_ci) %>% 
-      rename(residence = REGNAME)  %>% 
-      mutate(residence = paste0(residence," ",strata)) %>% 
-      dplyr::select(-strata) %>% 
-      pivot_wider(names_from=residence,values_from=est_ci) 
-    
-    left_join(
-      nt_df ,
-      st_df,
-      by = "variable"
-    ) %>% 
-      left_join(dt_df,
-                by="variable") %>% 
-      mutate_all(function(x) str_replace(x," \\(","<br>\\(")) %>% 
-      rename(Cascade = variable)
-  })
+  # tab1 <- reactive({
+  #   
+  #   st_df <- nested_s1() %>% 
+  #     dplyr::filter(strata %in% c("Total","Male","Female")) %>% 
+  #     dplyr::filter(n5_state == input$stateinput1) %>% 
+  #     dplyr::select(variable,residence,strata,est_ci) %>% 
+  #     mutate(residence = paste0(input$stateinput1," ",residence," ",strata))  %>% 
+  #     dplyr::select(-strata) %>% 
+  #     pivot_wider(names_from=residence,values_from=est_ci) 
+  #   
+  #   nt_df <- nested_n1() %>% 
+  #     dplyr::filter(strata %in% c("Total","Male","Female")) %>% 
+  #     dplyr::select(variable,strata,residence,est_ci) %>% 
+  #     mutate(residence = case_when(is.na(residence) ~ "",
+  #                                  TRUE ~ residence)) %>% 
+  #     mutate(residence = paste0("India ",residence," ",strata)) %>% 
+  #     dplyr::select(-strata) %>% 
+  #     pivot_wider(names_from=residence,values_from=est_ci) 
+  #   
+  #   dt_df <- nested_d1() %>% 
+  #     dplyr::filter(strata == input$stratainput1,
+  #                   REGNAME == input$districtinput1) %>% 
+  #     dplyr::select(variable,strata,REGNAME,est_ci) %>% 
+  #     rename(residence = REGNAME)  %>% 
+  #     mutate(residence = paste0(residence," ",strata)) %>% 
+  #     dplyr::select(-strata) %>% 
+  #     pivot_wider(names_from=residence,values_from=est_ci) 
+  #   
+  #   left_join(
+  #     nt_df ,
+  #     st_df,
+  #     by = "variable"
+  #   ) %>% 
+  #     left_join(dt_df,
+  #               by="variable") %>% 
+  #     mutate_all(function(x) str_replace(x," \\(","<br>\\(")) %>% 
+  #     rename(Cascade = variable)
+  # })
 
-  # output$tableoutput -----------
-  output$tableoutput <- renderTable({
-    
-    tab1()
-    
-  },bordered = TRUE, sanitize.text.function=identity,align = "c")
-  
   # Panel 3: State ------------------
   
   
