@@ -2,6 +2,7 @@
 library(shiny)
 library(shinydashboard)
 library(tmap)
+library(waiter)
 run_manual = FALSE
 if(run_manual){
   map2016_v024 <- readxl::read_excel(file.path("diabetes_cascade/data","maps.xlsx"),sheet="map2016_v024")
@@ -123,15 +124,15 @@ panel_about <- tabPanel("About",value = 1,
 panel_overview <- tabPanel("Overview",value = 2,
                            
                            fluidRow(
-                                h3("Please stay on this page for 15 to 20 seconds for dashboard to load",align='center'),
-                                
+                             h3("Please stay on this page for 15 to 20 seconds for dashboard to load",align='center'),
+                             useWaiter(),
                              
-                                 box(solidHeader=FALSE,status="warning",title = "National Overview (%)",
+                             box(solidHeader=FALSE,status="warning",title = "National Overview (%)",
                                  tmap::tmapOutput("nationalmap"), width = 6),
-                                
-                                 box(solidHeader=FALSE,status="warning",title = "Selected State (%)",
+                             
+                             box(solidHeader=FALSE,status="warning",title = "Selected State (%)",
                                  tmap::tmapOutput("statemap"), width = 6)
-                                 ),
+                           ),
                            fluidRow(box(solidHeader=FALSE,status="warning",width = 12, title = "Diabetes Care Cascade - National, State, District (%)",
                                         # background = "light-blue",
                                         tableOutput("tableoutput1"),

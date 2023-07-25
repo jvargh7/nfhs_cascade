@@ -1,0 +1,433 @@
+state,residence,variable,estimate,lci,uci,type,est_ci,n,stratification,strata,n5_state,zone
+1,Rural,Unscreened,3.5,2.4,4.6,Proportion,"3.5 (2.4, 4.6)",1761,NA,NA,Jammu & Kashmir,North
+1,Rural,Undiagnosed,8.8,6.4,11.1,Proportion,"8.8 (6.4, 11.1)",1761,NA,NA,Jammu & Kashmir,North
+1,Urban,Unscreened,3.1,1.4,4.9,Proportion,"3.1 (1.4, 4.9)",488,NA,NA,Jammu & Kashmir,North
+1,Urban,Undiagnosed,6.3,3.7,8.9,Proportion,"6.3 (3.7, 8.9)",488,NA,NA,Jammu & Kashmir,North
+2,Rural,Unscreened,8.3,6.3,10.3,Proportion,"8.3 (6.3, 10.3)",1270,NA,NA,Himachal Pradesh,North
+2,Rural,Undiagnosed,19.3,16.5,22,Proportion,"19.3 (16.5, 22)",1270,NA,NA,Himachal Pradesh,North
+2,Urban,Unscreened,4.8,1,8.5,Proportion,"4.8 (1, 8.5)",174,NA,NA,Himachal Pradesh,North
+2,Urban,Undiagnosed,15.1,8.4,21.9,Proportion,"15.1 (8.4, 21.9)",174,NA,NA,Himachal Pradesh,North
+3,Rural,Unscreened,8.9,7.5,10.4,Proportion,"8.9 (7.5, 10.4)",2163,NA,NA,Punjab,North
+3,Rural,Undiagnosed,22.7,20.3,25.1,Proportion,"22.7 (20.3, 25.1)",2163,NA,NA,Punjab,North
+3,Urban,Unscreened,5.9,3.9,7.8,Proportion,"5.9 (3.9, 7.8)",1205,NA,NA,Punjab,North
+3,Urban,Undiagnosed,19.5,15.9,23.1,Proportion,"19.5 (15.9, 23.1)",1205,NA,NA,Punjab,North
+4,Rural,Unscreened,25,25,25,Proportion,"25 (25, 25)",4,NA,NA,Chandigarh,North
+4,Rural,Undiagnosed,25,25,25,Proportion,"25 (25, 25)",4,NA,NA,Chandigarh,North
+4,Urban,Unscreened,6.9,2.6,11.2,Proportion,"6.9 (2.6, 11.2)",118,NA,NA,Chandigarh,North
+4,Urban,Undiagnosed,21.1,12.9,29.3,Proportion,"21.1 (12.9, 29.3)",118,NA,NA,Chandigarh,North
+5,Rural,Unscreened,10.7,8.2,13.1,Proportion,"10.7 (8.2, 13.1)",888,NA,NA,Uttarakhand,Central
+5,Rural,Undiagnosed,21.2,17.9,24.5,Proportion,"21.2 (17.9, 24.5)",888,NA,NA,Uttarakhand,Central
+5,Urban,Unscreened,13.3,8.7,17.9,Proportion,"13.3 (8.7, 17.9)",423,NA,NA,Uttarakhand,Central
+5,Urban,Undiagnosed,19.6,14,25.1,Proportion,"19.6 (14, 25.1)",423,NA,NA,Uttarakhand,Central
+6,Rural,Unscreened,13.5,11.2,15.8,Proportion,"13.5 (11.2, 15.8)",1630,NA,NA,Haryana,North
+6,Rural,Undiagnosed,25.7,22.6,28.8,Proportion,"25.7 (22.6, 28.8)",1630,NA,NA,Haryana,North
+6,Urban,Unscreened,6,4.3,7.8,Proportion,"6 (4.3, 7.8)",1143,NA,NA,Haryana,North
+6,Urban,Undiagnosed,13.9,11.3,16.6,Proportion,"13.9 (11.3, 16.6)",1143,NA,NA,Haryana,North
+7,Rural,Unscreened,2.2,-2.1,6.4,Proportion,"2.2 (-2.1, 6.4)",35,NA,NA,Nct Of Delhi,North
+7,Rural,Undiagnosed,21.6,2.2,41.1,Proportion,"21.6 (2.2, 41.1)",35,NA,NA,Nct Of Delhi,North
+7,Urban,Unscreened,6.5,5,7.9,Proportion,"6.5 (5, 7.9)",1589,NA,NA,Nct Of Delhi,North
+7,Urban,Undiagnosed,17.6,15.4,19.9,Proportion,"17.6 (15.4, 19.9)",1589,NA,NA,Nct Of Delhi,North
+8,Rural,Unscreened,15.9,13.4,18.5,Proportion,"15.9 (13.4, 18.5)",1660,NA,NA,Rajasthan,North
+8,Rural,Undiagnosed,21.8,18.8,24.9,Proportion,"21.8 (18.8, 24.9)",1660,NA,NA,Rajasthan,North
+8,Urban,Unscreened,9.9,6.9,12.9,Proportion,"9.9 (6.9, 12.9)",915,NA,NA,Rajasthan,North
+8,Urban,Undiagnosed,14.4,10.9,17.9,Proportion,"14.4 (10.9, 17.9)",915,NA,NA,Rajasthan,North
+9,Rural,Unscreened,16.8,15.3,18.3,Proportion,"16.8 (15.3, 18.3)",6305,NA,NA,Uttar Pradesh,Central
+9,Rural,Undiagnosed,25.8,23.9,27.8,Proportion,"25.8 (23.9, 27.8)",6305,NA,NA,Uttar Pradesh,Central
+9,Urban,Unscreened,13.3,11.1,15.5,Proportion,"13.3 (11.1, 15.5)",1931,NA,NA,Uttar Pradesh,Central
+9,Urban,Undiagnosed,25.3,22,28.6,Proportion,"25.3 (22, 28.6)",1931,NA,NA,Uttar Pradesh,Central
+10,Rural,Unscreened,20.6,18.7,22.5,Proportion,"20.6 (18.7, 22.5)",3344,NA,NA,Bihar,East
+10,Rural,Undiagnosed,26.6,24.3,28.8,Proportion,"26.6 (24.3, 28.8)",3344,NA,NA,Bihar,East
+10,Urban,Unscreened,11.8,8.8,14.8,Proportion,"11.8 (8.8, 14.8)",762,NA,NA,Bihar,East
+10,Urban,Undiagnosed,18,14.2,21.8,Proportion,"18 (14.2, 21.8)",762,NA,NA,Bihar,East
+11,Rural,Unscreened,8.2,4.7,11.7,Proportion,"8.2 (4.7, 11.7)",279,NA,NA,Sikkim,North East
+11,Rural,Undiagnosed,19.4,14,24.7,Proportion,"19.4 (14, 24.7)",279,NA,NA,Sikkim,North East
+11,Urban,Unscreened,10.3,2.6,18,Proportion,"10.3 (2.6, 18)",77,NA,NA,Sikkim,North East
+11,Urban,Undiagnosed,14.2,6,22.4,Proportion,"14.2 (6, 22.4)",77,NA,NA,Sikkim,North East
+12,Rural,Unscreened,13.6,10.2,17,Proportion,"13.6 (10.2, 17)",1030,NA,NA,Arunachal Pradesh,North East
+12,Rural,Undiagnosed,18.5,14.1,23,Proportion,"18.5 (14.1, 23)",1030,NA,NA,Arunachal Pradesh,North East
+12,Urban,Unscreened,9.2,5.5,12.9,Proportion,"9.2 (5.5, 12.9)",603,NA,NA,Arunachal Pradesh,North East
+12,Urban,Undiagnosed,18.2,12.5,23.8,Proportion,"18.2 (12.5, 23.8)",603,NA,NA,Arunachal Pradesh,North East
+13,Rural,Unscreened,25,18.1,31.8,Proportion,"25 (18.1, 31.8)",329,NA,NA,Nagaland,North East
+13,Rural,Undiagnosed,32.1,23.7,40.5,Proportion,"32.1 (23.7, 40.5)",329,NA,NA,Nagaland,North East
+13,Urban,Unscreened,8.4,4.5,12.3,Proportion,"8.4 (4.5, 12.3)",236,NA,NA,Nagaland,North East
+13,Urban,Undiagnosed,15.2,9.1,21.3,Proportion,"15.2 (9.1, 21.3)",236,NA,NA,Nagaland,North East
+14,Rural,Unscreened,15.9,12.6,19.3,Proportion,"15.9 (12.6, 19.3)",643,NA,NA,Manipur,North East
+14,Rural,Undiagnosed,25.2,21.4,29,Proportion,"25.2 (21.4, 29)",643,NA,NA,Manipur,North East
+14,Urban,Unscreened,8.6,5.9,11.3,Proportion,"8.6 (5.9, 11.3)",426,NA,NA,Manipur,North East
+14,Urban,Undiagnosed,18.2,14.1,22.3,Proportion,"18.2 (14.1, 22.3)",426,NA,NA,Manipur,North East
+15,Rural,Unscreened,14.9,8.9,21,Proportion,"14.9 (8.9, 21)",343,NA,NA,Mizoram,North East
+15,Rural,Undiagnosed,20.2,13.4,27.1,Proportion,"20.2 (13.4, 27.1)",343,NA,NA,Mizoram,North East
+15,Urban,Unscreened,4.1,1.7,6.5,Proportion,"4.1 (1.7, 6.5)",438,NA,NA,Mizoram,North East
+15,Urban,Undiagnosed,8.9,5.9,11.8,Proportion,"8.9 (5.9, 11.8)",438,NA,NA,Mizoram,North East
+16,Rural,Unscreened,16.7,13.4,20,Proportion,"16.7 (13.4, 20)",598,NA,NA,Tripura,North East
+16,Rural,Undiagnosed,27.9,23.6,32.2,Proportion,"27.9 (23.6, 32.2)",598,NA,NA,Tripura,North East
+16,Urban,Unscreened,16.9,11.2,22.6,Proportion,"16.9 (11.2, 22.6)",268,NA,NA,Tripura,North East
+16,Urban,Undiagnosed,25.4,18.5,32.4,Proportion,"25.4 (18.5, 32.4)",268,NA,NA,Tripura,North East
+17,Rural,Unscreened,23.2,16.2,30.1,Proportion,"23.2 (16.2, 30.1)",328,NA,NA,Meghalaya,North East
+17,Rural,Undiagnosed,27.3,19,35.6,Proportion,"27.3 (19, 35.6)",328,NA,NA,Meghalaya,North East
+17,Urban,Unscreened,11.1,4.2,17.9,Proportion,"11.1 (4.2, 17.9)",97,NA,NA,Meghalaya,North East
+17,Urban,Undiagnosed,17.1,8.9,25.3,Proportion,"17.1 (8.9, 25.3)",97,NA,NA,Meghalaya,North East
+18,Rural,Unscreened,14.2,12.3,16,Proportion,"14.2 (12.3, 16)",2275,NA,NA,Assam,North East
+18,Rural,Undiagnosed,23.8,21.5,26.2,Proportion,"23.8 (21.5, 26.2)",2275,NA,NA,Assam,North East
+18,Urban,Unscreened,7.9,5.5,10.3,Proportion,"7.9 (5.5, 10.3)",726,NA,NA,Assam,North East
+18,Urban,Undiagnosed,20.7,16.8,24.6,Proportion,"20.7 (16.8, 24.6)",726,NA,NA,Assam,North East
+19,Rural,Unscreened,24.3,21.2,27.3,Proportion,"24.3 (21.2, 27.3)",1287,NA,NA,West Bengal,East
+19,Rural,Undiagnosed,35,31.3,38.6,Proportion,"35 (31.3, 38.6)",1287,NA,NA,West Bengal,East
+19,Urban,Unscreened,15.8,12.5,19.2,Proportion,"15.8 (12.5, 19.2)",897,NA,NA,West Bengal,East
+19,Urban,Undiagnosed,25.3,21.3,29.4,Proportion,"25.3 (21.3, 29.4)",897,NA,NA,West Bengal,East
+20,Rural,Unscreened,21.2,17.7,24.6,Proportion,"21.2 (17.7, 24.6)",1771,NA,NA,Jharkhand,East
+20,Rural,Undiagnosed,28.1,23.9,32.2,Proportion,"28.1 (23.9, 32.2)",1771,NA,NA,Jharkhand,East
+20,Urban,Unscreened,9.7,6.9,12.6,Proportion,"9.7 (6.9, 12.6)",974,NA,NA,Jharkhand,East
+20,Urban,Undiagnosed,18.8,14.7,22.8,Proportion,"18.8 (14.7, 22.8)",974,NA,NA,Jharkhand,East
+21,Rural,Unscreened,23.1,20.6,25.6,Proportion,"23.1 (20.6, 25.6)",2481,NA,NA,Odisha,East
+21,Rural,Undiagnosed,29.5,26.8,32.3,Proportion,"29.5 (26.8, 32.3)",2481,NA,NA,Odisha,East
+21,Urban,Unscreened,14.3,11.3,17.4,Proportion,"14.3 (11.3, 17.4)",786,NA,NA,Odisha,East
+21,Urban,Undiagnosed,21.6,17.2,26,Proportion,"21.6 (17.2, 26)",786,NA,NA,Odisha,East
+22,Rural,Unscreened,19.6,16.2,23,Proportion,"19.6 (16.2, 23)",1459,NA,NA,Chhattisgarh,Central
+22,Rural,Undiagnosed,29,24.8,33.1,Proportion,"29 (24.8, 33.1)",1459,NA,NA,Chhattisgarh,Central
+22,Urban,Unscreened,10.7,7.1,14.3,Proportion,"10.7 (7.1, 14.3)",759,NA,NA,Chhattisgarh,Central
+22,Urban,Undiagnosed,20.9,15.8,26.1,Proportion,"20.9 (15.8, 26.1)",759,NA,NA,Chhattisgarh,Central
+23,Rural,Unscreened,28.2,25.5,30.9,Proportion,"28.2 (25.5, 30.9)",2079,NA,NA,Madhya Pradesh,Central
+23,Rural,Undiagnosed,37.9,35.1,40.7,Proportion,"37.9 (35.1, 40.7)",2079,NA,NA,Madhya Pradesh,Central
+23,Urban,Unscreened,15.2,12.6,17.9,Proportion,"15.2 (12.6, 17.9)",1112,NA,NA,Madhya Pradesh,Central
+23,Urban,Undiagnosed,23.8,20.6,27.1,Proportion,"23.8 (20.6, 27.1)",1112,NA,NA,Madhya Pradesh,Central
+24,Rural,Unscreened,27.2,24.6,29.8,Proportion,"27.2 (24.6, 29.8)",2003,NA,NA,Gujarat,West
+24,Rural,Undiagnosed,37.4,34.4,40.4,Proportion,"37.4 (34.4, 40.4)",2003,NA,NA,Gujarat,West
+24,Urban,Unscreened,15.2,12.5,17.9,Proportion,"15.2 (12.5, 17.9)",1550,NA,NA,Gujarat,West
+24,Urban,Undiagnosed,24,21,27,Proportion,"24 (21, 27)",1550,NA,NA,Gujarat,West
+25,Rural,Unscreened,39,26.8,51.2,Proportion,"39 (26.8, 51.2)",134,NA,NA,Dadra & Nagar Haveli And Daman & Diu,West
+25,Rural,Undiagnosed,55,42.9,67,Proportion,"55 (42.9, 67)",134,NA,NA,Dadra & Nagar Haveli And Daman & Diu,West
+25,Urban,Unscreened,29.3,16.7,41.8,Proportion,"29.3 (16.7, 41.8)",203,NA,NA,Dadra & Nagar Haveli And Daman & Diu,West
+25,Urban,Undiagnosed,38.1,26.5,49.7,Proportion,"38.1 (26.5, 49.7)",203,NA,NA,Dadra & Nagar Haveli And Daman & Diu,West
+27,Rural,Unscreened,20.1,17.4,22.8,Proportion,"20.1 (17.4, 22.8)",2220,NA,NA,Maharashtra,West
+27,Rural,Undiagnosed,29.7,27.1,32.4,Proportion,"29.7 (27.1, 32.4)",2220,NA,NA,Maharashtra,West
+27,Urban,Unscreened,11.9,9.3,14.4,Proportion,"11.9 (9.3, 14.4)",1613,NA,NA,Maharashtra,West
+27,Urban,Undiagnosed,21,17.8,24.1,Proportion,"21 (17.8, 24.1)",1613,NA,NA,Maharashtra,West
+28,Rural,Unscreened,10.1,8.2,12,Proportion,"10.1 (8.2, 12)",1612,NA,NA,Andhra Pradesh,South
+28,Rural,Undiagnosed,23.1,20.5,25.6,Proportion,"23.1 (20.5, 25.6)",1612,NA,NA,Andhra Pradesh,South
+28,Urban,Unscreened,8.6,6.5,10.8,Proportion,"8.6 (6.5, 10.8)",957,NA,NA,Andhra Pradesh,South
+28,Urban,Undiagnosed,23.9,20.5,27.3,Proportion,"23.9 (20.5, 27.3)",957,NA,NA,Andhra Pradesh,South
+29,Rural,Unscreened,13.8,12.1,15.5,Proportion,"13.8 (12.1, 15.5)",2926,NA,NA,Karnataka,South
+29,Rural,Undiagnosed,27,24.8,29.2,Proportion,"27 (24.8, 29.2)",2926,NA,NA,Karnataka,South
+29,Urban,Unscreened,10.4,8.1,12.8,Proportion,"10.4 (8.1, 12.8)",1710,NA,NA,Karnataka,South
+29,Urban,Undiagnosed,22.9,19.6,26.3,Proportion,"22.9 (19.6, 26.3)",1710,NA,NA,Karnataka,South
+30,Rural,Unscreened,4.3,1.2,7.3,Proportion,"4.3 (1.2, 7.3)",229,NA,NA,Goa,West
+30,Rural,Undiagnosed,15.2,9.7,20.7,Proportion,"15.2 (9.7, 20.7)",229,NA,NA,Goa,West
+30,Urban,Unscreened,1.1,0,2.1,Proportion,"1.1 (0, 2.1)",336,NA,NA,Goa,West
+30,Urban,Undiagnosed,12.1,8.7,15.4,Proportion,"12.1 (8.7, 15.4)",336,NA,NA,Goa,West
+31,Rural,Unscreened,0,0,0,Proportion,"0 (0, 0)",54,NA,NA,Lakshadweep,South
+31,Rural,Undiagnosed,10.4,3.2,17.6,Proportion,"10.4 (3.2, 17.6)",54,NA,NA,Lakshadweep,South
+31,Urban,Unscreened,0,0,0,Proportion,"0 (0, 0)",234,NA,NA,Lakshadweep,South
+31,Urban,Undiagnosed,6.7,3,10.5,Proportion,"6.7 (3, 10.5)",234,NA,NA,Lakshadweep,South
+32,Rural,Unscreened,2,1.5,2.6,Proportion,"2 (1.5, 2.6)",2936,NA,NA,Kerala,South
+32,Rural,Undiagnosed,10.5,9,11.9,Proportion,"10.5 (9, 11.9)",2936,NA,NA,Kerala,South
+32,Urban,Unscreened,1.4,0.8,2,Proportion,"1.4 (0.8, 2)",2057,NA,NA,Kerala,South
+32,Urban,Undiagnosed,9,7.7,10.4,Proportion,"9 (7.7, 10.4)",2057,NA,NA,Kerala,South
+33,Rural,Unscreened,5.3,4.4,6.2,Proportion,"5.3 (4.4, 6.2)",4676,NA,NA,Tamil Nadu,South
+33,Rural,Undiagnosed,17.4,15.4,19.4,Proportion,"17.4 (15.4, 19.4)",4676,NA,NA,Tamil Nadu,South
+33,Urban,Unscreened,3.7,2.9,4.4,Proportion,"3.7 (2.9, 4.4)",4273,NA,NA,Tamil Nadu,South
+33,Urban,Undiagnosed,14.4,12.7,16,Proportion,"14.4 (12.7, 16)",4273,NA,NA,Tamil Nadu,South
+34,Rural,Unscreened,2.5,-0.4,5.4,Proportion,"2.5 (-0.4, 5.4)",176,NA,NA,Puducherry,South
+34,Rural,Undiagnosed,17.2,9.9,24.5,Proportion,"17.2 (9.9, 24.5)",176,NA,NA,Puducherry,South
+34,Urban,Unscreened,3.5,1.4,5.5,Proportion,"3.5 (1.4, 5.5)",1099,NA,NA,Puducherry,South
+34,Urban,Undiagnosed,10.4,7.1,13.6,Proportion,"10.4 (7.1, 13.6)",1099,NA,NA,Puducherry,South
+35,Rural,Unscreened,2.4,0.5,4.4,Proportion,"2.4 (0.5, 4.4)",352,NA,NA,Andaman & Nicobar Islands,South
+35,Rural,Undiagnosed,11.5,6.8,16.2,Proportion,"11.5 (6.8, 16.2)",352,NA,NA,Andaman & Nicobar Islands,South
+35,Urban,Unscreened,3.5,0.6,6.4,Proportion,"3.5 (0.6, 6.4)",123,NA,NA,Andaman & Nicobar Islands,South
+35,Urban,Undiagnosed,13.2,6,20.3,Proportion,"13.2 (6, 20.3)",123,NA,NA,Andaman & Nicobar Islands,South
+36,Rural,Unscreened,12.6,11.2,14.1,Proportion,"12.6 (11.2, 14.1)",2891,NA,NA,Telangana,South
+36,Rural,Undiagnosed,26.2,24.2,28.2,Proportion,"26.2 (24.2, 28.2)",2891,NA,NA,Telangana,South
+36,Urban,Unscreened,6.3,4.7,7.9,Proportion,"6.3 (4.7, 7.9)",1593,NA,NA,Telangana,South
+36,Urban,Undiagnosed,17.3,14,20.6,Proportion,"17.3 (14, 20.6)",1593,NA,NA,Telangana,South
+37,Rural,Unscreened,0,0,0,Proportion,"0 (0, 0)",280,NA,NA,Ladakh,North
+37,Rural,Undiagnosed,0,0,0,Proportion,"0 (0, 0)",280,NA,NA,Ladakh,North
+37,Urban,Unscreened,0,0,0,Proportion,"0 (0, 0)",112,NA,NA,Ladakh,North
+37,Urban,Undiagnosed,0.7,-0.9,2.4,Proportion,"0.7 (-0.9, 2.4)",112,NA,NA,Ladakh,North
+1,Rural,Untreated,42,35.9,48,Proportion,"42 (35.9, 48)",1632,NA,NA,Jammu & Kashmir,North
+1,Rural,Uncontrolled,19.6,15.9,23.3,Proportion,"19.6 (15.9, 23.3)",1632,NA,NA,Jammu & Kashmir,North
+1,Rural,NA,30.5,26.4,34.6,Proportion,"30.5 (26.4, 34.6)",1627,NA,NA,Jammu & Kashmir,North
+1,Urban,Untreated,36.8,28.9,44.6,Proportion,"36.8 (28.9, 44.6)",449,NA,NA,Jammu & Kashmir,North
+1,Urban,Uncontrolled,24.5,18.3,30.7,Proportion,"24.5 (18.3, 30.7)",449,NA,NA,Jammu & Kashmir,North
+1,Urban,NA,30.9,25.7,36,Proportion,"30.9 (25.7, 36)",448,NA,NA,Jammu & Kashmir,North
+2,Rural,Untreated,37.2,31.3,43.1,Proportion,"37.2 (31.3, 43.1)",1032,NA,NA,Himachal Pradesh,North
+2,Rural,Uncontrolled,39.3,34.4,44.3,Proportion,"39.3 (34.4, 44.3)",1032,NA,NA,Himachal Pradesh,North
+2,Rural,NA,39.4,36,42.7,Proportion,"39.4 (36, 42.7)",1029,NA,NA,Himachal Pradesh,North
+2,Urban,Untreated,20,11,29,Proportion,"20 (11, 29)",151,NA,NA,Himachal Pradesh,North
+2,Urban,Uncontrolled,44.5,35.5,53.5,Proportion,"44.5 (35.5, 53.5)",151,NA,NA,Himachal Pradesh,North
+2,Urban,NA,34.5,25.8,43.3,Proportion,"34.5 (25.8, 43.3)",151,NA,NA,Himachal Pradesh,North
+3,Rural,Untreated,28.9,25.6,32.3,Proportion,"28.9 (25.6, 32.3)",1677,NA,NA,Punjab,North
+3,Rural,Uncontrolled,54.2,50.9,57.5,Proportion,"54.2 (50.9, 57.5)",1677,NA,NA,Punjab,North
+3,Rural,NA,52.1,49.2,55,Proportion,"52.1 (49.2, 55)",1677,NA,NA,Punjab,North
+3,Urban,Untreated,22.2,17.6,26.7,Proportion,"22.2 (17.6, 26.7)",970,NA,NA,Punjab,North
+3,Urban,Uncontrolled,55.5,50.9,60.1,Proportion,"55.5 (50.9, 60.1)",970,NA,NA,Punjab,North
+3,Urban,NA,53.3,47.8,58.8,Proportion,"53.3 (47.8, 58.8)",969,NA,NA,Punjab,North
+4,Rural,Untreated,0,0,0,Proportion,"0 (0, 0)",3,NA,NA,Chandigarh,North
+4,Rural,Uncontrolled,66.7,66.7,66.7,Proportion,"66.7 (66.7, 66.7)",3,NA,NA,Chandigarh,North
+4,Rural,NA,33.3,33.3,33.3,Proportion,"33.3 (33.3, 33.3)",3,NA,NA,Chandigarh,North
+4,Urban,Untreated,14,7.4,20.5,Proportion,"14 (7.4, 20.5)",93,NA,NA,Chandigarh,North
+4,Urban,Uncontrolled,62.6,53.1,72.2,Proportion,"62.6 (53.1, 72.2)",93,NA,NA,Chandigarh,North
+4,Urban,NA,45.3,34,56.7,Proportion,"45.3 (34, 56.7)",93,NA,NA,Chandigarh,North
+5,Rural,Untreated,36.8,31.4,42.2,Proportion,"36.8 (31.4, 42.2)",682,NA,NA,Uttarakhand,Central
+5,Rural,Uncontrolled,45.9,40.5,51.2,Proportion,"45.9 (40.5, 51.2)",682,NA,NA,Uttarakhand,Central
+5,Rural,NA,47.1,42.3,52,Proportion,"47.1 (42.3, 52)",681,NA,NA,Uttarakhand,Central
+5,Urban,Untreated,24.9,16.8,33,Proportion,"24.9 (16.8, 33)",344,NA,NA,Uttarakhand,Central
+5,Urban,Uncontrolled,45.4,38.4,52.3,Proportion,"45.4 (38.4, 52.3)",344,NA,NA,Uttarakhand,Central
+5,Urban,NA,41.5,34.8,48.2,Proportion,"41.5 (34.8, 48.2)",344,NA,NA,Uttarakhand,Central
+6,Rural,Untreated,47.7,42.4,53.1,Proportion,"47.7 (42.4, 53.1)",1211,NA,NA,Haryana,North
+6,Rural,Uncontrolled,39.7,35.2,44.3,Proportion,"39.7 (35.2, 44.3)",1211,NA,NA,Haryana,North
+6,Rural,NA,38.3,34.9,41.7,Proportion,"38.3 (34.9, 41.7)",1209,NA,NA,Haryana,North
+6,Urban,Untreated,41.4,35.1,47.6,Proportion,"41.4 (35.1, 47.6)",965,NA,NA,Haryana,North
+6,Urban,Uncontrolled,40.1,35.8,44.5,Proportion,"40.1 (35.8, 44.5)",965,NA,NA,Haryana,North
+6,Urban,NA,42.5,38.8,46.2,Proportion,"42.5 (38.8, 46.2)",962,NA,NA,Haryana,North
+7,Rural,Untreated,23.1,9.3,37,Proportion,"23.1 (9.3, 37)",25,NA,NA,Nct Of Delhi,North
+7,Rural,Uncontrolled,23,-13.6,59.6,Proportion,"23 (-13.6, 59.6)",25,NA,NA,Nct Of Delhi,North
+7,Rural,NA,52.4,42.2,62.7,Proportion,"52.4 (42.2, 62.7)",25,NA,NA,Nct Of Delhi,North
+7,Urban,Untreated,15.5,12.8,18.2,Proportion,"15.5 (12.8, 18.2)",1307,NA,NA,Nct Of Delhi,North
+7,Urban,Uncontrolled,46.1,42.7,49.5,Proportion,"46.1 (42.7, 49.5)",1307,NA,NA,Nct Of Delhi,North
+7,Urban,NA,50.1,46.8,53.4,Proportion,"50.1 (46.8, 53.4)",1302,NA,NA,Nct Of Delhi,North
+8,Rural,Untreated,52.4,46.9,57.9,Proportion,"52.4 (46.9, 57.9)",1297,NA,NA,Rajasthan,North
+8,Rural,Uncontrolled,30.1,26,34.3,Proportion,"30.1 (26, 34.3)",1297,NA,NA,Rajasthan,North
+8,Rural,NA,37.3,34,40.5,Proportion,"37.3 (34, 40.5)",1295,NA,NA,Rajasthan,North
+8,Urban,Untreated,47.1,38.1,56.1,Proportion,"47.1 (38.1, 56.1)",782,NA,NA,Rajasthan,North
+8,Urban,Uncontrolled,25.1,20.4,29.7,Proportion,"25.1 (20.4, 29.7)",782,NA,NA,Rajasthan,North
+8,Urban,NA,36.1,30.6,41.5,Proportion,"36.1 (30.6, 41.5)",781,NA,NA,Rajasthan,North
+9,Rural,Untreated,63.2,60.3,66.1,Proportion,"63.2 (60.3, 66.1)",4683,NA,NA,Uttar Pradesh,Central
+9,Rural,Uncontrolled,25.2,23,27.3,Proportion,"25.2 (23, 27.3)",4683,NA,NA,Uttar Pradesh,Central
+9,Rural,NA,33.1,31.2,35,Proportion,"33.1 (31.2, 35)",4668,NA,NA,Uttar Pradesh,Central
+9,Urban,Untreated,41.1,35.3,46.9,Proportion,"41.1 (35.3, 46.9)",1452,NA,NA,Uttar Pradesh,Central
+9,Urban,Uncontrolled,41,36.9,45.1,Proportion,"41 (36.9, 45.1)",1452,NA,NA,Uttar Pradesh,Central
+9,Urban,NA,42.3,39.3,45.3,Proportion,"42.3 (39.3, 45.3)",1449,NA,NA,Uttar Pradesh,Central
+10,Rural,Untreated,52.6,49.3,55.8,Proportion,"52.6 (49.3, 55.8)",2422,NA,NA,Bihar,East
+10,Rural,Uncontrolled,31,28.3,33.6,Proportion,"31 (28.3, 33.6)",2422,NA,NA,Bihar,East
+10,Rural,NA,32.5,30.2,34.8,Proportion,"32.5 (30.2, 34.8)",2413,NA,NA,Bihar,East
+10,Urban,Untreated,43.5,35.4,51.6,Proportion,"43.5 (35.4, 51.6)",617,NA,NA,Bihar,East
+10,Urban,Uncontrolled,40.1,33.6,46.6,Proportion,"40.1 (33.6, 46.6)",617,NA,NA,Bihar,East
+10,Urban,NA,34.2,28.7,39.7,Proportion,"34.2 (28.7, 39.7)",615,NA,NA,Bihar,East
+11,Rural,Untreated,35.1,26.7,43.6,Proportion,"35.1 (26.7, 43.6)",223,NA,NA,Sikkim,North East
+11,Rural,Uncontrolled,42.6,34.2,51,Proportion,"42.6 (34.2, 51)",223,NA,NA,Sikkim,North East
+11,Rural,NA,51.6,44.6,58.6,Proportion,"51.6 (44.6, 58.6)",222,NA,NA,Sikkim,North East
+11,Urban,Untreated,30.8,16.9,44.8,Proportion,"30.8 (16.9, 44.8)",64,NA,NA,Sikkim,North East
+11,Urban,Uncontrolled,56.3,39.9,72.7,Proportion,"56.3 (39.9, 72.7)",64,NA,NA,Sikkim,North East
+11,Urban,NA,57,41.4,72.6,Proportion,"57 (41.4, 72.6)",63,NA,NA,Sikkim,North East
+12,Rural,Untreated,72.4,65.6,79.2,Proportion,"72.4 (65.6, 79.2)",812,NA,NA,Arunachal Pradesh,North East
+12,Rural,Uncontrolled,21.4,16.7,26.1,Proportion,"21.4 (16.7, 26.1)",812,NA,NA,Arunachal Pradesh,North East
+12,Rural,NA,45.8,40.2,51.4,Proportion,"45.8 (40.2, 51.4)",811,NA,NA,Arunachal Pradesh,North East
+12,Urban,Untreated,65.9,58.8,73,Proportion,"65.9 (58.8, 73)",517,NA,NA,Arunachal Pradesh,North East
+12,Urban,Uncontrolled,17.1,11.6,22.5,Proportion,"17.1 (11.6, 22.5)",517,NA,NA,Arunachal Pradesh,North East
+12,Urban,NA,38.9,32.9,44.8,Proportion,"38.9 (32.9, 44.8)",515,NA,NA,Arunachal Pradesh,North East
+13,Rural,Untreated,50,38.2,61.7,Proportion,"50 (38.2, 61.7)",221,NA,NA,Nagaland,North East
+13,Rural,Uncontrolled,42.5,29.5,55.4,Proportion,"42.5 (29.5, 55.4)",221,NA,NA,Nagaland,North East
+13,Rural,NA,55,47.6,62.4,Proportion,"55 (47.6, 62.4)",221,NA,NA,Nagaland,North East
+13,Urban,Untreated,50.2,33.4,67,Proportion,"50.2 (33.4, 67)",198,NA,NA,Nagaland,North East
+13,Urban,Uncontrolled,45.1,30.3,60,Proportion,"45.1 (30.3, 60)",198,NA,NA,Nagaland,North East
+13,Urban,NA,48.6,35.8,61.3,Proportion,"48.6 (35.8, 61.3)",198,NA,NA,Nagaland,North East
+14,Rural,Untreated,34.9,28.8,40.9,Proportion,"34.9 (28.8, 40.9)",467,NA,NA,Manipur,North East
+14,Rural,Uncontrolled,39.8,34.5,45,Proportion,"39.8 (34.5, 45)",467,NA,NA,Manipur,North East
+14,Rural,NA,40.4,34.3,46.5,Proportion,"40.4 (34.3, 46.5)",467,NA,NA,Manipur,North East
+14,Urban,Untreated,26.2,22.2,30.3,Proportion,"26.2 (22.2, 30.3)",351,NA,NA,Manipur,North East
+14,Urban,Uncontrolled,45,39.2,50.9,Proportion,"45 (39.2, 50.9)",351,NA,NA,Manipur,North East
+14,Urban,NA,44.9,39.7,50.1,Proportion,"44.9 (39.7, 50.1)",351,NA,NA,Manipur,North East
+15,Rural,Untreated,38.7,29.1,48.3,Proportion,"38.7 (29.1, 48.3)",262,NA,NA,Mizoram,North East
+15,Rural,Uncontrolled,30.5,24,37.1,Proportion,"30.5 (24, 37.1)",262,NA,NA,Mizoram,North East
+15,Rural,NA,34,26.9,41.1,Proportion,"34 (26.9, 41.1)",260,NA,NA,Mizoram,North East
+15,Urban,Untreated,26.8,20.5,33.2,Proportion,"26.8 (20.5, 33.2)",387,NA,NA,Mizoram,North East
+15,Urban,Uncontrolled,35.3,29.1,41.5,Proportion,"35.3 (29.1, 41.5)",387,NA,NA,Mizoram,North East
+15,Urban,NA,32.9,26.1,39.7,Proportion,"32.9 (26.1, 39.7)",385,NA,NA,Mizoram,North East
+16,Rural,Untreated,40.7,35.3,46.1,Proportion,"40.7 (35.3, 46.1)",422,NA,NA,Tripura,North East
+16,Rural,Uncontrolled,44.5,39.5,49.5,Proportion,"44.5 (39.5, 49.5)",422,NA,NA,Tripura,North East
+16,Rural,NA,29.2,24.6,33.9,Proportion,"29.2 (24.6, 33.9)",422,NA,NA,Tripura,North East
+16,Urban,Untreated,17.6,11.1,24.2,Proportion,"17.6 (11.1, 24.2)",201,NA,NA,Tripura,North East
+16,Urban,Uncontrolled,42.2,33.5,50.8,Proportion,"42.2 (33.5, 50.8)",201,NA,NA,Tripura,North East
+16,Urban,NA,34.3,27.6,41.1,Proportion,"34.3 (27.6, 41.1)",201,NA,NA,Tripura,North East
+17,Rural,Untreated,53.3,43.1,63.5,Proportion,"53.3 (43.1, 63.5)",239,NA,NA,Meghalaya,North East
+17,Rural,Uncontrolled,21.5,13,29.9,Proportion,"21.5 (13, 29.9)",239,NA,NA,Meghalaya,North East
+17,Rural,NA,31.4,22,40.8,Proportion,"31.4 (22, 40.8)",238,NA,NA,Meghalaya,North East
+17,Urban,Untreated,30.2,18.4,42,Proportion,"30.2 (18.4, 42)",76,NA,NA,Meghalaya,North East
+17,Urban,Uncontrolled,33.5,16.8,50.2,Proportion,"33.5 (16.8, 50.2)",76,NA,NA,Meghalaya,North East
+17,Urban,NA,41.5,29.7,53.2,Proportion,"41.5 (29.7, 53.2)",76,NA,NA,Meghalaya,North East
+18,Rural,Untreated,40.1,36.2,44,Proportion,"40.1 (36.2, 44)",1734,NA,NA,Assam,North East
+18,Rural,Uncontrolled,37.8,34.7,40.9,Proportion,"37.8 (34.7, 40.9)",1734,NA,NA,Assam,North East
+18,Rural,NA,36.9,34.2,39.6,Proportion,"36.9 (34.2, 39.6)",1733,NA,NA,Assam,North East
+18,Urban,Untreated,31.8,24.7,39,Proportion,"31.8 (24.7, 39)",580,NA,NA,Assam,North East
+18,Urban,Uncontrolled,40.1,34.1,46.1,Proportion,"40.1 (34.1, 46.1)",580,NA,NA,Assam,North East
+18,Urban,NA,39.5,34.9,44.2,Proportion,"39.5 (34.9, 44.2)",579,NA,NA,Assam,North East
+19,Rural,Untreated,26.5,22.7,30.4,Proportion,"26.5 (22.7, 30.4)",842,NA,NA,West Bengal,East
+19,Rural,Uncontrolled,47.7,43.2,52.1,Proportion,"47.7 (43.2, 52.1)",842,NA,NA,West Bengal,East
+19,Rural,NA,35.9,32.1,39.8,Proportion,"35.9 (32.1, 39.8)",842,NA,NA,West Bengal,East
+19,Urban,Untreated,16.2,12.7,19.7,Proportion,"16.2 (12.7, 19.7)",670,NA,NA,West Bengal,East
+19,Urban,Uncontrolled,46.2,41.3,51,Proportion,"46.2 (41.3, 51)",670,NA,NA,West Bengal,East
+19,Urban,NA,39.1,34.4,43.8,Proportion,"39.1 (34.4, 43.8)",670,NA,NA,West Bengal,East
+20,Rural,Untreated,63.4,57.1,69.8,Proportion,"63.4 (57.1, 69.8)",1297,NA,NA,Jharkhand,East
+20,Rural,Uncontrolled,23,18.6,27.4,Proportion,"23 (18.6, 27.4)",1297,NA,NA,Jharkhand,East
+20,Rural,NA,27.5,23.1,31.9,Proportion,"27.5 (23.1, 31.9)",1297,NA,NA,Jharkhand,East
+20,Urban,Untreated,48.6,39.3,58,Proportion,"48.6 (39.3, 58)",812,NA,NA,Jharkhand,East
+20,Urban,Uncontrolled,31.2,24.9,37.6,Proportion,"31.2 (24.9, 37.6)",812,NA,NA,Jharkhand,East
+20,Urban,NA,35.3,29.1,41.5,Proportion,"35.3 (29.1, 41.5)",812,NA,NA,Jharkhand,East
+21,Rural,Untreated,33.2,28.2,38.2,Proportion,"33.2 (28.2, 38.2)",1732,NA,NA,Odisha,East
+21,Rural,Uncontrolled,41.6,38.1,45,Proportion,"41.6 (38.1, 45)",1732,NA,NA,Odisha,East
+21,Rural,NA,36,33.3,38.7,Proportion,"36 (33.3, 38.7)",1730,NA,NA,Odisha,East
+21,Urban,Untreated,20.2,13.4,27.1,Proportion,"20.2 (13.4, 27.1)",604,NA,NA,Odisha,East
+21,Urban,Uncontrolled,47,40.1,54,Proportion,"47 (40.1, 54)",604,NA,NA,Odisha,East
+21,Urban,NA,33.6,29.1,38,Proportion,"33.6 (29.1, 38)",601,NA,NA,Odisha,East
+22,Rural,Untreated,47.2,40.4,54,Proportion,"47.2 (40.4, 54)",991,NA,NA,Chhattisgarh,Central
+22,Rural,Uncontrolled,26.6,22.3,31,Proportion,"26.6 (22.3, 31)",991,NA,NA,Chhattisgarh,Central
+22,Rural,NA,42.7,38.8,46.6,Proportion,"42.7 (38.8, 46.6)",989,NA,NA,Chhattisgarh,Central
+22,Urban,Untreated,36.8,27,46.6,Proportion,"36.8 (27, 46.6)",576,NA,NA,Chhattisgarh,Central
+22,Urban,Uncontrolled,27.5,21.2,33.8,Proportion,"27.5 (21.2, 33.8)",576,NA,NA,Chhattisgarh,Central
+22,Urban,NA,46.3,41.4,51.3,Proportion,"46.3 (41.4, 51.3)",575,NA,NA,Chhattisgarh,Central
+23,Rural,Untreated,35.2,31.3,39.1,Proportion,"35.2 (31.3, 39.1)",1285,NA,NA,Madhya Pradesh,Central
+23,Rural,Uncontrolled,36.2,33,39.4,Proportion,"36.2 (33, 39.4)",1285,NA,NA,Madhya Pradesh,Central
+23,Rural,NA,41.7,38.3,45,Proportion,"41.7 (38.3, 45)",1284,NA,NA,Madhya Pradesh,Central
+23,Urban,Untreated,27.3,22.5,32.1,Proportion,"27.3 (22.5, 32.1)",837,NA,NA,Madhya Pradesh,Central
+23,Urban,Uncontrolled,43.1,38.6,47.5,Proportion,"43.1 (38.6, 47.5)",837,NA,NA,Madhya Pradesh,Central
+23,Urban,NA,43.2,39,47.5,Proportion,"43.2 (39, 47.5)",836,NA,NA,Madhya Pradesh,Central
+24,Rural,Untreated,24.4,20.7,28.1,Proportion,"24.4 (20.7, 28.1)",1249,NA,NA,Gujarat,West
+24,Rural,Uncontrolled,42.6,39.3,45.9,Proportion,"42.6 (39.3, 45.9)",1249,NA,NA,Gujarat,West
+24,Rural,NA,35.4,31.9,39,Proportion,"35.4 (31.9, 39)",1248,NA,NA,Gujarat,West
+24,Urban,Untreated,12.6,10,15.3,Proportion,"12.6 (10, 15.3)",1177,NA,NA,Gujarat,West
+24,Urban,Uncontrolled,43.9,40.2,47.6,Proportion,"43.9 (40.2, 47.6)",1177,NA,NA,Gujarat,West
+24,Urban,NA,35.1,31.3,38.8,Proportion,"35.1 (31.3, 38.8)",1175,NA,NA,Gujarat,West
+25,Rural,Untreated,9.1,0,18.1,Proportion,"9.1 (0, 18.1)",79,NA,NA,Dadra & Nagar Haveli And Daman & Diu,West
+25,Rural,Uncontrolled,47.6,27.2,68,Proportion,"47.6 (27.2, 68)",79,NA,NA,Dadra & Nagar Haveli And Daman & Diu,West
+25,Rural,NA,32.7,15.8,49.5,Proportion,"32.7 (15.8, 49.5)",79,NA,NA,Dadra & Nagar Haveli And Daman & Diu,West
+25,Urban,Untreated,9.2,3.6,14.9,Proportion,"9.2 (3.6, 14.9)",144,NA,NA,Dadra & Nagar Haveli And Daman & Diu,West
+25,Urban,Uncontrolled,55.6,44.5,66.7,Proportion,"55.6 (44.5, 66.7)",144,NA,NA,Dadra & Nagar Haveli And Daman & Diu,West
+25,Urban,NA,30.2,14.4,46,Proportion,"30.2 (14.4, 46)",144,NA,NA,Dadra & Nagar Haveli And Daman & Diu,West
+27,Rural,Untreated,15.8,13.2,18.3,Proportion,"15.8 (13.2, 18.3)",1583,NA,NA,Maharashtra,West
+27,Rural,Uncontrolled,39.3,36.4,42.2,Proportion,"39.3 (36.4, 42.2)",1583,NA,NA,Maharashtra,West
+27,Rural,NA,39.4,36.3,42.4,Proportion,"39.4 (36.3, 42.4)",1580,NA,NA,Maharashtra,West
+27,Urban,Untreated,11.4,8.8,14,Proportion,"11.4 (8.8, 14)",1256,NA,NA,Maharashtra,West
+27,Urban,Uncontrolled,39.2,35.1,43.3,Proportion,"39.2 (35.1, 43.3)",1256,NA,NA,Maharashtra,West
+27,Urban,NA,39.2,35.3,43.1,Proportion,"39.2 (35.3, 43.1)",1255,NA,NA,Maharashtra,West
+28,Rural,Untreated,11.9,9.6,14.3,Proportion,"11.9 (9.6, 14.3)",1233,NA,NA,Andhra Pradesh,South
+28,Rural,Uncontrolled,50.5,47.4,53.7,Proportion,"50.5 (47.4, 53.7)",1233,NA,NA,Andhra Pradesh,South
+28,Rural,NA,41.1,38,44.1,Proportion,"41.1 (38, 44.1)",1232,NA,NA,Andhra Pradesh,South
+28,Urban,Untreated,9.8,7.2,12.5,Proportion,"9.8 (7.2, 12.5)",736,NA,NA,Andhra Pradesh,South
+28,Urban,Uncontrolled,53.5,48.8,58.1,Proportion,"53.5 (48.8, 58.1)",736,NA,NA,Andhra Pradesh,South
+28,Urban,NA,39.6,35.2,43.9,Proportion,"39.6 (35.2, 43.9)",735,NA,NA,Andhra Pradesh,South
+29,Rural,Untreated,15,12.6,17.4,Proportion,"15 (12.6, 17.4)",2130,NA,NA,Karnataka,South
+29,Rural,Uncontrolled,46.3,43.2,49.4,Proportion,"46.3 (43.2, 49.4)",2130,NA,NA,Karnataka,South
+29,Rural,NA,41.6,38.9,44.4,Proportion,"41.6 (38.9, 44.4)",2125,NA,NA,Karnataka,South
+29,Urban,Untreated,9.6,6.6,12.7,Proportion,"9.6 (6.6, 12.7)",1292,NA,NA,Karnataka,South
+29,Urban,Uncontrolled,51.7,47.2,56.3,Proportion,"51.7 (47.2, 56.3)",1292,NA,NA,Karnataka,South
+29,Urban,NA,44.6,38.4,50.8,Proportion,"44.6 (38.4, 50.8)",1291,NA,NA,Karnataka,South
+30,Rural,Untreated,11.5,5,18,Proportion,"11.5 (5, 18)",196,NA,NA,Goa,West
+30,Rural,Uncontrolled,44.5,35.7,53.3,Proportion,"44.5 (35.7, 53.3)",196,NA,NA,Goa,West
+30,Rural,NA,33,24.5,41.5,Proportion,"33 (24.5, 41.5)",196,NA,NA,Goa,West
+30,Urban,Untreated,9.2,5.1,13.4,Proportion,"9.2 (5.1, 13.4)",296,NA,NA,Goa,West
+30,Urban,Uncontrolled,50.1,42.8,57.3,Proportion,"50.1 (42.8, 57.3)",296,NA,NA,Goa,West
+30,Urban,NA,35.4,29.4,41.4,Proportion,"35.4 (29.4, 41.4)",296,NA,NA,Goa,West
+31,Rural,Untreated,22.2,13.6,30.8,Proportion,"22.2 (13.6, 30.8)",49,NA,NA,Lakshadweep,South
+31,Rural,Uncontrolled,51.4,42.3,60.6,Proportion,"51.4 (42.3, 60.6)",49,NA,NA,Lakshadweep,South
+31,Rural,NA,45.9,28.7,63,Proportion,"45.9 (28.7, 63)",49,NA,NA,Lakshadweep,South
+31,Urban,Untreated,17.4,9.7,25.1,Proportion,"17.4 (9.7, 25.1)",218,NA,NA,Lakshadweep,South
+31,Urban,Uncontrolled,40.7,31.7,49.7,Proportion,"40.7 (31.7, 49.7)",218,NA,NA,Lakshadweep,South
+31,Urban,NA,51.8,45,58.5,Proportion,"51.8 (45, 58.5)",218,NA,NA,Lakshadweep,South
+32,Rural,Untreated,17.6,15.6,19.7,Proportion,"17.6 (15.6, 19.7)",2641,NA,NA,Kerala,South
+32,Rural,Uncontrolled,41.9,39.5,44.3,Proportion,"41.9 (39.5, 44.3)",2641,NA,NA,Kerala,South
+32,Rural,NA,41,38.6,43.5,Proportion,"41 (38.6, 43.5)",2636,NA,NA,Kerala,South
+32,Urban,Untreated,15,12.6,17.4,Proportion,"15 (12.6, 17.4)",1866,NA,NA,Kerala,South
+32,Urban,Uncontrolled,44.3,41.7,46.9,Proportion,"44.3 (41.7, 46.9)",1866,NA,NA,Kerala,South
+32,Urban,NA,39.6,36.8,42.4,Proportion,"39.6 (36.8, 42.4)",1863,NA,NA,Kerala,South
+33,Rural,Untreated,36.9,31,42.8,Proportion,"36.9 (31, 42.8)",3863,NA,NA,Tamil Nadu,South
+33,Rural,Uncontrolled,37.9,34.3,41.4,Proportion,"37.9 (34.3, 41.4)",3863,NA,NA,Tamil Nadu,South
+33,Rural,NA,35.5,33.2,37.9,Proportion,"35.5 (33.2, 37.9)",3858,NA,NA,Tamil Nadu,South
+33,Urban,Untreated,25.6,20,31.2,Proportion,"25.6 (20, 31.2)",3643,NA,NA,Tamil Nadu,South
+33,Urban,Uncontrolled,45.6,42.2,49,Proportion,"45.6 (42.2, 49)",3643,NA,NA,Tamil Nadu,South
+33,Urban,NA,37.2,34.8,39.6,Proportion,"37.2 (34.8, 39.6)",3642,NA,NA,Tamil Nadu,South
+34,Rural,Untreated,15.7,7.6,23.8,Proportion,"15.7 (7.6, 23.8)",145,NA,NA,Puducherry,South
+34,Rural,Uncontrolled,52.6,42.6,62.6,Proportion,"52.6 (42.6, 62.6)",145,NA,NA,Puducherry,South
+34,Rural,NA,32.6,24.3,40.9,Proportion,"32.6 (24.3, 40.9)",145,NA,NA,Puducherry,South
+34,Urban,Untreated,14.9,7.3,22.5,Proportion,"14.9 (7.3, 22.5)",977,NA,NA,Puducherry,South
+34,Urban,Uncontrolled,41.8,34.7,48.8,Proportion,"41.8 (34.7, 48.8)",977,NA,NA,Puducherry,South
+34,Urban,NA,33.8,25.8,41.9,Proportion,"33.8 (25.8, 41.9)",976,NA,NA,Puducherry,South
+35,Rural,Untreated,13,8.4,17.6,Proportion,"13 (8.4, 17.6)",309,NA,NA,Andaman & Nicobar Islands,South
+35,Rural,Uncontrolled,43.7,36.4,51.1,Proportion,"43.7 (36.4, 51.1)",309,NA,NA,Andaman & Nicobar Islands,South
+35,Rural,NA,42.9,36.3,49.5,Proportion,"42.9 (36.3, 49.5)",309,NA,NA,Andaman & Nicobar Islands,South
+35,Urban,Untreated,7.2,2,12.4,Proportion,"7.2 (2, 12.4)",106,NA,NA,Andaman & Nicobar Islands,South
+35,Urban,Uncontrolled,50.7,40,61.3,Proportion,"50.7 (40, 61.3)",106,NA,NA,Andaman & Nicobar Islands,South
+35,Urban,NA,38.4,30.6,46.1,Proportion,"38.4 (30.6, 46.1)",106,NA,NA,Andaman & Nicobar Islands,South
+36,Rural,Untreated,16.5,14.4,18.7,Proportion,"16.5 (14.4, 18.7)",2117,NA,NA,Telangana,South
+36,Rural,Uncontrolled,40.5,38.1,42.9,Proportion,"40.5 (38.1, 42.9)",2117,NA,NA,Telangana,South
+36,Rural,NA,38.7,36.2,41.1,Proportion,"38.7 (36.2, 41.1)",2113,NA,NA,Telangana,South
+36,Urban,Untreated,8.1,5.9,10.2,Proportion,"8.1 (5.9, 10.2)",1319,NA,NA,Telangana,South
+36,Urban,Uncontrolled,44.2,40.6,47.9,Proportion,"44.2 (40.6, 47.9)",1319,NA,NA,Telangana,South
+36,Urban,NA,41.3,37.2,45.4,Proportion,"41.3 (37.2, 45.4)",1314,NA,NA,Telangana,South
+37,Rural,Untreated,67.5,47.3,87.7,Proportion,"67.5 (47.3, 87.7)",280,NA,NA,Ladakh,North
+37,Rural,Uncontrolled,12.7,2.7,22.7,Proportion,"12.7 (2.7, 22.7)",280,NA,NA,Ladakh,North
+37,Rural,NA,23.9,10.4,37.5,Proportion,"23.9 (10.4, 37.5)",280,NA,NA,Ladakh,North
+37,Urban,Untreated,79.8,57.5,102.2,Proportion,"79.8 (57.5, 102.2)",111,NA,NA,Ladakh,North
+37,Urban,Uncontrolled,7.7,-1.8,17.2,Proportion,"7.7 (-1.8, 17.2)",111,NA,NA,Ladakh,North
+37,Urban,NA,9.7,-3,22.3,Proportion,"9.7 (-3, 22.3)",111,NA,NA,Ladakh,North
+1,Rural,Diabetes,3.9,3.5,4.3,Proportion,"3.9 (3.5, 4.3)",44116,NA,NA,Jammu & Kashmir,North
+1,Urban,Diabetes,5,4.2,5.8,Proportion,"5 (4.2, 5.8)",9935,NA,NA,Jammu & Kashmir,North
+2,Rural,Diabetes,5.8,5.2,6.4,Proportion,"5.8 (5.2, 6.4)",24969,NA,NA,Himachal Pradesh,North
+2,Urban,Diabetes,7.3,5.4,9.3,Proportion,"7.3 (5.4, 9.3)",2087,NA,NA,Himachal Pradesh,North
+3,Rural,Diabetes,6.2,5.8,6.6,Proportion,"6.2 (5.8, 6.6)",34594,NA,NA,Punjab,North
+3,Urban,Diabetes,8,7.2,8.8,Proportion,"8 (7.2, 8.8)",15209,NA,NA,Punjab,North
+4,Rural,Diabetes,9.1,9.1,9.1,Proportion,"9.1 (9.1, 9.1)",44,NA,NA,Chandigarh,North
+4,Urban,Diabetes,9.3,7.4,11.2,Proportion,"9.3 (7.4, 11.2)",1307,NA,NA,Chandigarh,North
+5,Rural,Diabetes,4.6,4.2,5.1,Proportion,"4.6 (4.2, 5.1)",22928,NA,NA,Uttarakhand,Central
+5,Urban,Diabetes,9.1,7.9,10.3,Proportion,"9.1 (7.9, 10.3)",4888,NA,NA,Uttarakhand,Central
+6,Rural,Diabetes,5,4.5,5.4,Proportion,"5 (4.5, 5.4)",34499,NA,NA,Haryana,North
+6,Urban,Diabetes,7.8,6.8,8.7,Proportion,"7.8 (6.8, 8.7)",14942,NA,NA,Haryana,North
+7,Rural,Diabetes,6.2,1.3,11,Proportion,"6.2 (1.3, 11)",820,NA,NA,Nct Of Delhi,North
+7,Urban,Diabetes,7.7,7.2,8.2,Proportion,"7.7 (7.2, 8.2)",20521,NA,NA,Nct Of Delhi,North
+8,Rural,Diabetes,2.3,2.1,2.6,Proportion,"2.3 (2.1, 2.6)",74638,NA,NA,Rajasthan,North
+8,Urban,Diabetes,4.7,4,5.4,Proportion,"4.7 (4, 5.4)",20738,NA,NA,Rajasthan,North
+9,Rural,Diabetes,4.3,4,4.5,Proportion,"4.3 (4, 4.5)",155168,NA,NA,Uttar Pradesh,Central
+9,Urban,Diabetes,5.6,5.1,6.1,Proportion,"5.6 (5.1, 6.1)",36885,NA,NA,Uttar Pradesh,Central
+10,Rural,Diabetes,4.6,4.3,4.9,Proportion,"4.6 (4.3, 4.9)",75991,NA,NA,Bihar,East
+10,Urban,Diabetes,8.4,7.2,9.5,Proportion,"8.4 (7.2, 9.5)",9857,NA,NA,Bihar,East
+11,Rural,Diabetes,4.6,3.8,5.5,Proportion,"4.6 (3.8, 5.5)",6457,NA,NA,Sikkim,North East
+11,Urban,Diabetes,7.1,4.9,9.3,Proportion,"7.1 (4.9, 9.3)",1021,NA,NA,Sikkim,North East
+12,Rural,Diabetes,3.1,2.5,3.7,Proportion,"3.1 (2.5, 3.7)",35952,NA,NA,Arunachal Pradesh,North East
+12,Urban,Diabetes,6.1,4.7,7.5,Proportion,"6.1 (4.7, 7.5)",8290,NA,NA,Arunachal Pradesh,North East
+13,Rural,Diabetes,2.2,1.7,2.6,Proportion,"2.2 (1.7, 2.6)",17397,NA,NA,Nagaland,North East
+13,Urban,Diabetes,4.6,3.3,5.8,Proportion,"4.6 (3.3, 5.8)",5830,NA,NA,Nagaland,North East
+14,Rural,Diabetes,5,4.3,5.7,Proportion,"5 (4.3, 5.7)",14815,NA,NA,Manipur,North East
+14,Urban,Diabetes,8.5,7.3,9.7,Proportion,"8.5 (7.3, 9.7)",5397,NA,NA,Manipur,North East
+15,Rural,Diabetes,3.7,3,4.5,Proportion,"3.7 (3, 4.5)",10466,NA,NA,Mizoram,North East
+15,Urban,Diabetes,6.8,5.6,8,Proportion,"6.8 (5.6, 8)",7920,NA,NA,Mizoram,North East
+16,Rural,Diabetes,4.2,3.7,4.7,Proportion,"4.2 (3.7, 4.7)",13968,NA,NA,Tripura,North East
+16,Urban,Diabetes,8.4,6.9,9.9,Proportion,"8.4 (6.9, 9.9)",3354,NA,NA,Tripura,North East
+17,Rural,Diabetes,1.6,1.3,2,Proportion,"1.6 (1.3, 2)",22715,NA,NA,Meghalaya,North East
+17,Urban,Diabetes,4.8,3.6,5.9,Proportion,"4.8 (3.6, 5.9)",2848,NA,NA,Meghalaya,North East
+18,Rural,Diabetes,3.6,3.3,3.9,Proportion,"3.6 (3.3, 3.9)",67880,NA,NA,Assam,North East
+18,Urban,Diabetes,7.4,6.5,8.3,Proportion,"7.4 (6.5, 8.3)",9775,NA,NA,Assam,North East
+19,Rural,Diabetes,4.2,3.9,4.5,Proportion,"4.2 (3.9, 4.5)",32955,NA,NA,West Bengal,East
+19,Urban,Diabetes,6.3,5.6,7,Proportion,"6.3 (5.6, 7)",14805,NA,NA,West Bengal,East
+20,Rural,Diabetes,3.9,3.4,4.4,Proportion,"3.9 (3.4, 4.4)",45256,NA,NA,Jharkhand,East
+20,Urban,Diabetes,7.6,6.4,8.8,Proportion,"7.6 (6.4, 8.8)",11370,NA,NA,Jharkhand,East
+21,Rural,Diabetes,4.7,4.3,5.1,Proportion,"4.7 (4.3, 5.1)",57491,NA,NA,Odisha,East
+21,Urban,Diabetes,9.1,8,10.2,Proportion,"9.1 (8, 10.2)",9261,NA,NA,Odisha,East
+22,Rural,Diabetes,3.2,2.9,3.6,Proportion,"3.2 (2.9, 3.6)",52610,NA,NA,Chhattisgarh,Central
+22,Urban,Diabetes,6.3,5.3,7.3,Proportion,"6.3 (5.3, 7.3)",12243,NA,NA,Chhattisgarh,Central
+23,Rural,Diabetes,2.5,2.3,2.7,Proportion,"2.5 (2.3, 2.7)",86958,NA,NA,Madhya Pradesh,Central
+23,Urban,Diabetes,4.8,4.3,5.3,Proportion,"4.8 (4.3, 5.3)",22639,NA,NA,Madhya Pradesh,Central
+24,Rural,Diabetes,3.5,3.2,3.7,Proportion,"3.5 (3.2, 3.7)",59343,NA,NA,Gujarat,West
+24,Urban,Diabetes,5.7,5.3,6.2,Proportion,"5.7 (5.3, 6.2)",26811,NA,NA,Gujarat,West
+25,Rural,Diabetes,3.9,2.8,5,Proportion,"3.9 (2.8, 5)",2908,NA,NA,Dadra & Nagar Haveli And Daman & Diu,West
+25,Urban,Diabetes,5.3,4,6.7,Proportion,"5.3 (4, 6.7)",3463,NA,NA,Dadra & Nagar Haveli And Daman & Diu,West
+27,Rural,Diabetes,3.8,3.5,4,Proportion,"3.8 (3.5, 4)",60891,NA,NA,Maharashtra,West
+27,Urban,Diabetes,6.6,6.1,7.2,Proportion,"6.6 (6.1, 7.2)",27328,NA,NA,Maharashtra,West
+28,Rural,Diabetes,8.8,8.2,9.4,Proportion,"8.8 (8.2, 9.4)",19143,NA,NA,Andhra Pradesh,South
+28,Urban,Diabetes,13.4,12.2,14.7,Proportion,"13.4 (12.2, 14.7)",7363,NA,NA,Andhra Pradesh,South
+29,Rural,Diabetes,5.5,5.2,5.9,Proportion,"5.5 (5.2, 5.9)",52477,NA,NA,Karnataka,South
+29,Urban,Diabetes,8.6,7.7,9.5,Proportion,"8.6 (7.7, 9.5)",20340,NA,NA,Karnataka,South
+30,Rural,Diabetes,11.8,10,13.5,Proportion,"11.8 (10, 13.5)",1928,NA,NA,Goa,West
+30,Urban,Diabetes,10.7,9.2,12.2,Proportion,"10.7 (9.2, 12.2)",3006,NA,NA,Goa,West
+31,Rural,Diabetes,9.1,7.2,11.1,Proportion,"9.1 (7.2, 11.1)",611,NA,NA,Lakshadweep,South
+31,Urban,Diabetes,10.4,8.7,12.1,Proportion,"10.4 (8.7, 12.1)",2248,NA,NA,Lakshadweep,South
+32,Rural,Diabetes,17.2,16.3,18,Proportion,"17.2 (16.3, 18)",17946,NA,NA,Kerala,South
+32,Urban,Diabetes,16.9,16,17.8,Proportion,"16.9 (16, 17.8)",12328,NA,NA,Kerala,South
+33,Rural,Diabetes,12.2,11.1,13.3,Proportion,"12.2 (11.1, 13.3)",37938,NA,NA,Tamil Nadu,South
+33,Urban,Diabetes,15.9,14.7,17,Proportion,"15.9 (14.7, 17)",27097,NA,NA,Tamil Nadu,South
+34,Rural,Diabetes,8.5,6.6,10.4,Proportion,"8.5 (6.6, 10.4)",1818,NA,NA,Puducherry,South
+34,Urban,Diabetes,14.7,12.7,16.7,Proportion,"14.7 (12.7, 16.7)",7327,NA,NA,Puducherry,South
+35,Rural,Diabetes,7.6,6.2,9,Proportion,"7.6 (6.2, 9)",5242,NA,NA,Andaman & Nicobar Islands,South
+35,Urban,Diabetes,9.3,7.5,11.1,Proportion,"9.3 (7.5, 11.1)",1336,NA,NA,Andaman & Nicobar Islands,South
+36,Rural,Diabetes,6.3,6,6.6,Proportion,"6.3 (6, 6.6)",47385,NA,NA,Telangana,South
+36,Urban,Diabetes,11.4,10.5,12.3,Proportion,"11.4 (10.5, 12.3)",15432,NA,NA,Telangana,South
+37,Rural,Diabetes,6.3,2.9,9.7,Proportion,"6.3 (2.9, 9.7)",4396,NA,NA,Ladakh,North
+37,Urban,Diabetes,9.7,1.3,18.1,Proportion,"9.7 (1.3, 18.1)",1262,NA,NA,Ladakh,North

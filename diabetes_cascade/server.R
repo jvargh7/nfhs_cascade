@@ -94,6 +94,8 @@ shinyServer(function(input, output,session) {
   
   
   # Panel 2: Overview ----------------
+  # https://waiter.john-coene.com/#/waiter/examples#on-render -----
+  w <- Waiter$new(id = c("nationalmap", "statemap"))
   
   welcome_modal <- modalDialog(
     title = "Welcome!",
@@ -221,7 +223,6 @@ shinyServer(function(input, output,session) {
     updateSelectInput(session, "districtinput1", choices = na.omit(d_i)) 
   })  
 
-  
   nm_merge <- reactive({
     
     ss <- state_shp %>% 
@@ -232,8 +233,14 @@ shinyServer(function(input, output,session) {
                 dplyr::select(n5_state,ST_NM,estimate) %>% 
                 rename_at(vars(estimate),~paste0(input$mapinput1," ",input$stratainput1," ",input$varinput1," ")),
               by.x="ST_NM",by.y="ST_NM",all.x=TRUE)
-    
+    # https://waiter.john-coene.com/#/waiter/examples#on-render 
+    w$show()
     ss
+    
+    # w$show()
+    # on.exit({
+    #   w$hide()
+    # })
   })
   
   
@@ -258,8 +265,7 @@ shinyServer(function(input, output,session) {
   output$nationalmap <- tmap::renderTmap({
     
     
-    
-    
+
     nm <- tmap_mode("view") +
       tm_shape(shp = nm_merge(),id = "n5_state") +
       tm_fill(title= "",

@@ -1,0 +1,221 @@
+residence,variable,estimate,lci,uci,type,est_ci,n,stratification,strata
+Rural,Screened,29.9,29.5,30.3,Proportion,"29.9 (29.5, 30.3)",1244713,,Total
+Rural,Diabetes,5,4.9,5.1,Proportion,"5 (4.9, 5.1)",1244713,,Total
+Rural,Diagnosed,3.8,3.7,3.9,Proportion,"3.8 (3.7, 3.9)",1244713,,Total
+Rural,Treated,2.5,2.4,2.5,Proportion,"2.5 (2.4, 2.5)",1244713,,Total
+Rural,Controlled,2.4,2.3,2.4,Proportion,"2.4 (2.3, 2.4)",1244713,,Total
+Urban,Screened,45.5,44.7,46.4,Proportion,"45.5 (44.7, 46.4)",406463,,Total
+Urban,Diabetes,8.4,8.2,8.6,Proportion,"8.4 (8.2, 8.6)",406463,,Total
+Urban,Diagnosed,6.8,6.6,7,Proportion,"6.8 (6.6, 7)",406463,,Total
+Urban,Treated,5.3,5.2,5.5,Proportion,"5.3 (5.2, 5.5)",406463,,Total
+Urban,Controlled,3.8,3.7,4,Proportion,"3.8 (3.7, 4)",406463,,Total
+Rural,Screened,31.8,31.4,32.3,Proportion,"31.8 (31.4, 32.3)",655126,sex,Female
+Rural,Diabetes,4.9,4.8,5,Proportion,"4.9 (4.8, 5)",655126,sex,Female
+Rural,Diagnosed,3.8,3.6,3.9,Proportion,"3.8 (3.6, 3.9)",655126,sex,Female
+Rural,Treated,2.4,2.3,2.5,Proportion,"2.4 (2.3, 2.5)",655126,sex,Female
+Rural,Controlled,2.4,2.3,2.5,Proportion,"2.4 (2.3, 2.5)",655126,sex,Female
+Rural,Screened,27.7,27.3,28.1,Proportion,"27.7 (27.3, 28.1)",589587,sex,Male
+Rural,Diabetes,5.2,5.1,5.3,Proportion,"5.2 (5.1, 5.3)",589587,sex,Male
+Rural,Diagnosed,3.8,3.7,4,Proportion,"3.8 (3.7, 4)",589587,sex,Male
+Rural,Treated,2.5,2.5,2.6,Proportion,"2.5 (2.5, 2.6)",589587,sex,Male
+Rural,Controlled,2.3,2.3,2.4,Proportion,"2.3 (2.3, 2.4)",589587,sex,Male
+Urban,Screened,48.5,47.6,49.4,Proportion,"48.5 (47.6, 49.4)",212770,sex,Female
+Urban,Diabetes,8.5,8.3,8.8,Proportion,"8.5 (8.3, 8.8)",212770,sex,Female
+Urban,Diagnosed,7,6.8,7.2,Proportion,"7 (6.8, 7.2)",212770,sex,Female
+Urban,Treated,5.5,5.3,5.7,Proportion,"5.5 (5.3, 5.7)",212770,sex,Female
+Urban,Controlled,4,3.8,4.1,Proportion,"4 (3.8, 4.1)",212770,sex,Female
+Urban,Screened,42.3,41.4,43.2,Proportion,"42.3 (41.4, 43.2)",193693,sex,Male
+Urban,Diabetes,8.3,8,8.6,Proportion,"8.3 (8, 8.6)",193693,sex,Male
+Urban,Diagnosed,6.6,6.4,6.9,Proportion,"6.6 (6.4, 6.9)",193693,sex,Male
+Urban,Treated,5.1,5,5.3,Proportion,"5.1 (5, 5.3)",193693,sex,Male
+Urban,Controlled,3.7,3.5,3.9,Proportion,"3.7 (3.5, 3.9)",193693,sex,Male
+Rural,Screened,23,22.7,23.4,Proportion,"23 (22.7, 23.4)",629169,age_category,18-39
+Rural,Diabetes,1.7,1.7,1.8,Proportion,"1.7 (1.7, 1.8)",629169,age_category,18-39
+Rural,Diagnosed,1.2,1.2,1.3,Proportion,"1.2 (1.2, 1.3)",629169,age_category,18-39
+Rural,Treated,0.4,0.4,0.5,Proportion,"0.4 (0.4, 0.5)",629169,age_category,18-39
+Rural,Controlled,1,0.9,1.1,Proportion,"1 (0.9, 1.1)",629169,age_category,18-39
+Rural,Screened,35.5,35,36,Proportion,"35.5 (35, 36)",480515,age_category,40-64
+Rural,Diabetes,7.6,7.5,7.8,Proportion,"7.6 (7.5, 7.8)",480515,age_category,40-64
+Rural,Diagnosed,5.7,5.5,5.8,Proportion,"5.7 (5.5, 5.8)",480515,age_category,40-64
+Rural,Treated,3.9,3.8,4,Proportion,"3.9 (3.8, 4)",480515,age_category,40-64
+Rural,Controlled,3.2,3.1,3.3,Proportion,"3.2 (3.1, 3.3)",480515,age_category,40-64
+Rural,Screened,41.4,40.8,42,Proportion,"41.4 (40.8, 42)",135029,age_category,65 plus
+Rural,Diabetes,11,10.7,11.3,Proportion,"11 (10.7, 11.3)",135029,age_category,65 plus
+Rural,Diagnosed,8.9,8.6,9.1,Proportion,"8.9 (8.6, 9.1)",135029,age_category,65 plus
+Rural,Treated,6.6,6.4,6.8,Proportion,"6.6 (6.4, 6.8)",135029,age_category,65 plus
+Rural,Controlled,5.5,5.3,5.7,Proportion,"5.5 (5.3, 5.7)",135029,age_category,65 plus
+Urban,Screened,33.7,32.8,34.5,Proportion,"33.7 (32.8, 34.5)",206731,age_category,18-39
+Urban,Diabetes,2.3,2.2,2.5,Proportion,"2.3 (2.2, 2.5)",206731,age_category,18-39
+Urban,Diagnosed,1.7,1.6,1.8,Proportion,"1.7 (1.6, 1.8)",206731,age_category,18-39
+Urban,Treated,0.8,0.8,0.9,Proportion,"0.8 (0.8, 0.9)",206731,age_category,18-39
+Urban,Controlled,1.2,1.1,1.3,Proportion,"1.2 (1.1, 1.3)",206731,age_category,18-39
+Urban,Screened,55.4,54.5,56.4,Proportion,"55.4 (54.5, 56.4)",159739,age_category,40-64
+Urban,Diabetes,12.8,12.4,13.1,Proportion,"12.8 (12.4, 13.1)",159739,age_category,40-64
+Urban,Diagnosed,10.3,9.9,10.6,Proportion,"10.3 (9.9, 10.6)",159739,age_category,40-64
+Urban,Treated,8.3,8,8.5,Proportion,"8.3 (8, 8.5)",159739,age_category,40-64
+Urban,Controlled,5.3,5.1,5.5,Proportion,"5.3 (5.1, 5.5)",159739,age_category,40-64
+Urban,Screened,65.4,64.2,66.5,Proportion,"65.4 (64.2, 66.5)",39993,age_category,65 plus
+Urban,Diabetes,21.2,20.5,22,Proportion,"21.2 (20.5, 22)",39993,age_category,65 plus
+Urban,Diagnosed,18.6,17.9,19.3,Proportion,"18.6 (17.9, 19.3)",39993,age_category,65 plus
+Urban,Treated,15.9,15.3,16.6,Proportion,"15.9 (15.3, 16.6)",39993,age_category,65 plus
+Urban,Controlled,10.8,10.3,11.4,Proportion,"10.8 (10.3, 11.4)",39993,age_category,65 plus
+Rural,Screened,31.1,30.4,31.8,Proportion,"31.1 (30.4, 31.8)",126226,education,Higher
+Rural,Diabetes,4,3.8,4.2,Proportion,"4 (3.8, 4.2)",126226,education,Higher
+Rural,Diagnosed,3.1,2.9,3.3,Proportion,"3.1 (2.9, 3.3)",126226,education,Higher
+Rural,Treated,1.7,1.6,1.8,Proportion,"1.7 (1.6, 1.8)",126226,education,Higher
+Rural,Controlled,2.1,1.9,2.3,Proportion,"2.1 (1.9, 2.3)",126226,education,Higher
+Rural,Screened,27.8,27.3,28.2,Proportion,"27.8 (27.3, 28.2)",407626,education,No education
+Rural,Diabetes,5.3,5.2,5.4,Proportion,"5.3 (5.2, 5.4)",407626,education,No education
+Rural,Diagnosed,3.9,3.7,4,Proportion,"3.9 (3.7, 4)",407626,education,No education
+Rural,Treated,2.5,2.4,2.6,Proportion,"2.5 (2.4, 2.6)",407626,education,No education
+Rural,Controlled,2.4,2.3,2.5,Proportion,"2.4 (2.3, 2.5)",407626,education,No education
+Rural,Screened,32.1,31.6,32.7,Proportion,"32.1 (31.6, 32.7)",187169,education,Primary
+Rural,Diabetes,6.2,6,6.4,Proportion,"6.2 (6, 6.4)",187169,education,Primary
+Rural,Diagnosed,4.7,4.5,4.9,Proportion,"4.7 (4.5, 4.9)",187169,education,Primary
+Rural,Treated,3.2,3.1,3.4,Proportion,"3.2 (3.1, 3.4)",187169,education,Primary
+Rural,Controlled,2.8,2.7,3,Proportion,"2.8 (2.7, 3)",187169,education,Primary
+Rural,Screened,30.5,30,30.9,Proportion,"30.5 (30, 30.9)",523692,education,Secondary
+Rural,Diabetes,4.7,4.6,4.8,Proportion,"4.7 (4.6, 4.8)",523692,education,Secondary
+Rural,Diagnosed,3.6,3.5,3.7,Proportion,"3.6 (3.5, 3.7)",523692,education,Secondary
+Rural,Treated,2.3,2.3,2.4,Proportion,"2.3 (2.3, 2.4)",523692,education,Secondary
+Rural,Controlled,2.2,2.1,2.3,Proportion,"2.2 (2.1, 2.3)",523692,education,Secondary
+Urban,Screened,46.9,45.7,48,Proportion,"46.9 (45.7, 48)",99688,education,Higher
+Urban,Diabetes,6.3,6,6.6,Proportion,"6.3 (6, 6.6)",99688,education,Higher
+Urban,Diagnosed,5.2,5,5.5,Proportion,"5.2 (5, 5.5)",99688,education,Higher
+Urban,Treated,3.9,3.7,4.1,Proportion,"3.9 (3.7, 4.1)",99688,education,Higher
+Urban,Controlled,3.3,3.1,3.5,Proportion,"3.3 (3.1, 3.5)",99688,education,Higher
+Urban,Screened,43,41.8,44.2,Proportion,"43 (41.8, 44.2)",65735,education,No education
+Urban,Diabetes,9.8,9.4,10.2,Proportion,"9.8 (9.4, 10.2)",65735,education,No education
+Urban,Diagnosed,7.7,7.3,8.1,Proportion,"7.7 (7.3, 8.1)",65735,education,No education
+Urban,Treated,6,5.7,6.3,Proportion,"6 (5.7, 6.3)",65735,education,No education
+Urban,Controlled,4.2,3.9,4.4,Proportion,"4.2 (3.9, 4.4)",65735,education,No education
+Urban,Screened,47.2,46,48.4,Proportion,"47.2 (46, 48.4)",46570,education,Primary
+Urban,Diabetes,11.2,10.7,11.7,Proportion,"11.2 (10.7, 11.7)",46570,education,Primary
+Urban,Diagnosed,9.2,8.7,9.7,Proportion,"9.2 (8.7, 9.7)",46570,education,Primary
+Urban,Treated,7.4,7,7.9,Proportion,"7.4 (7, 7.9)",46570,education,Primary
+Urban,Controlled,4.9,4.5,5.2,Proportion,"4.9 (4.5, 5.2)",46570,education,Primary
+Urban,Screened,45.3,44.3,46.2,Proportion,"45.3 (44.3, 46.2)",194470,education,Secondary
+Urban,Diabetes,8.4,8.1,8.6,Proportion,"8.4 (8.1, 8.6)",194470,education,Secondary
+Urban,Diagnosed,6.8,6.5,7,Proportion,"6.8 (6.5, 7)",194470,education,Secondary
+Urban,Treated,5.3,5.1,5.5,Proportion,"5.3 (5.1, 5.5)",194470,education,Secondary
+Urban,Controlled,3.7,3.6,3.9,Proportion,"3.7 (3.6, 3.9)",194470,education,Secondary
+Rural,Screened,33.1,32.4,33.7,Proportion,"33.1 (32.4, 33.7)",276653,caste,General
+Rural,Diabetes,6.2,6,6.4,Proportion,"6.2 (6, 6.4)",276653,caste,General
+Rural,Diagnosed,4.8,4.6,5,Proportion,"4.8 (4.6, 5)",276653,caste,General
+Rural,Treated,3.3,3.2,3.4,Proportion,"3.3 (3.2, 3.4)",276653,caste,General
+Rural,Controlled,2.9,2.7,3,Proportion,"2.9 (2.7, 3)",276653,caste,General
+Rural,Screened,31.5,31,32.1,Proportion,"31.5 (31, 32.1)",455380,caste,OBC
+Rural,Diabetes,5.4,5.3,5.6,Proportion,"5.4 (5.3, 5.6)",455380,caste,OBC
+Rural,Diagnosed,4.1,4,4.3,Proportion,"4.1 (4, 4.3)",455380,caste,OBC
+Rural,Treated,2.7,2.6,2.8,Proportion,"2.7 (2.6, 2.8)",455380,caste,OBC
+Rural,Controlled,2.6,2.4,2.7,Proportion,"2.6 (2.4, 2.7)",455380,caste,OBC
+Rural,Screened,28.9,28.1,29.6,Proportion,"28.9 (28.1, 29.6)",242767,caste,Schedule Caste
+Rural,Diabetes,4.5,4.3,4.6,Proportion,"4.5 (4.3, 4.6)",242767,caste,Schedule Caste
+Rural,Diagnosed,3.3,3.1,3.4,Proportion,"3.3 (3.1, 3.4)",242767,caste,Schedule Caste
+Rural,Treated,2,1.9,2.1,Proportion,"2 (1.9, 2.1)",242767,caste,Schedule Caste
+Rural,Controlled,2.1,2,2.2,Proportion,"2.1 (2, 2.2)",242767,caste,Schedule Caste
+Rural,Screened,19.9,19.1,20.7,Proportion,"19.9 (19.1, 20.7)",269913,caste,Schedule Tribe
+Rural,Diabetes,2.5,2.4,2.6,Proportion,"2.5 (2.4, 2.6)",269913,caste,Schedule Tribe
+Rural,Diagnosed,1.6,1.5,1.7,Proportion,"1.6 (1.5, 1.7)",269913,caste,Schedule Tribe
+Rural,Treated,0.9,0.9,1,Proportion,"0.9 (0.9, 1)",269913,caste,Schedule Tribe
+Rural,Controlled,1.1,1,1.2,Proportion,"1.1 (1, 1.2)",269913,caste,Schedule Tribe
+Urban,Screened,47.1,45.9,48.3,Proportion,"47.1 (45.9, 48.3)",133731,caste,General
+Urban,Diabetes,8.8,8.4,9.1,Proportion,"8.8 (8.4, 9.1)",133731,caste,General
+Urban,Diagnosed,7.2,6.9,7.5,Proportion,"7.2 (6.9, 7.5)",133731,caste,General
+Urban,Treated,5.8,5.5,6.1,Proportion,"5.8 (5.5, 6.1)",133731,caste,General
+Urban,Controlled,4.1,3.9,4.3,Proportion,"4.1 (3.9, 4.3)",133731,caste,General
+Urban,Screened,47.5,46.5,48.6,Proportion,"47.5 (46.5, 48.6)",159119,caste,OBC
+Urban,Diabetes,9.1,8.8,9.4,Proportion,"9.1 (8.8, 9.4)",159119,caste,OBC
+Urban,Diagnosed,7.4,7.1,7.7,Proportion,"7.4 (7.1, 7.7)",159119,caste,OBC
+Urban,Treated,5.7,5.5,6,Proportion,"5.7 (5.5, 6)",159119,caste,OBC
+Urban,Controlled,4.1,3.9,4.3,Proportion,"4.1 (3.9, 4.3)",159119,caste,OBC
+Urban,Screened,40.5,39.1,41.9,Proportion,"40.5 (39.1, 41.9)",71992,caste,Schedule Caste
+Urban,Diabetes,6.9,6.5,7.3,Proportion,"6.9 (6.5, 7.3)",71992,caste,Schedule Caste
+Urban,Diagnosed,5.3,5,5.7,Proportion,"5.3 (5, 5.7)",71992,caste,Schedule Caste
+Urban,Treated,4,3.7,4.2,Proportion,"4 (3.7, 4.2)",71992,caste,Schedule Caste
+Urban,Controlled,3,2.7,3.2,Proportion,"3 (2.7, 3.2)",71992,caste,Schedule Caste
+Urban,Screened,35.4,33,37.8,Proportion,"35.4 (33, 37.8)",41621,caste,Schedule Tribe
+Urban,Diabetes,5.7,5.1,6.3,Proportion,"5.7 (5.1, 6.3)",41621,caste,Schedule Tribe
+Urban,Diagnosed,4.4,3.9,5,Proportion,"4.4 (3.9, 5)",41621,caste,Schedule Tribe
+Urban,Treated,3.2,2.8,3.7,Proportion,"3.2 (2.8, 3.7)",41621,caste,Schedule Tribe
+Urban,Controlled,2.5,2.2,2.9,Proportion,"2.5 (2.2, 2.9)",41621,caste,Schedule Tribe
+Rural,Screened,29.3,28.8,29.7,Proportion,"29.3 (28.8, 29.7)",960261,religion,Hindu
+Rural,Diabetes,4.9,4.8,5,Proportion,"4.9 (4.8, 5)",960261,religion,Hindu
+Rural,Diagnosed,3.6,3.5,3.7,Proportion,"3.6 (3.5, 3.7)",960261,religion,Hindu
+Rural,Treated,2.3,2.3,2.4,Proportion,"2.3 (2.3, 2.4)",960261,religion,Hindu
+Rural,Controlled,2.3,2.2,2.4,Proportion,"2.3 (2.2, 2.4)",960261,religion,Hindu
+Rural,Screened,29.3,28.3,30.3,Proportion,"29.3 (28.3, 30.3)",125179,religion,Muslim
+Rural,Diabetes,5.4,5.1,5.7,Proportion,"5.4 (5.1, 5.7)",125179,religion,Muslim
+Rural,Diagnosed,4.1,3.8,4.4,Proportion,"4.1 (3.8, 4.4)",125179,religion,Muslim
+Rural,Treated,2.7,2.5,2.9,Proportion,"2.7 (2.5, 2.9)",125179,religion,Muslim
+Rural,Controlled,2.4,2.2,2.7,Proportion,"2.4 (2.2, 2.7)",125179,religion,Muslim
+Rural,Screened,41,39.6,42.3,Proportion,"41 (39.6, 42.3)",159273,religion,Other
+Rural,Diabetes,7.1,6.7,7.5,Proportion,"7.1 (6.7, 7.5)",159273,religion,Other
+Rural,Diagnosed,5.7,5.4,6.1,Proportion,"5.7 (5.4, 6.1)",159273,religion,Other
+Rural,Treated,4.2,3.9,4.5,Proportion,"4.2 (3.9, 4.5)",159273,religion,Other
+Rural,Controlled,3.2,2.9,3.5,Proportion,"3.2 (2.9, 3.5)",159273,religion,Other
+Urban,Screened,45.8,44.9,46.7,Proportion,"45.8 (44.9, 46.7)",297734,religion,Hindu
+Urban,Diabetes,8.4,8.1,8.6,Proportion,"8.4 (8.1, 8.6)",297734,religion,Hindu
+Urban,Diagnosed,6.8,6.5,7,Proportion,"6.8 (6.5, 7)",297734,religion,Hindu
+Urban,Treated,5.3,5.1,5.4,Proportion,"5.3 (5.1, 5.4)",297734,religion,Hindu
+Urban,Controlled,3.8,3.6,4,Proportion,"3.8 (3.6, 4)",297734,religion,Hindu
+Urban,Screened,39.9,38.1,41.7,Proportion,"39.9 (38.1, 41.7)",63075,religion,Muslim
+Urban,Diabetes,7.5,7,7.9,Proportion,"7.5 (7, 7.9)",63075,religion,Muslim
+Urban,Diagnosed,6,5.6,6.4,Proportion,"6 (5.6, 6.4)",63075,religion,Muslim
+Urban,Treated,4.7,4.4,5.1,Proportion,"4.7 (4.4, 5.1)",63075,religion,Muslim
+Urban,Controlled,3.3,3,3.6,Proportion,"3.3 (3, 3.6)",63075,religion,Muslim
+Urban,Screened,56.6,54.6,58.6,Proportion,"56.6 (54.6, 58.6)",45654,religion,Other
+Urban,Diabetes,11.2,10.3,12,Proportion,"11.2 (10.3, 12)",45654,religion,Other
+Urban,Diagnosed,9.6,8.8,10.4,Proportion,"9.6 (8.8, 10.4)",45654,religion,Other
+Urban,Treated,7.8,7.1,8.4,Proportion,"7.8 (7.1, 8.4)",45654,religion,Other
+Urban,Controlled,5.4,4.8,6,Proportion,"5.4 (4.8, 6)",45654,religion,Other
+Rural,Screened,16.3,15.8,16.8,Proportion,"16.3 (15.8, 16.8)",227277,wealthq_ur,1
+Rural,Diabetes,2.7,2.6,2.8,Proportion,"2.7 (2.6, 2.8)",227277,wealthq_ur,1
+Rural,Diagnosed,1.8,1.7,1.9,Proportion,"1.8 (1.7, 1.9)",227277,wealthq_ur,1
+Rural,Treated,0.9,0.8,0.9,Proportion,"0.9 (0.8, 0.9)",227277,wealthq_ur,1
+Rural,Controlled,1.3,1.2,1.4,Proportion,"1.3 (1.2, 1.4)",227277,wealthq_ur,1
+Rural,Screened,22.2,21.7,22.6,Proportion,"22.2 (21.7, 22.6)",250935,wealthq_ur,2
+Rural,Diabetes,3.5,3.3,3.6,Proportion,"3.5 (3.3, 3.6)",250935,wealthq_ur,2
+Rural,Diagnosed,2.4,2.3,2.5,Proportion,"2.4 (2.3, 2.5)",250935,wealthq_ur,2
+Rural,Treated,1.3,1.2,1.4,Proportion,"1.3 (1.2, 1.4)",250935,wealthq_ur,2
+Rural,Controlled,1.7,1.6,1.8,Proportion,"1.7 (1.6, 1.8)",250935,wealthq_ur,2
+Rural,Screened,28.8,28.2,29.3,Proportion,"28.8 (28.2, 29.3)",253013,wealthq_ur,3
+Rural,Diabetes,4.5,4.4,4.7,Proportion,"4.5 (4.4, 4.7)",253013,wealthq_ur,3
+Rural,Diagnosed,3.3,3.2,3.5,Proportion,"3.3 (3.2, 3.5)",253013,wealthq_ur,3
+Rural,Treated,2,1.9,2,Proportion,"2 (1.9, 2)",253013,wealthq_ur,3
+Rural,Controlled,2.2,2,2.3,Proportion,"2.2 (2, 2.3)",253013,wealthq_ur,3
+Rural,Screened,35.8,35.2,36.4,Proportion,"35.8 (35.2, 36.4)",251378,wealthq_ur,4
+Rural,Diabetes,6,5.8,6.2,Proportion,"6 (5.8, 6.2)",251378,wealthq_ur,4
+Rural,Diagnosed,4.5,4.3,4.7,Proportion,"4.5 (4.3, 4.7)",251378,wealthq_ur,4
+Rural,Treated,3.1,3,3.2,Proportion,"3.1 (3, 3.2)",251378,wealthq_ur,4
+Rural,Controlled,2.7,2.6,2.8,Proportion,"2.7 (2.6, 2.8)",251378,wealthq_ur,4
+Rural,Screened,43.3,42.5,44,Proportion,"43.3 (42.5, 44)",262110,wealthq_ur,5
+Rural,Diabetes,8,7.8,8.2,Proportion,"8 (7.8, 8.2)",262110,wealthq_ur,5
+Rural,Diagnosed,6.4,6.2,6.6,Proportion,"6.4 (6.2, 6.6)",262110,wealthq_ur,5
+Rural,Treated,4.7,4.5,4.9,Proportion,"4.7 (4.5, 4.9)",262110,wealthq_ur,5
+Rural,Controlled,3.6,3.5,3.8,Proportion,"3.6 (3.5, 3.8)",262110,wealthq_ur,5
+Urban,Screened,32.8,31.6,34.1,Proportion,"32.8 (31.6, 34.1)",84165,wealthq_ur,1
+Urban,Diabetes,5.4,5.1,5.8,Proportion,"5.4 (5.1, 5.8)",84165,wealthq_ur,1
+Urban,Diagnosed,4,3.7,4.3,Proportion,"4 (3.7, 4.3)",84165,wealthq_ur,1
+Urban,Treated,2.7,2.5,2.9,Proportion,"2.7 (2.5, 2.9)",84165,wealthq_ur,1
+Urban,Controlled,2.5,2.2,2.7,Proportion,"2.5 (2.2, 2.7)",84165,wealthq_ur,1
+Urban,Screened,41.7,40.5,42.8,Proportion,"41.7 (40.5, 42.8)",84341,wealthq_ur,2
+Urban,Diabetes,7.5,7.1,7.8,Proportion,"7.5 (7.1, 7.8)",84341,wealthq_ur,2
+Urban,Diagnosed,5.7,5.4,6,Proportion,"5.7 (5.4, 6)",84341,wealthq_ur,2
+Urban,Treated,4.3,4,4.5,Proportion,"4.3 (4, 4.5)",84341,wealthq_ur,2
+Urban,Controlled,3.2,2.9,3.4,Proportion,"3.2 (2.9, 3.4)",84341,wealthq_ur,2
+Urban,Screened,45.8,44.6,47,Proportion,"45.8 (44.6, 47)",81292,wealthq_ur,3
+Urban,Diabetes,8.7,8.3,9,Proportion,"8.7 (8.3, 9)",81292,wealthq_ur,3
+Urban,Diagnosed,7,6.7,7.3,Proportion,"7 (6.7, 7.3)",81292,wealthq_ur,3
+Urban,Treated,5.5,5.3,5.8,Proportion,"5.5 (5.3, 5.8)",81292,wealthq_ur,3
+Urban,Controlled,3.7,3.5,4,Proportion,"3.7 (3.5, 4)",81292,wealthq_ur,3
+Urban,Screened,49.6,48.5,50.8,Proportion,"49.6 (48.5, 50.8)",79052,wealthq_ur,4
+Urban,Diabetes,9.6,9.2,10,Proportion,"9.6 (9.2, 10)",79052,wealthq_ur,4
+Urban,Diagnosed,8,7.7,8.4,Proportion,"8 (7.7, 8.4)",79052,wealthq_ur,4
+Urban,Treated,6.5,6.2,6.8,Proportion,"6.5 (6.2, 6.8)",79052,wealthq_ur,4
+Urban,Controlled,4.5,4.2,4.7,Proportion,"4.5 (4.2, 4.7)",79052,wealthq_ur,4
+Urban,Screened,57.5,56.1,58.8,Proportion,"57.5 (56.1, 58.8)",77613,wealthq_ur,5
+Urban,Diabetes,10.8,10.3,11.2,Proportion,"10.8 (10.3, 11.2)",77613,wealthq_ur,5
+Urban,Diagnosed,9.3,8.9,9.7,Proportion,"9.3 (8.9, 9.7)",77613,wealthq_ur,5
+Urban,Treated,7.6,7.2,7.9,Proportion,"7.6 (7.2, 7.9)",77613,wealthq_ur,5
+Urban,Controlled,5.3,5,5.6,Proportion,"5.3 (5, 5.6)",77613,wealthq_ur,5

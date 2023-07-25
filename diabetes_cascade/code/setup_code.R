@@ -42,6 +42,7 @@ national_nested <- bind_rows(
                             TRUE ~ strata),
          stratification = case_when(is.na(stratification) ~ "",
                                     TRUE ~ stratification))
+saveRDS(national_nested,file="diabetes_cascade/data/national_nested.RDS")
 
 nationalz_nested <- bind_rows(
   read_csv("age_standardized/ncz01_age standardized national care cascade.csv") %>% 
@@ -58,7 +59,6 @@ nationalz_nested <- bind_rows(
                                     TRUE ~ stratification))
 
 
-saveRDS(national_nested,file="diabetes_cascade/data/national_nested.RDS")
 saveRDS(nationalz_nested,file="diabetes_cascade/data/nationalz_nested.RDS")
 
 
@@ -255,3 +255,17 @@ saveRDS(districtz_nested,file="diabetes_cascade/data/districtz_nested.RDS")
 # Copying functions --------
 
 file.copy("functions/cascade_plot.R",to = "diabetes_cascade/code/cascade_plot.R")
+
+write_csv(nca02_national,file="lattice/dashboard original/nca02_national.csv")
+write_csv(ncz01_national,file="lattice/dashboard original/ncz01_national.csv")
+write_csv(national_nested,file="lattice/dashboard original/national_nested.csv")
+write_csv(nationalz_nested,file="lattice/dashboard original/nationalz_nested.csv")
+write_csv(nca03_state,file="lattice/dashboard original/nca03_state.csv")
+write_csv(ncz02_state,file="lattice/dashboard original/ncz02_state.csv")
+write_csv(nca05_state,file="lattice/dashboard original/nca05_state_unmet.csv")
+write_csv(state_nested,file="lattice/dashboard original/state_nested.csv")
+write_csv(statez_nested,file="lattice/dashboard original/statez_nested.csv")
+write_csv(nca04_district,file="lattice/dashboard original/nca04_district.csv")
+write_csv(nca08_district,file="lattice/dashboard original/nca08_district_unmet.csv")
+write_csv(district_nested,file="lattice/dashboard original/district_nested.csv")
+write_csv(districtz_nested,file="diabetes_cascade/data/districtz_nested.csv")
