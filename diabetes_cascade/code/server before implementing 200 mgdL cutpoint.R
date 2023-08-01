@@ -19,42 +19,21 @@ if(run_manual){
   district_shp <- readRDS(file.path("diabetes_cascade/data","district_shp.RDS"))
   state_shp <- readRDS(file.path("diabetes_cascade/data","state_shp.RDS"))
   
-  nca02_national <- bind_rows(
-    readRDS(file.path("diabetes_cascade/data","nca02_national.RDS")) %>% mutate(cutpoint = "220 mg/dL"),
-    readRDS(file.path("diabetes_cascade/cutoff200","ncc200a02_national.RDS")) %>% mutate(cutpoint = "200 mg/dL"))
-  
-  national_nested <- bind_rows(
-    readRDS(file.path("diabetes_cascade/data","national_nested.RDS")) %>% mutate(cutpoint = "220 mg/dL"),
-    readRDS(file.path("diabetes_cascade/cutoff200","national_nested.RDS")) %>% mutate(cutpoint = "200 mg/dL"))
-  
-  nationalz_nested <- bind_rows(readRDS(file.path("diabetes_cascade/data","nationalz_nested.RDS")) %>% mutate(cutpoint = "220 mg/dL"),
-                                readRDS(file.path("diabetes_cascade/cutoff200","nationalz_nested.RDS")) %>% mutate(cutpoint = "200 mg/dL"))
+  nca02_national <- readRDS(file.path("diabetes_cascade/data","nca02_national.RDS"))
+  national_nested <- readRDS(file.path("diabetes_cascade/data","national_nested.RDS"))
+  nationalz_nested <- readRDS(file.path("diabetes_cascade/data","nationalz_nested.RDS"))
   
   
-  nca03_state <- bind_rows(readRDS(file.path("diabetes_cascade/data","nca03_state.RDS")) %>% mutate(cutpoint = "220 mg/dL"),
-                           readRDS(file.path("diabetes_cascade/cutoff200","ncc200a03_state.RDS")) %>% mutate(cutpoint = "200 mg/dL"))
+  nca03_state <- readRDS(file.path("diabetes_cascade/data","nca03_state.RDS"))
+  nca05_state_unmet <- readRDS(file.path("diabetes_cascade/data","nca05_state_unmet.RDS"))
+  state_nested <- readRDS(file.path("diabetes_cascade/data","state_nested.RDS"))
+  statez_nested <- readRDS(file.path("diabetes_cascade/data","statez_nested.RDS"))
   
-  nca05_state_unmet <- bind_rows(readRDS(file.path("diabetes_cascade/data","nca05_state_unmet.RDS")) %>% mutate(cutpoint = "220 mg/dL"),
-                                 readRDS(file.path("diabetes_cascade/cutoff200","ncc200a05_state_unmet.RDS")) %>% mutate(cutpoint = "200 mg/dL"))
+  nca04_district <- readRDS(file.path("diabetes_cascade/data","nca04_district.RDS"))
+  nca08_district_unmet <- readRDS(file.path("diabetes_cascade/data","nca08_district_unmet.RDS"))
+  district_nested <- readRDS(file.path("diabetes_cascade/data","district_nested.RDS"))
+  districtz_nested <- readRDS(file.path("diabetes_cascade/data","districtz_nested.RDS"))
   
-  state_nested <- bind_rows(readRDS(file.path("diabetes_cascade/data","state_nested.RDS")) %>% mutate(cutpoint = "220 mg/dL"),
-                            readRDS(file.path("diabetes_cascade/cutoff200","state_nested.RDS")) %>% mutate(cutpoint = "200 mg/dL"))
-  
-  statez_nested <- bind_rows(readRDS(file.path("diabetes_cascade/data","statez_nested.RDS")) %>% mutate(cutpoint = "220 mg/dL"),
-                             readRDS(file.path("diabetes_cascade/cutoff200","statez_nested.RDS")) %>% mutate(cutpoint = "200 mg/dL"))
-   
-  nca04_district <- bind_rows(readRDS(file.path("diabetes_cascade/data","nca04_district.RDS")) %>% mutate(cutpoint = "220 mg/dL"),
-                              readRDS(file.path("diabetes_cascade/cutoff200","ncc200a04_district.RDS")) %>% mutate(cutpoint = "200 mg/dL"))
-  
-  nca08_district_unmet <- bind_rows(readRDS(file.path("diabetes_cascade/data","nca08_district_unmet.RDS")) %>% mutate(cutpoint = "220 mg/dL"),
-                                    readRDS(file.path("diabetes_cascade/cutoff200","ncc200a08_district_unmet.RDS")) %>% mutate(cutpoint = "200 mg/dL"))
-  
-  district_nested <- bind_rows(readRDS(file.path("diabetes_cascade/data","district_nested.RDS")) %>% mutate(cutpoint = "220 mg/dL"),
-                               readRDS(file.path("diabetes_cascade/cutoff200","district_nested.RDS")) %>% mutate(cutpoint = "200 mg/dL"))
-  
-  districtz_nested <- bind_rows(readRDS(file.path("diabetes_cascade/data","districtz_nested.RDS")) %>% mutate(cutpoint = "220 mg/dL"),
-                                readRDS(file.path("diabetes_cascade/cutoff200","districtz_nested.RDS")) %>% mutate(cutpoint = "200 mg/dL"))
-
   source("diabetes_cascade/code/cascade_plot.R")
   
   
@@ -69,43 +48,21 @@ mapnfhs5_v024 <- readxl::read_excel(file.path("data","maps.xlsx"),sheet="mapnfhs
 
 district_shp <- readRDS(file.path("data","district_shp.RDS"))
 state_shp <- readRDS(file.path("data","state_shp.RDS"))
+ncz01_national <- readRDS(file.path("data","ncz01_national.RDS"))
+nca02_national <- readRDS(file.path("data","nca02_national.RDS"))
+national_nested <- readRDS(file.path("data","national_nested.RDS"))
+nationalz_nested <- readRDS(file.path("data","nationalz_nested.RDS"))
 
-ncz01_national <- bind_rows(readRDS(file.path("data","ncz01_national.RDS")) %>% mutate(cutpoint = "220 mg/dL"),
-                            readRDS(file.path("cutoff200","ncc200z01_national.RDS")) %>% mutate(cutpoint = "200 mg/dL"))
+ncz02_state <- readRDS(file.path("data","ncz02_state.RDS"))
+nca03_state <- readRDS(file.path("data","nca03_state.RDS"))
+nca05_state_unmet <- readRDS(file.path("data","nca05_state_unmet.RDS"))
+state_nested <- readRDS(file.path("data","state_nested.RDS"))
+statez_nested <- readRDS(file.path("data","statez_nested.RDS"))
 
-nca02_national <- bind_rows(readRDS(file.path("data","nca02_national.RDS"))  %>% mutate(cutpoint = "220 mg/dL"),
-                            readRDS(file.path("cutoff200","ncc200a02_national.RDS"))  %>% mutate(cutpoint = "200 mg/dL"))
-national_nested <- bind_rows(readRDS(file.path("data","national_nested.RDS"))  %>% mutate(cutpoint = "220 mg/dL"),
-                             readRDS(file.path("cutoff200","national_nested.RDS"))  %>% mutate(cutpoint = "200 mg/dL"))
-nationalz_nested <- bind_rows(readRDS(file.path("data","nationalz_nested.RDS"))  %>% mutate(cutpoint = "220 mg/dL"),
-                              readRDS(file.path("cutoff200","nationalz_nested.RDS"))  %>% mutate(cutpoint = "200 mg/dL"))
-
-ncz02_state <- bind_rows(readRDS(file.path("data","ncz02_state.RDS"))  %>% mutate(cutpoint = "220 mg/dL"),
-                         readRDS(file.path("cutoff200","ncc200z02_state.RDS"))  %>% mutate(cutpoint = "200 mg/dL"))
-
-nca03_state <- bind_rows(readRDS(file.path("data","nca03_state.RDS"))  %>% mutate(cutpoint = "220 mg/dL"),
-                         readRDS(file.path("cutoff200","ncc200a03_state.RDS"))  %>% mutate(cutpoint = "200 mg/dL"))
-
-nca05_state_unmet <- bind_rows(readRDS(file.path("data","nca05_state_unmet.RDS"))  %>% mutate(cutpoint = "220 mg/dL"),
-                               readRDS(file.path("cutoff200","ncc200a05_state_unmet.RDS"))  %>% mutate(cutpoint = "200 mg/dL"))
-
-state_nested <- bind_rows(readRDS(file.path("data","state_nested.RDS"))  %>% mutate(cutpoint = "220 mg/dL"),
-                          readRDS(file.path("cutoff200","state_nested.RDS"))  %>% mutate(cutpoint = "200 mg/dL"))
-
-statez_nested <- bind_rows(readRDS(file.path("data","statez_nested.RDS"))  %>% mutate(cutpoint = "220 mg/dL"),
-                           readRDS(file.path("cutoff200","statez_nested.RDS"))  %>% mutate(cutpoint = "200 mg/dL"))
-
-nca04_district <- bind_rows(readRDS(file.path("data","nca04_district.RDS"))  %>% mutate(cutpoint = "220 mg/dL"),
-                            readRDS(file.path("cutoff200","ncc200a04_district.RDS"))  %>% mutate(cutpoint = "200 mg/dL"))
-
-nca08_district_unmet <- bind_rows(readRDS(file.path("data","nca08_district_unmet.RDS"))  %>% mutate(cutpoint = "220 mg/dL"),
-                                  readRDS(file.path("cutoff200","ncc200a08_district_unmet.RDS"))  %>% mutate(cutpoint = "200 mg/dL"))
-
-district_nested <- bind_rows(readRDS(file.path("data","district_nested.RDS"))  %>% mutate(cutpoint = "220 mg/dL"),
-                             readRDS(file.path("cutoff200","district_nested.RDS"))  %>% mutate(cutpoint = "200 mg/dL"))
-
-districtz_nested <- bind_rows(readRDS(file.path("data","districtz_nested.RDS"))  %>% mutate(cutpoint = "220 mg/dL"),
-                              readRDS(file.path("cutoff200","districtz_nested.RDS"))  %>% mutate(cutpoint = "200 mg/dL"))
+nca04_district <- readRDS(file.path("data","nca04_district.RDS"))
+nca08_district_unmet <- readRDS(file.path("data","nca08_district_unmet.RDS"))
+district_nested <- readRDS(file.path("data","district_nested.RDS"))
+districtz_nested <- readRDS(file.path("data","districtz_nested.RDS"))
 
 source("code/cascade_plot.R")
 
@@ -122,17 +79,17 @@ shinyServer(function(input, output,session) {
     
     data.frame(Indicator = c("Age standardization","Screening","Diabetes","",
                              "Diagnosed","Treated","Controlled"),
-                                Definition = c("Age standardized to national distribution as per NFHS-5 [18-39: 50.26%, 40-64: 38.78%, 65+: 10.96%] for national (up to subgroups of sociodemographic covariates), state (up to urban/rural strata) and district",
-                                               "Blood glucose ever checked previously",
-                                               "(a) Self-reported diabetes",
-                                               "(b) High blood glucose (≥126 mg/dL if fasting [≥8 hours] or ≥220 mg/dL if not fasting [random])",
-                                               "Told had high glucose on two or more occasions by a medical provider among those with Diabetes",
-                                               "Currently taking a prescribed medicine to lower glucose among those with Diagnosed Diabetes",
-                                               "Blood glucose in non-hyperglycemic range (<126 mg/dL if fasted and ≤180 mg/dL if not fasting) among those with Diagnosed Diabetes")
-                                )
-    })
-
-
+               Definition = c("Age standardized to national distribution as per NFHS-5 [18-39: 50.26%, 40-64: 38.78%, 65+: 10.96%] for national (up to subgroups of sociodemographic covariates), state (up to urban/rural strata) and district",
+                              "Blood glucose ever checked previously",
+                              "(a) Self-reported diabetes",
+                              "(b) High blood glucose (≥126 mg/dL if fasting [≥8 hours] or ≥220 mg/dL if not fasting [random])",
+                              "Told had high glucose on two or more occasions by a medical provider among those with Diabetes",
+                              "Currently taking a prescribed medicine to lower glucose among those with Diagnosed Diabetes",
+                              "Blood glucose in non-hyperglycemic range (<126 mg/dL if fasted and ≤180 mg/dL if not fasting) among those with Diagnosed Diabetes")
+    )
+  })
+  
+  
   
   
   
@@ -175,11 +132,6 @@ shinyServer(function(input, output,session) {
   })
   print(head(nested_s1))
   
-  n5_cutpoint_input <- reactive({
-    input$cutoffinput1
-  })
-  
-  
   n5_state_input <- reactive({
     input$stateinput1
   })
@@ -187,7 +139,7 @@ shinyServer(function(input, output,session) {
   tab_national <- reactive({
     
     nested_n1() %>%
-      dplyr::filter(strata %in% c("Total","Male","Female"),cutpoint == input$cutoffinput1) %>%
+      dplyr::filter(strata %in% c("Total","Male","Female")) %>%
       dplyr::select(variable,strata,residence,est_ci) %>%
       mutate(residence = case_when(is.na(residence) ~ "",
                                    TRUE ~ residence)) %>%
@@ -202,7 +154,7 @@ shinyServer(function(input, output,session) {
   tab_national <- reactive({
     
     nested_n1() %>%
-      dplyr::filter(strata %in% c("Total","Male","Female"),cutpoint == input$cutoffinput1) %>%
+      dplyr::filter(strata %in% c("Total","Male","Female")) %>%
       dplyr::select(variable,strata,residence,est_ci) %>%
       mutate(residence = case_when(is.na(residence) ~ "",
                                    TRUE ~ residence)) %>%
@@ -220,7 +172,7 @@ shinyServer(function(input, output,session) {
   tab_state <- reactive({
     
     nested_s1() %>%
-      dplyr::filter(strata %in% c("Total","Male","Female"),cutpoint == input$cutoffinput1) %>%
+      dplyr::filter(strata %in% c("Total","Male","Female")) %>%
       dplyr::filter(n5_state == input$stateinput1) %>%
       dplyr::select(variable,residence,strata,est_ci) %>%
       mutate(residence = paste0(input$stateinput1," ",residence," ",strata))  %>%
@@ -235,7 +187,7 @@ shinyServer(function(input, output,session) {
     
     nested_d1() %>% 
       dplyr::filter(
-        REGNAME == input$districtinput1,cutpoint == input$cutoffinput1) %>%
+        REGNAME == input$districtinput1) %>%
       dplyr::select(variable,strata,REGNAME,est_ci) %>%
       rename(residence = REGNAME)  %>%
       mutate(residence = paste0(residence," ",strata)) %>%
@@ -272,18 +224,17 @@ shinyServer(function(input, output,session) {
     d_i = mapnfhs5_sdist[mapnfhs5_sdist$n5_state == n5_state_input(),]$REGNAME
     updateSelectInput(session, "districtinput1", choices = na.omit(d_i)) 
   })  
-
+  
   nm_merge <- reactive({
     
     ss <- state_shp %>% 
-    sp::merge(nested_s1() %>%
-                dplyr::filter(variable == input$varinput1,
-                              residence == input$mapinput1,
-                              cutpoint == input$cutoffinput1,
-                              strata == input$stratainput1)  %>% 
-                dplyr::select(n5_state,ST_NM,estimate) %>% 
-                rename_at(vars(estimate),~paste0(input$mapinput1," ",input$stratainput1," ",input$varinput1," ")),
-              by.x="ST_NM",by.y="ST_NM",all.x=TRUE)
+      sp::merge(nested_s1() %>%
+                  dplyr::filter(variable == input$varinput1,
+                                residence == input$mapinput1,
+                                strata == input$stratainput1)  %>% 
+                  dplyr::select(n5_state,ST_NM,estimate) %>% 
+                  rename_at(vars(estimate),~paste0(input$mapinput1," ",input$stratainput1," ",input$varinput1," ")),
+                by.x="ST_NM",by.y="ST_NM",all.x=TRUE)
     # https://waiter.john-coene.com/#/waiter/examples#on-render 
     w$show()
     ss
@@ -297,8 +248,8 @@ shinyServer(function(input, output,session) {
   
   palette_chr <- reactive({
     case_when(input$varinput1 == "Diabetes" ~ "-RdYlGn",
-                   TRUE ~ "RdYlGn")
-        })
+              TRUE ~ "RdYlGn")
+  })
   
   breaks <- reactive({
     if(input$varinput1 == "Diabetes"){
@@ -312,11 +263,11 @@ shinyServer(function(input, output,session) {
   
   
   
-# output$nationalmap -----------
+  # output$nationalmap -----------
   output$nationalmap <- tmap::renderTmap({
     
     
-
+    
     nm <- tmap_mode("view") +
       tm_shape(shp = nm_merge(),id = "n5_state") +
       tm_fill(title= "",
@@ -331,8 +282,8 @@ shinyServer(function(input, output,session) {
       tm_text(text="n5_state",col="black",size=0.5,remove.overlap = TRUE)+
       tm_view(view.legend.position = c("right","top")) +
       tm_legend(
-                legend.outside=FALSE,
-                legend.just=c("left","top"))
+        legend.outside=FALSE,
+        legend.just=c("left","top"))
     nm
     
     
@@ -359,7 +310,6 @@ shinyServer(function(input, output,session) {
     ds <- district_shp %>% 
       sp::merge(nested_d1() %>%
                   dplyr::filter(variable == input$varinput1,
-                                cutpoint == input$cutoffinput1,
                                 strata == input$stratainput1)  %>% 
                   dplyr::select(REGCODE,n5_state,estimate) %>% 
                   rename_at(vars(estimate),~paste0(input$mapinput1," ",input$stratainput1," ",input$varinput1)),
@@ -388,9 +338,9 @@ shinyServer(function(input, output,session) {
       tm_borders(col="black") + 
       tm_text(text="REGNAME",col="black",size=0.5,remove.overlap = TRUE)+
       tm_view(view.legend.position = c("right","top"))
-      tm_legend(
-                legend.outside=FALSE,
-                legend.just=c("left","top"))
+    tm_legend(
+      legend.outside=FALSE,
+      legend.just=c("left","top"))
     # tm_layout(plot_title,title.size = 2,
     #           legend.text.size = 1,
     #           legend.title.size = 1)
@@ -438,7 +388,7 @@ shinyServer(function(input, output,session) {
   #     mutate_all(function(x) str_replace(x," \\(","<br>\\(")) %>% 
   #     rename(Cascade = variable)
   # })
-
+  
   # Panel 3: State ------------------
   
   
@@ -465,15 +415,10 @@ shinyServer(function(input, output,session) {
     input$stateinput2
   })
   
-  panel2_n5_cutpoint <- reactive({
-    input$cutoffinput2
-  })
-  
   district_cm_merge2 <- reactive({
     dcm2 <- unmet_d2() %>% 
-        dplyr::filter(strata == input$stratainput2,
-                      cutpoint == input$cutoffinput2,
-                      n5_state == panel2_n5_state())
+      dplyr::filter(strata == input$stratainput2,
+                    n5_state == panel2_n5_state())
     
     
     dcm2
@@ -560,7 +505,6 @@ shinyServer(function(input, output,session) {
   district_cm_merge3 <- reactive({
     dcm3 <- unmet_d3() %>% 
       dplyr::filter(strata == input$stratainput3,
-                    cutpoint == input$cutoffinput3,
                     n5_state == panel3_n5_state())
     
     dcm3
@@ -572,7 +516,7 @@ shinyServer(function(input, output,session) {
   state_cs_merge <- reactive({
     # panel2_n5_state = "Kerala"
     scm <- unmet_s3() %>% 
-      dplyr::filter(n5_state == panel3_n5_state(),cutpoint == input$cutoffinput3) %>% 
+      dplyr::filter(n5_state == panel3_n5_state()) %>% 
       # mutate(cascade = str_replace(variable,"dm_","") %>% str_to_title()) %>% 
       mutate(cascade = factor(variable,levels=c("Screened","Diabetes","Diagnosed","Treated","Controlled"),
                               labels=c("Screened","Diabetes","Diagnosed","Taking Medication","Under Control"))) %>% 
@@ -594,7 +538,7 @@ shinyServer(function(input, output,session) {
       dplyr::filter(stratification == "education") %>%
       mutate(group = factor(group, levels=c("Rural\nNo education","Rural\nPrimary","Rural\nSecondary","Rural\nHigher",
                                             "Urban\nNo education","Urban\nPrimary","Urban\nSecondary","Urban\nHigher"
-                                            ))) %>% 
+      ))) %>% 
       cascade_plot(.,limits_y = c(0,100))
     figD <- state_cs_merge() %>%
       dplyr::filter(stratification == "caste") %>%
@@ -602,11 +546,11 @@ shinyServer(function(input, output,session) {
     figE <- state_cs_merge() %>%
       dplyr::filter(stratification == "swealthq_ur") %>%
       mutate(group = factor(group,
-                             levels = paste0(rep(c("Rural","Urban"),each =5),
-                                             "\n",
-                                             rep(c("Wealth: Lowest","Wealth: Low",
-                                                   "Wealth: Medium","Wealth: High",
-                                                   "Wealth: Highest"),times=2)),ordered=TRUE)) %>% 
+                            levels = paste0(rep(c("Rural","Urban"),each =5),
+                                            "\n",
+                                            rep(c("Wealth: Lowest","Wealth: Low",
+                                                  "Wealth: Medium","Wealth: High",
+                                                  "Wealth: Highest"),times=2)),ordered=TRUE)) %>% 
       cascade_plot(.,limits_y = c(0,100))
     
     ggarrange(figA,
@@ -619,5 +563,5 @@ shinyServer(function(input, output,session) {
     
   })
   
-
+  
 })
