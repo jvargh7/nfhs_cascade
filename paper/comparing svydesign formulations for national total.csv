@@ -1,0 +1,11 @@
+variable,estimate,lci,uci,type,est_ci,design
+dm_screened,34.9,34.6,35.2,Proportion,"34.9 (34.6, 35.2)",Original
+dm_disease,6.1,6,6.2,Proportion,"6.1 (6, 6.2)",Original
+dm_diagnosed,4.8,4.7,4.8,Proportion,"4.8 (4.7, 4.8)",Original
+dm_treated,3.4,3.3,3.4,Proportion,"3.4 (3.3, 3.4)",Original
+dm_controlled,2.8,2.8,2.9,Proportion,"2.8 (2.8, 2.9)",Original
+dm_screened,34.9,34.5,35.3,Proportion,"34.9 (34.5, 35.3)",Used
+dm_disease,6.1,6,6.2,Proportion,"6.1 (6, 6.2)",Used
+dm_diagnosed,4.8,4.7,4.9,Proportion,"4.8 (4.7, 4.9)",Used
+dm_treated,3.4,3.3,3.4,Proportion,"3.4 (3.3, 3.4)",Used
+dm_controlled,2.8,2.8,2.9,Proportion,"2.8 (2.8, 2.9)",Used

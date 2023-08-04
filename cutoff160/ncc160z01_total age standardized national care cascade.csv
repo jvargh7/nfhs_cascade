@@ -1,0 +1,6 @@
+variable,estimate,lci,uci,type,est_ci
+dm_screened,35.7,35.3,36,Proportion,"35.7 (35.3, 36)"
+dm_disease,10.4,10.3,10.5,Proportion,"10.4 (10.3, 10.5)"
+dm_diagnosed,5.1,5,5.2,Proportion,"5.1 (5, 5.2)"
+dm_treated,3.6,3.6,3.7,Proportion,"3.6 (3.6, 3.7)"
+dm_controlled,3,2.9,3.1,Proportion,"3 (2.9, 3.1)"

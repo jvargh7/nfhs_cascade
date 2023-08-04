@@ -21,39 +21,61 @@ if(run_manual){
   
   nca02_national <- bind_rows(
     readRDS(file.path("diabetes_cascade/data","nca02_national.RDS")) %>% mutate(cutpoint = "220 mg/dL"),
-    readRDS(file.path("diabetes_cascade/cutoff200","ncc200a02_national.RDS")) %>% mutate(cutpoint = "200 mg/dL"))
+    readRDS(file.path("diabetes_cascade/cutoff200","ncc200a02_national.RDS")) %>% mutate(cutpoint = "200 mg/dL"),
+    readRDS(file.path("diabetes_cascade/cutoff160","ncc160a02_national.RDS")) %>% mutate(cutpoint = "160 mg/dL")
+    )
   
   national_nested <- bind_rows(
     readRDS(file.path("diabetes_cascade/data","national_nested.RDS")) %>% mutate(cutpoint = "220 mg/dL"),
-    readRDS(file.path("diabetes_cascade/cutoff200","national_nested.RDS")) %>% mutate(cutpoint = "200 mg/dL"))
+    readRDS(file.path("diabetes_cascade/cutoff200","national_nested.RDS")) %>% mutate(cutpoint = "200 mg/dL"),
+    readRDS(file.path("diabetes_cascade/cutoff160","national_nested.RDS")) %>% mutate(cutpoint = "160 mg/dL")
+    )
   
   nationalz_nested <- bind_rows(readRDS(file.path("diabetes_cascade/data","nationalz_nested.RDS")) %>% mutate(cutpoint = "220 mg/dL"),
-                                readRDS(file.path("diabetes_cascade/cutoff200","nationalz_nested.RDS")) %>% mutate(cutpoint = "200 mg/dL"))
+                                readRDS(file.path("diabetes_cascade/cutoff200","nationalz_nested.RDS")) %>% mutate(cutpoint = "200 mg/dL"),
+                                readRDS(file.path("diabetes_cascade/cutoff160","nationalz_nested.RDS")) %>% mutate(cutpoint = "160 mg/dL")
+                                )
   
   
   nca03_state <- bind_rows(readRDS(file.path("diabetes_cascade/data","nca03_state.RDS")) %>% mutate(cutpoint = "220 mg/dL"),
-                           readRDS(file.path("diabetes_cascade/cutoff200","ncc200a03_state.RDS")) %>% mutate(cutpoint = "200 mg/dL"))
+                           readRDS(file.path("diabetes_cascade/cutoff200","ncc200a03_state.RDS")) %>% mutate(cutpoint = "200 mg/dL"),
+                           readRDS(file.path("diabetes_cascade/cutoff160","ncc160a03_state.RDS")) %>% mutate(cutpoint = "160 mg/dL")
+                           )
   
   nca05_state_unmet <- bind_rows(readRDS(file.path("diabetes_cascade/data","nca05_state_unmet.RDS")) %>% mutate(cutpoint = "220 mg/dL"),
-                                 readRDS(file.path("diabetes_cascade/cutoff200","ncc200a05_state_unmet.RDS")) %>% mutate(cutpoint = "200 mg/dL"))
+                                 readRDS(file.path("diabetes_cascade/cutoff200","ncc200a05_state_unmet.RDS")) %>% mutate(cutpoint = "200 mg/dL"),
+                                 readRDS(file.path("diabetes_cascade/cutoff160","ncc160a05_state_unmet.RDS")) %>% mutate(cutpoint = "160 mg/dL")
+                                 )
   
   state_nested <- bind_rows(readRDS(file.path("diabetes_cascade/data","state_nested.RDS")) %>% mutate(cutpoint = "220 mg/dL"),
-                            readRDS(file.path("diabetes_cascade/cutoff200","state_nested.RDS")) %>% mutate(cutpoint = "200 mg/dL"))
+                            readRDS(file.path("diabetes_cascade/cutoff200","state_nested.RDS")) %>% mutate(cutpoint = "200 mg/dL"),
+                            readRDS(file.path("diabetes_cascade/cutoff160","state_nested.RDS")) %>% mutate(cutpoint = "160 mg/dL")
+                            )
   
   statez_nested <- bind_rows(readRDS(file.path("diabetes_cascade/data","statez_nested.RDS")) %>% mutate(cutpoint = "220 mg/dL"),
-                             readRDS(file.path("diabetes_cascade/cutoff200","statez_nested.RDS")) %>% mutate(cutpoint = "200 mg/dL"))
+                             readRDS(file.path("diabetes_cascade/cutoff200","statez_nested.RDS")) %>% mutate(cutpoint = "200 mg/dL"),
+                             readRDS(file.path("diabetes_cascade/cutoff160","statez_nested.RDS")) %>% mutate(cutpoint = "160 mg/dL")
+                             )
    
   nca04_district <- bind_rows(readRDS(file.path("diabetes_cascade/data","nca04_district.RDS")) %>% mutate(cutpoint = "220 mg/dL"),
-                              readRDS(file.path("diabetes_cascade/cutoff200","ncc200a04_district.RDS")) %>% mutate(cutpoint = "200 mg/dL"))
+                              readRDS(file.path("diabetes_cascade/cutoff200","ncc200a04_district.RDS")) %>% mutate(cutpoint = "200 mg/dL"),
+                              readRDS(file.path("diabetes_cascade/cutoff160","ncc160a04_district.RDS")) %>% mutate(cutpoint = "160 mg/dL")
+                              )
   
   nca08_district_unmet <- bind_rows(readRDS(file.path("diabetes_cascade/data","nca08_district_unmet.RDS")) %>% mutate(cutpoint = "220 mg/dL"),
-                                    readRDS(file.path("diabetes_cascade/cutoff200","ncc200a08_district_unmet.RDS")) %>% mutate(cutpoint = "200 mg/dL"))
+                                    readRDS(file.path("diabetes_cascade/cutoff200","ncc200a08_district_unmet.RDS")) %>% mutate(cutpoint = "200 mg/dL"),
+                                    readRDS(file.path("diabetes_cascade/cutoff160","ncc160a08_district_unmet.RDS")) %>% mutate(cutpoint = "160 mg/dL")
+                                    )
   
   district_nested <- bind_rows(readRDS(file.path("diabetes_cascade/data","district_nested.RDS")) %>% mutate(cutpoint = "220 mg/dL"),
-                               readRDS(file.path("diabetes_cascade/cutoff200","district_nested.RDS")) %>% mutate(cutpoint = "200 mg/dL"))
+                               readRDS(file.path("diabetes_cascade/cutoff200","district_nested.RDS")) %>% mutate(cutpoint = "200 mg/dL"),
+                               readRDS(file.path("diabetes_cascade/cutoff160","district_nested.RDS")) %>% mutate(cutpoint = "160 mg/dL")
+                               )
   
   districtz_nested <- bind_rows(readRDS(file.path("diabetes_cascade/data","districtz_nested.RDS")) %>% mutate(cutpoint = "220 mg/dL"),
-                                readRDS(file.path("diabetes_cascade/cutoff200","districtz_nested.RDS")) %>% mutate(cutpoint = "200 mg/dL"))
+                                readRDS(file.path("diabetes_cascade/cutoff200","districtz_nested.RDS")) %>% mutate(cutpoint = "200 mg/dL"),
+                                readRDS(file.path("diabetes_cascade/cutoff160","districtz_nested.RDS")) %>% mutate(cutpoint = "160 mg/dL")
+                                )
 
   source("diabetes_cascade/code/cascade_plot.R")
   
@@ -71,41 +93,67 @@ district_shp <- readRDS(file.path("data","district_shp.RDS"))
 state_shp <- readRDS(file.path("data","state_shp.RDS"))
 
 ncz01_national <- bind_rows(readRDS(file.path("data","ncz01_national.RDS")) %>% mutate(cutpoint = "220 mg/dL"),
-                            readRDS(file.path("cutoff200","ncc200z01_national.RDS")) %>% mutate(cutpoint = "200 mg/dL"))
+                            readRDS(file.path("cutoff200","ncc200z01_national.RDS")) %>% mutate(cutpoint = "200 mg/dL"),
+                            readRDS(file.path("cutoff160","ncc160z01_national.RDS")) %>% mutate(cutpoint = "160 mg/dL")
+                            )
 
 nca02_national <- bind_rows(readRDS(file.path("data","nca02_national.RDS"))  %>% mutate(cutpoint = "220 mg/dL"),
-                            readRDS(file.path("cutoff200","ncc200a02_national.RDS"))  %>% mutate(cutpoint = "200 mg/dL"))
+                            readRDS(file.path("cutoff200","ncc200a02_national.RDS"))  %>% mutate(cutpoint = "200 mg/dL"),
+                            readRDS(file.path("cutoff160","ncc160a02_national.RDS"))  %>% mutate(cutpoint = "160 mg/dL")
+                            )
 national_nested <- bind_rows(readRDS(file.path("data","national_nested.RDS"))  %>% mutate(cutpoint = "220 mg/dL"),
-                             readRDS(file.path("cutoff200","national_nested.RDS"))  %>% mutate(cutpoint = "200 mg/dL"))
+                             readRDS(file.path("cutoff200","national_nested.RDS"))  %>% mutate(cutpoint = "200 mg/dL"),
+                             readRDS(file.path("cutoff160","national_nested.RDS"))  %>% mutate(cutpoint = "160 mg/dL")
+                             )
 nationalz_nested <- bind_rows(readRDS(file.path("data","nationalz_nested.RDS"))  %>% mutate(cutpoint = "220 mg/dL"),
-                              readRDS(file.path("cutoff200","nationalz_nested.RDS"))  %>% mutate(cutpoint = "200 mg/dL"))
+                              readRDS(file.path("cutoff200","nationalz_nested.RDS"))  %>% mutate(cutpoint = "200 mg/dL"),
+                              readRDS(file.path("cutoff160","nationalz_nested.RDS"))  %>% mutate(cutpoint = "160 mg/dL")
+                              )
 
 ncz02_state <- bind_rows(readRDS(file.path("data","ncz02_state.RDS"))  %>% mutate(cutpoint = "220 mg/dL"),
-                         readRDS(file.path("cutoff200","ncc200z02_state.RDS"))  %>% mutate(cutpoint = "200 mg/dL"))
+                         readRDS(file.path("cutoff200","ncc200z02_state.RDS"))  %>% mutate(cutpoint = "200 mg/dL"),
+                         readRDS(file.path("cutoff160","ncc160z02_state.RDS"))  %>% mutate(cutpoint = "160 mg/dL")
+                         )
 
 nca03_state <- bind_rows(readRDS(file.path("data","nca03_state.RDS"))  %>% mutate(cutpoint = "220 mg/dL"),
-                         readRDS(file.path("cutoff200","ncc200a03_state.RDS"))  %>% mutate(cutpoint = "200 mg/dL"))
+                         readRDS(file.path("cutoff200","ncc200a03_state.RDS"))  %>% mutate(cutpoint = "200 mg/dL"),
+                         readRDS(file.path("cutoff160","ncc160a03_state.RDS"))  %>% mutate(cutpoint = "160 mg/dL")
+                         )
 
 nca05_state_unmet <- bind_rows(readRDS(file.path("data","nca05_state_unmet.RDS"))  %>% mutate(cutpoint = "220 mg/dL"),
-                               readRDS(file.path("cutoff200","ncc200a05_state_unmet.RDS"))  %>% mutate(cutpoint = "200 mg/dL"))
+                               readRDS(file.path("cutoff200","ncc200a05_state_unmet.RDS"))  %>% mutate(cutpoint = "200 mg/dL"),
+                               readRDS(file.path("cutoff160","ncc160a05_state_unmet.RDS"))  %>% mutate(cutpoint = "160 mg/dL")
+                               )
 
 state_nested <- bind_rows(readRDS(file.path("data","state_nested.RDS"))  %>% mutate(cutpoint = "220 mg/dL"),
-                          readRDS(file.path("cutoff200","state_nested.RDS"))  %>% mutate(cutpoint = "200 mg/dL"))
+                          readRDS(file.path("cutoff200","state_nested.RDS"))  %>% mutate(cutpoint = "200 mg/dL"),
+                          readRDS(file.path("cutoff160","state_nested.RDS"))  %>% mutate(cutpoint = "160 mg/dL")
+                          )
 
 statez_nested <- bind_rows(readRDS(file.path("data","statez_nested.RDS"))  %>% mutate(cutpoint = "220 mg/dL"),
-                           readRDS(file.path("cutoff200","statez_nested.RDS"))  %>% mutate(cutpoint = "200 mg/dL"))
+                           readRDS(file.path("cutoff200","statez_nested.RDS"))  %>% mutate(cutpoint = "200 mg/dL"),
+                           readRDS(file.path("cutoff160","statez_nested.RDS"))  %>% mutate(cutpoint = "160 mg/dL")
+                           )
 
 nca04_district <- bind_rows(readRDS(file.path("data","nca04_district.RDS"))  %>% mutate(cutpoint = "220 mg/dL"),
-                            readRDS(file.path("cutoff200","ncc200a04_district.RDS"))  %>% mutate(cutpoint = "200 mg/dL"))
+                            readRDS(file.path("cutoff200","ncc200a04_district.RDS"))  %>% mutate(cutpoint = "200 mg/dL"),
+                            readRDS(file.path("cutoff160","ncc160a04_district.RDS"))  %>% mutate(cutpoint = "160 mg/dL")
+                            )
 
 nca08_district_unmet <- bind_rows(readRDS(file.path("data","nca08_district_unmet.RDS"))  %>% mutate(cutpoint = "220 mg/dL"),
-                                  readRDS(file.path("cutoff200","ncc200a08_district_unmet.RDS"))  %>% mutate(cutpoint = "200 mg/dL"))
+                                  readRDS(file.path("cutoff200","ncc200a08_district_unmet.RDS"))  %>% mutate(cutpoint = "200 mg/dL"),
+                                  readRDS(file.path("cutoff160","ncc160a08_district_unmet.RDS"))  %>% mutate(cutpoint = "160 mg/dL")
+                                  )
 
 district_nested <- bind_rows(readRDS(file.path("data","district_nested.RDS"))  %>% mutate(cutpoint = "220 mg/dL"),
-                             readRDS(file.path("cutoff200","district_nested.RDS"))  %>% mutate(cutpoint = "200 mg/dL"))
+                             readRDS(file.path("cutoff200","district_nested.RDS"))  %>% mutate(cutpoint = "200 mg/dL"),
+                             readRDS(file.path("cutoff200","district_nested.RDS"))  %>% mutate(cutpoint = "160 mg/dL")
+                             )
 
 districtz_nested <- bind_rows(readRDS(file.path("data","districtz_nested.RDS"))  %>% mutate(cutpoint = "220 mg/dL"),
-                              readRDS(file.path("cutoff200","districtz_nested.RDS"))  %>% mutate(cutpoint = "200 mg/dL"))
+                              readRDS(file.path("cutoff200","districtz_nested.RDS"))  %>% mutate(cutpoint = "200 mg/dL"),
+                              readRDS(file.path("cutoff160","districtz_nested.RDS"))  %>% mutate(cutpoint = "160 mg/dL")
+                              )
 
 source("code/cascade_plot.R")
 
@@ -144,7 +192,7 @@ shinyServer(function(input, output,session) {
     title = "Welcome!",
     "This comprehensive dashboard takes 15-20 seconds to load. In the meantime, you can easily visualize state-level summary statistics at",
     # a("shodha.stopncd.org", href="http://157.245.97.237/"),
-    tags$a("shodha.stopncd.org", href="http://157.245.97.237/",target="_blank"),
+    tags$a("shodha.stopncd.org", href="http://shodha.stopncd.org/",target="_blank"),
     
     
     easyClose = F
