@@ -18,10 +18,8 @@ ncp_preprocessing2 <- function(df, sex = "Female"){
                              interview > "2020-03-23" ~ 2,
                              TRUE ~ NA_real_)
     )  %>% 
-    mutate_at(vars(sbp1,dbp1,
-                   sbp2,dbp2,
-                   sbp3,dbp3),function(x) case_when(as.numeric(x) %in% c(994,995,996,999) ~ NA_real_,
-                                                    TRUE ~ as.numeric(x))) %>% 
+    bp_processing(.) %>% 
+    
     # Different in qc/qc15to49_preprocessing and nfhs5_couples/preprocessing/n5couples_preprocessing ---------
   mutate(screened_dm = case_when(screened_dm == 1 ~ 1,
                                  TRUE ~ 0),
@@ -110,6 +108,8 @@ ncp_preprocessing2 <- function(df, sex = "Female"){
       # dbp = case_when(sbp == sbp1 ~ dbp1,
       #                 sbp == sbp2 ~ dbp2,
       #                 sbp == sbp3 ~ dbp3),
+      dbp = case_when(is.na(dbp) ~ pmin(dbp1,dbp2,dbp3,na.rm=TRUE),
+                      TRUE ~ dbp),
       
       htn = case_when(diagnosed_bp == 1 ~ 1,
                       is.na(sbp) | is.na(dbp) ~ NA_real_,
@@ -201,7 +201,7 @@ ncp_preprocessing2 <- function(df, sex = "Female"){
                                 TRUE ~ 1),
          # Diagnosis: No/DK, Blood pressure: in range
          htn_free = case_when(
-           is.na(htn) ~ NA_real_,
+           is.na(htn) | is.na(sbp) | is.na(dbp) ~ NA_real_,
            htn == 1 ~ 0,
            htn == 0 ~ 1,
            TRUE ~ NA_real_),

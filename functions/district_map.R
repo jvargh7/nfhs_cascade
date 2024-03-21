@@ -1,7 +1,7 @@
 require(tmap)
 district_map <- function(df,plot_variable,dmap_version = 2019,smap_version=2016,
                       plot_title = "A",breaks = c(0,2.5,5,7.5,10,15,20),
-                      palette_chr = "RdYlGn"){
+                      palette_chr = "RdYlGn",include_state_names = TRUE){
   
   if(smap_version == 2016){
     state_shp <- readRDS(paste0(path_india_shapefiles,"cleaned/smapsmaster_sp.RDS"))
@@ -42,8 +42,14 @@ district_map <- function(df,plot_variable,dmap_version = 2019,smap_version=2016,
             textNA="Data not available",
             colorNA = "white")+ 
     tm_borders() + 
-    tm_shape(state_shp) + tm_borders(col="black") +
-    tm_text(text="ST_NM",col="black",size=0.5,remove.overlap = TRUE)+
+    tm_shape(state_shp) + tm_borders(col="black") 
+  
+  if(is.null(include_state_names) | include_state_names == TRUE){
+    d_p <- d_p + 
+      tm_text(text="ST_NM",col="black",size=0.5,remove.overlap = TRUE)
+  }
+  
+  d_p <- d_p +
     tm_legend(legend.position = c("right","top"),
               legend.outside=FALSE,
               legend.just=c("left","top"))+ 

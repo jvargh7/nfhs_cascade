@@ -47,9 +47,18 @@ rpg_cutoff2 <- 200
 # Alternative cutoff for RPG --> used in ncp_preprocessing3.R
 rpg_cutoff3 <- 160
 
+source("C:/code/external/nfhs_cascade/functions/bp_processing.R")
 
 sbp_cutoff <- 140
 dbp_cutoff <- 90
+sbppre_cutoff <- 130
+dbppre_cutoff <- 85
+
+# Alternative cutoff for SBP and DBP --> used in ncp_preprocessing3.R
+sbp_cutoff2 <- 130
+dbp_cutoff2 <- 80
+sbppre_cutoff2 <- 120
+dbppre_cutoff2 <- 80
 
 fpg_target <- 126
 rpg_target <- 180 #Indian DM guidelines
@@ -66,8 +75,7 @@ dbp_target <- c(90,90)
 
 fpgpre_cutoff <- 100
 rpgpre_cutoff <- 140
-sbppre_cutoff <- 130
-dbppre_cutoff <- 85
+
 
 gc()
 

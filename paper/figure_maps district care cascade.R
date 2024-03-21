@@ -44,3 +44,9 @@ tmap_arrange(
   figA,figB,figC,figD,
   ncol = 2,nrow=2) %>% 
   tmap_save(.,filename=paste0(path_cascade_folder,"/writing/JAMA Int Med R1/Figure 3.pdf"),height=14,width=14)
+
+
+unmet_cascade %>% 
+  dplyr::filter(is.na(stratification)) %>% 
+  district_map(.,plot_variable = "Uncontrolled",plot_title = "",breaks = seq(0,100,by=20),palette_chr = "-RdYlGn") %>% 
+  tmap_save(.,filename=paste0(path_cascade_folder,"/figures/figure_district care cascade uncontrolled.png"),height=7,width=7)

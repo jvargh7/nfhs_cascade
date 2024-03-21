@@ -18,10 +18,7 @@ ncp_preprocessing3 <- function(df, sex = "Female"){
                              interview > "2020-03-23" ~ 2,
                              TRUE ~ NA_real_)
     )  %>% 
-    mutate_at(vars(sbp1,dbp1,
-                   sbp2,dbp2,
-                   sbp3,dbp3),function(x) case_when(as.numeric(x) %in% c(994,995,996,999) ~ NA_real_,
-                                                    TRUE ~ as.numeric(x))) %>% 
+    bp_processing(.) %>% 
     # Different in qc/qc15to49_preprocessing and nfhs5_couples/preprocessing/n5couples_preprocessing ---------
   mutate(screened_dm = case_when(screened_dm == 1 ~ 1,
                                  TRUE ~ 0),
@@ -99,31 +96,34 @@ ncp_preprocessing3 <- function(df, sex = "Female"){
     # Option 2: Should this be average of last 2 measurements?
     # Option 3: ICMR suggests take 2 measurements 1 min apart, if difference in SBP > 5mmHg, take 3rd. Take lowest among closest.
     mutate(
-      sbp = rowMeans(.[,c("sbp2","sbp3")],na.rm=TRUE),
+      # sbp = rowMeans(.[,c("sbp1","sbp2","sbp3")],na.rm=TRUE),
       # https://stackoverflow.com/questions/53084598/row-wise-min-on-right-hand-when-using-dplyrcase-when
-      # sbp = case_when((abs(sbp1-sbp2) <= 5) ~ pmin(sbp1,sbp2,na.rm=TRUE),
-      #                 TRUE ~ pmin(sbp1,sbp2,sbp3,na.rm=TRUE)),
+      sbp = case_when((abs(sbp1-sbp2) <= 5) ~ pmin(sbp1,sbp2,na.rm=TRUE),
+                      TRUE ~ pmin(sbp1,sbp2,sbp3,na.rm=TRUE)),
       
       # "sb18d" has 108 everywhere
-      dbp = rowMeans(.[,c("dbp2","dbp3")],na.rm=TRUE),
+      # dbp = rowMeans(.[,c("dbp1","dbp2","dbp3")],na.rm=TRUE),
       
-      # dbp = case_when(sbp == sbp1 ~ dbp1,
-      #                 sbp == sbp2 ~ dbp2,
-      #                 sbp == sbp3 ~ dbp3),
+      dbp = case_when(sbp == sbp1 ~ dbp1,
+                      sbp == sbp2 ~ dbp2,
+                      sbp == sbp3 ~ dbp3),
+      
+      dbp = case_when(is.na(dbp) ~ pmin(dbp1,dbp2,dbp3,na.rm=TRUE),
+                      TRUE ~ dbp),
       
       htn = case_when(diagnosed_bp == 1 ~ 1,
                       is.na(sbp) | is.na(dbp) ~ NA_real_,
-                      sbp >= sbp_cutoff ~ 1,
-                      dbp >= dbp_cutoff ~ 1,
-                      sbp < sbp_cutoff ~ 0,
-                      dbp < dbp_cutoff ~ 0,
+                      sbp >= sbp_cutoff2 ~ 1,
+                      dbp >= dbp_cutoff2 ~ 1,
+                      sbp < sbp_cutoff2 ~ 0,
+                      dbp < dbp_cutoff2 ~ 0,
                       TRUE ~ NA_real_),
       highbp = case_when(
         is.na(sbp) | is.na(dbp) ~ NA_real_,
-        sbp >= sbp_cutoff ~ 1,
-        dbp >= dbp_cutoff ~ 1,
-        sbp < sbp_cutoff ~ 0,
-        dbp < dbp_cutoff ~ 0,
+        sbp >= sbp_cutoff2 ~ 1,
+        dbp >= dbp_cutoff2 ~ 1,
+        sbp < sbp_cutoff2 ~ 0,
+        dbp < dbp_cutoff2 ~ 0,
         TRUE ~ NA_real_),
       
       invhighbp = 1 - highbp,
@@ -144,7 +144,7 @@ ncp_preprocessing3 <- function(df, sex = "Female"){
         
         TRUE ~ NA_real_)
     ) %>% 
-    
+
     # Diabetes cascade -----
   # From cp01_creating couples data.R --------
   mutate(
@@ -201,7 +201,7 @@ ncp_preprocessing3 <- function(df, sex = "Female"){
                                 TRUE ~ 1),
          # Diagnosis: No/DK, Blood pressure: in range
          htn_free = case_when(
-           is.na(htn) ~ NA_real_,
+           is.na(htn) | is.na(sbp) | is.na(dbp) ~ NA_real_,
            htn == 1 ~ 0,
            htn == 0 ~ 1,
            TRUE ~ NA_real_),
@@ -258,10 +258,10 @@ ncp_preprocessing3 <- function(df, sex = "Female"){
          prehypertension = case_when(diagnosed_bp == 1 ~ NA_real_,
                                      is.na(sbp) | is.na(dbp) ~ NA_real_,
                                      htn == 1 ~ 0,
-                                     sbp >= sbppre_cutoff & sbp < sbp_cutoff ~ 1,
-                                     dbp >= dbppre_cutoff & dbp < dbp_cutoff~ 1,
-                                     sbp < sbppre_cutoff ~ 0,
-                                     dbp < dbppre_cutoff ~ 0,
+                                     sbp >= sbppre_cutoff2 & sbp < sbp_cutoff2 ~ 1,
+                                     dbp >= dbppre_cutoff2 & dbp < dbp_cutoff2~ 1,
+                                     sbp < sbppre_cutoff2 ~ 0,
+                                     dbp < dbppre_cutoff2 ~ 0,
                                      TRUE ~ NA_real_)
   ) %>% 
     # BMI

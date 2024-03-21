@@ -1,0 +1,13 @@
+dm_diagnosed,variable,estimate,lci,uci,type,est_ci
+0,dm_screened,31.6,31.3,32,Stratified,"31.6 (31.3, 32)"
+0,dm_disease,1.4,1.4,1.5,Stratified,"1.4 (1.4, 1.5)"
+0,dm_treated,0,0,0,Stratified,"0 (0, 0)"
+0,dm_controlled,0,0,0,Stratified,"0 (0, 0)"
+1,dm_screened,100,100,100,Stratified,"100 (100, 100)"
+1,dm_disease,100,100,100,Stratified,"100 (100, 100)"
+1,dm_treated,70.9,69.8,71.9,Stratified,"70.9 (69.8, 71.9)"
+1,dm_controlled,59.3,58.6,60.1,Stratified,"59.3 (58.6, 60.1)"
+1,dm_screened,100,100,100,Restricted,"100 (100, 100)"
+1,dm_disease,100,100,100,Restricted,"100 (100, 100)"
+1,dm_treated,70.9,69.8,71.8,Restricted,"70.9 (69.8, 71.8)"
+1,dm_controlled,59.3,58.6,60.1,Restricted,"59.3 (58.6, 60.1)"
