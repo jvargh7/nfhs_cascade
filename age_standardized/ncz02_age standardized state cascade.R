@@ -25,10 +25,10 @@ nfhs5_svystdz <- svystandardize(nfhs5_svydesign,by=~age_category,over = ~state +
 rm(nfhs5_svydesign);gc();
 
 
-source("preprocessing/nc_parallelization.R")
+# source("preprocessing/nc_parallelization.R")
 
 
-state_svysummary <- future_map_dfr(group_vars,
+state_svysummary <- map_dfr(group_vars,
                             function(g_v){
                               print(g_v)
                               id_vars = c("state","residence",g_v);

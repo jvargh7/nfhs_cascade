@@ -15,53 +15,12 @@ proportion_vars <- c("dm_screened","dm_diagnosed","dm_unscreened","dm_undiagnose
 # source("preprocessing/nc_parallelization.R")
 
 unmet_svysummary_dm <- map_dfr(group_vars,
-                                   function(g_v){
-                                     id_vars = c("state","residence",g_v);
-                                     print(g_v);
-                                     n5_sy_dm <- svysummary(nfhs5dm_svydesign,
-                                                         # c_vars = continuous_vars,
-                                                         p_vars = proportion_vars[1:4],
-                                                         # g_vars = grouped_vars,
-                                                         id_vars = id_vars
-                                     ) %>% 
-                                       mutate_at(vars(estimate,lci,uci),~round(.,1)) %>% 
-                                       mutate(est_ci = paste0(estimate," (",
-                                                              lci,", ",uci,")"));
-                                     
-                                     # Count of non-NA values at intersection of id_vars and each variable in proportion_vars
-                                     n5_ct_dm <- nfhs5dm_df %>% 
-                                       group_by_at(vars(one_of(id_vars))) %>% 
-                                       summarize_at(vars(one_of(c(
-                                         # continuous_vars,
-                                         proportion_vars[1:4]
-                                         # grouped_vars
-                                       ))),
-                                       list(n = ~sum(!is.na(.)))) %>% 
-                                       pivot_longer(names_to="variable",values_to="n",cols=-one_of(id_vars)) %>% 
-                                       mutate(variable = str_replace(variable,"_n$",""));
-                                     
-                                     n5_out_dm <- left_join(n5_sy_dm,
-                                                         n5_ct_dm,
-                                                         by=c(id_vars[id_vars!=""],"variable")) %>% 
-                                       
-                                       # Restrict to those cells with more than 100 observations
-                                       # dplyr::filter(n > 100) %>% 
-                                       mutate(stratification = g_v) %>% 
-                                       rename_at(vars(one_of(g_v)),~c("strata")) %>% 
-                                       mutate_at(vars(one_of("strata")),~as.character(.));
-                                     gc();
-                                     return(n5_out_dm)
-                                     
-                                   })
-
-
-unmet_svysummary_dmdiag <- map_dfr(group_vars,
                                       function(g_v){
-                                        id_vars = c("state","residence",g_v);
+                                        id_vars = c("state",g_v);
                                         print(g_v);
-                                        n5_sy_dmdiag <- svysummary(nfhs5dmdiag_svydesign,
+                                        n5_sy_dm <- svysummary(nfhs5dm_svydesign,
                                                                # c_vars = continuous_vars,
-                                                               p_vars = proportion_vars[5:10],
+                                                               p_vars = proportion_vars[1:4],
                                                                # g_vars = grouped_vars,
                                                                id_vars = id_vars
                                         ) %>% 
@@ -70,19 +29,19 @@ unmet_svysummary_dmdiag <- map_dfr(group_vars,
                                                                  lci,", ",uci,")"));
                                         
                                         # Count of non-NA values at intersection of id_vars and each variable in proportion_vars
-                                        n5_ct_dmdiag <- nfhs5dmdiag_df %>% 
+                                        n5_ct_dm <- nfhs5dm_df %>% 
                                           group_by_at(vars(one_of(id_vars))) %>% 
                                           summarize_at(vars(one_of(c(
                                             # continuous_vars,
-                                            proportion_vars[5:10]
+                                            proportion_vars[1:4]
                                             # grouped_vars
                                           ))),
                                           list(n = ~sum(!is.na(.)))) %>% 
                                           pivot_longer(names_to="variable",values_to="n",cols=-one_of(id_vars)) %>% 
                                           mutate(variable = str_replace(variable,"_n$",""));
                                         
-                                        n5_out_dmdiag <- left_join(n5_sy_dmdiag,
-                                                               n5_ct_dmdiag,
+                                        n5_out_dm <- left_join(n5_sy_dm,
+                                                               n5_ct_dm,
                                                                by=c(id_vars[id_vars!=""],"variable")) %>% 
                                           
                                           # Restrict to those cells with more than 100 observations
@@ -91,9 +50,50 @@ unmet_svysummary_dmdiag <- map_dfr(group_vars,
                                           rename_at(vars(one_of(g_v)),~c("strata")) %>% 
                                           mutate_at(vars(one_of("strata")),~as.character(.));
                                         gc();
-                                        return(n5_out_dmdiag)
+                                        return(n5_out_dm)
                                         
                                       })
+
+
+unmet_svysummary_dmdiag <- map_dfr(group_vars,
+                                          function(g_v){
+                                            id_vars = c("state",g_v);
+                                            print(g_v);
+                                            n5_sy_dmdiag <- svysummary(nfhs5dmdiag_svydesign,
+                                                                       # c_vars = continuous_vars,
+                                                                       p_vars = proportion_vars[5:10],
+                                                                       # g_vars = grouped_vars,
+                                                                       id_vars = id_vars
+                                            ) %>% 
+                                              mutate_at(vars(estimate,lci,uci),~round(.,1)) %>% 
+                                              mutate(est_ci = paste0(estimate," (",
+                                                                     lci,", ",uci,")"));
+                                            
+                                            # Count of non-NA values at intersection of id_vars and each variable in proportion_vars
+                                            n5_ct_dmdiag <- nfhs5dmdiag_df %>% 
+                                              group_by_at(vars(one_of(id_vars))) %>% 
+                                              summarize_at(vars(one_of(c(
+                                                # continuous_vars,
+                                                proportion_vars[5:10]
+                                                # grouped_vars
+                                              ))),
+                                              list(n = ~sum(!is.na(.)))) %>% 
+                                              pivot_longer(names_to="variable",values_to="n",cols=-one_of(id_vars)) %>% 
+                                              mutate(variable = str_replace(variable,"_n$",""));
+                                            
+                                            n5_out_dmdiag <- left_join(n5_sy_dmdiag,
+                                                                       n5_ct_dmdiag,
+                                                                       by=c(id_vars[id_vars!=""],"variable")) %>% 
+                                              
+                                              # Restrict to those cells with more than 100 observations
+                                              # dplyr::filter(n > 100) %>% 
+                                              mutate(stratification = g_v) %>% 
+                                              rename_at(vars(one_of(g_v)),~c("strata")) %>% 
+                                              mutate_at(vars(one_of("strata")),~as.character(.));
+                                            gc();
+                                            return(n5_out_dmdiag)
+                                            
+                                          })
 
 
 bind_rows(unmet_svysummary_dm,
@@ -103,7 +103,7 @@ bind_rows(unmet_svysummary_dm,
               dplyr::select(v024,n5_state,zone) %>% 
               distinct(v024,n5_state,.keep_all=TRUE),
             by=c("state"="v024")) %>% 
-  write_csv(.,file = "analysis/nca05_state unmet need care cascade.csv")
+  write_csv(.,file = "analysis/nca12_state unmet need care cascade.csv")
 
 
 bind_rows(unmet_svysummary_dm,
@@ -113,7 +113,7 @@ bind_rows(unmet_svysummary_dm,
               dplyr::select(v024,n5_state,zone) %>% 
               distinct(v024,n5_state,.keep_all=TRUE),
             by=c("state"="v024")) %>% 
-  write_csv(.,file = "analysis/nca05_state met need care cascade.csv")
+  write_csv(.,file = "analysis/nca12_state met need care cascade.csv")
 
 # df <- read_csv(file="analysis/nca05_state unmet need care cascade.csv") %>%
 #   dplyr::select(-n5_state,-contains("zone")) %>%

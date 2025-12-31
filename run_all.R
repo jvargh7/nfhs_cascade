@@ -113,6 +113,20 @@ rm(list=ls()); gc(); source(".Rprofile")
 source("diabetes_cascade/code/setup_code.R")
 
 
+# NEW STATE -------
+
+rm(list=ls()); gc(); source(".Rprofile")
+source("analysis/nca11_total state level care cascade.R")
+
+rm(list=ls()); gc(); source(".Rprofile")
+source("analysis/nca12_total state unmet need care cascade.R")
+
+rm(list=ls()); gc(); source(".Rprofile")
+source("age_standardized/ncz15_age standardized total state cascade.R")
+
+rm(list=ls()); gc(); source(".Rprofile")
+source("age_standardized/ncz16_age standardized total state unmet need care cascade.R")
+
 
 
 
